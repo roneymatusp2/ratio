@@ -1,0 +1,64 @@
+# Netlify configuration for rATIO
+# Build settings for a Vite-based React TypeScript application
+
+[build]
+  # Directory to deploy (Vite output directory)
+  publish = "dist"
+  
+  # Build command
+  command = "npm run build"
+  
+  # Functions directory (if needed in future)
+  # functions = "netlify/functions"
+
+[build.environment]
+  # Node.js version for build
+  NODE_VERSION = "20"
+  
+  # NPM version (optional, uses default for Node version if not specified)
+  # NPM_VERSION = "10"
+
+# Production context: all deploys from the production branch
+[context.production]
+  environment = { NODE_ENV = "production" }
+
+# Deploy Preview context: all deploys generated from pull/merge requests
+[context.deploy-preview]
+  environment = { NODE_ENV = "development" }
+
+# Branch Deploy context: all deploys that are not from pull/merge requests or from the production branch
+[context.branch-deploy]
+  environment = { NODE_ENV = "development" }
+
+# Redirects and headers
+[[redirects]]
+  # SPA redirect - all routes to index.html
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  # Security headers for all routes
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  # Cache control for static assets
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # Cache control for images
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Plugins (optional, uncomment if needed)
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"

@@ -5,8 +5,8 @@
   # Directory to deploy (Vite output directory)
   publish = "dist"
   
-  # Build command - clean install without lock file
-  command = "rm -rf node_modules package-lock.json && npm install && npm run build"
+  # Build command - use custom build script with verbose logging
+  command = "bash build.sh"
   
   # Functions directory (if needed in future)
   # functions = "netlify/functions"
@@ -16,20 +16,8 @@
   NODE_VERSION = "20.11.0"
   # Prevent treating warnings as errors
   CI = "false"
-  # Ensure npm uses legacy peer deps resolution
-  NPM_FLAGS = "--legacy-peer-deps"
 
-# Production context: all deploys from the production branch
-[context.production]
-  environment = { NODE_ENV = "production" }
-
-# Deploy Preview context: all deploys generated from pull/merge requests
-[context.deploy-preview]
-  environment = { NODE_ENV = "development" }
-
-# Branch Deploy context: all deploys that are not from pull/merge requests or from the production branch
-[context.branch-deploy]
-  environment = { NODE_ENV = "development" }
+# Removed context-specific NODE_ENV to ensure devDependencies are always installed
 
 # Redirects and headers
 [[redirects]]

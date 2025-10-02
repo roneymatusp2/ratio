@@ -5,8 +5,8 @@
   # Directory to deploy (Vite output directory)
   publish = "dist"
   
-  # Build command - using install to ensure all dependencies including devDependencies
-  command = "npm install --legacy-peer-deps && npm run build"
+  # Build command - clean install without lock file
+  command = "rm -rf node_modules package-lock.json && npm install && npm run build"
   
   # Functions directory (if needed in future)
   # functions = "netlify/functions"

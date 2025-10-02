@@ -6,7 +6,7 @@
   publish = "dist"
   
   # Build command
-  command = "npm ci && npm run build"
+  command = "npm install && npm run build"
   
   # Functions directory (if needed in future)
   # functions = "netlify/functions"
@@ -14,12 +14,6 @@
 [build.environment]
   # Node.js version for build
   NODE_VERSION = "20"
-  
-  # CI environment for better npm behavior
-  CI = "true"
-  
-  # NPM version (optional, uses default for Node version if not specified)
-  # NPM_VERSION = "10"
 
 # Production context: all deploys from the production branch
 [context.production]

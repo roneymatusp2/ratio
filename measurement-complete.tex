@@ -1,0 +1,2030 @@
+\documentclass[12pt,a4paper]{article}
+% Essential packages for XeLaTeX
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\usepackage[british]{babel}
+\usepackage[margin=2.5cm,top=2cm,bottom=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage[most]{tcolorbox}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+% TikZ libraries
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,decorations.pathreplacing,calc,patterns}
+\pgfplotsset{compat=1.18}
+
+% Page style
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Form 2: Measurement and Time}
+\fancyhead[R]{\small Page \thepage\ of \pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% Colour definitions (British spelling!)
+\definecolor{primaryblue}{RGB}{41,128,185}
+\definecolor{successgreen}{RGB}{39,174,96}
+\definecolor{warningred}{RGB}{231,76,60}
+\definecolor{tipyellow}{RGB}{241,196,15}
+\definecolor{infopurple}{RGB}{142,68,173}
+\definecolor{lightgrey}{RGB}{236,240,241}
+\definecolor{darkgrey}{RGB}{52,73,94}
+
+% Custom box environments
+\newtcolorbox{conceptbox}[2][]{
+enhanced,
+title={#2},
+colback=primaryblue!8,
+colframe=primaryblue!80!black,
+coltitle=white,
+fonttitle=\bfseries\large,
+boxrule=1pt,
+arc=3mm,
+attach boxed title to top left={yshift=-2.5mm, xshift=5mm},
+boxed title style={colback=primaryblue!80!black,arc=2mm,boxrule=0pt},
+#1
+}
+
+\newtcolorbox{examplebox}[1]{
+enhanced,
+title={Worked Example: #1},
+colback=successgreen!8,
+colframe=successgreen!80!black,
+coltitle=white,
+fonttitle=\bfseries,
+boxrule=1pt,
+arc=2mm,
+attach boxed title to top left={yshift=-2.5mm, xshift=5mm},
+boxed title style={colback=successgreen!80!black,arc=2mm,boxrule=0pt}
+}
+
+\newtcolorbox{tipbox}[1]{
+enhanced,
+title={\textbf{💡 Top Tip:} #1},
+colback=tipyellow!15,
+colframe=tipyellow!80!black,
+boxrule=1pt,
+arc=2mm,
+left=5pt,
+right=5pt
+}
+
+\newtcolorbox{warningbox}[1]{
+enhanced,
+title={\textbf{⚠ Common Mistake:} #1},
+colback=warningred!10,
+colframe=warningred!80!black,
+boxrule=1pt,
+arc=2mm,
+left=5pt,
+right=5pt
+}
+
+\newtcolorbox{challengebox}[1]{
+enhanced,
+title={\textbf{🎯 Challenge:} #1},
+colback=infopurple!10,
+colframe=infopurple!80!black,
+boxrule=1pt,
+arc=2mm,
+left=5pt,
+right=5pt
+}
+
+\newtcolorbox{exercisebox}[1]{
+enhanced,
+title={Exercise #1},
+colback=lightgrey,
+colframe=darkgrey,
+coltitle=white,
+fonttitle=\bfseries,
+boxrule=1pt,
+arc=2mm,
+attach boxed title to top left={yshift=-2.5mm, xshift=5mm},
+boxed title style={colback=darkgrey,arc=2mm,boxrule=0pt}
+}
+
+% Custom commands
+\newcommand{\degC}{$^\circ$C}
+\newcommand{\hint}[1]{\textit{\textcolor{primaryblue}{Hint: #1}}}
+
+\begin{document}
+
+% ================= TITLE PAGE =================
+\begin{titlepage}
+\begin{center}
+\vspace*{1cm}
+
+{\Huge\bfseries Form 2 Mathematics\par}
+\vspace{0.5cm}
+{\LARGE\color{primaryblue}\bfseries Measurement and Time\par}
+\vspace{1cm}
+{\Large Student Booklet\par}
+
+\vspace{2cm}
+
+\begin{tikzpicture}
+% Clock
+\draw[line width=1.5pt] (0,0) circle (2cm);
+\foreach \angle in {0,30,...,330}
+\draw[line width=1pt] (\angle:1.8cm) -- (\angle:2cm);
+\foreach \hour in {1,2,...,12}
+\node at ({90-\hour*30}:1.5cm) {\Large\bfseries\hour};
+\draw[line width=2pt,-{Stealth[length=3mm]}] (0,0) -- (90:1cm);
+\draw[line width=1.5pt,-{Stealth[length=3mm]}] (0,0) -- (30:1.4cm);
+\fill (0,0) circle (2pt);
+
+% Ruler
+\begin{scope}[xshift=6cm]
+\draw[line width=1pt,fill=tipyellow!30] (0,0) rectangle (4,0.5);
+\foreach \x in {0,0.5,...,4}
+\draw[line width=0.5pt] (\x,0) -- (\x,0.2);
+\foreach \x in {0,1,...,4}
+\draw[line width=1pt] (\x,0) -- (\x,0.3);
+\foreach \x in {0,1,...,4}
+\node[below] at (\x,-0.1) {\small\x};
+\node at (2,0.8) {\textbf{cm}};
+\end{scope}
+
+% Thermometer
+\begin{scope}[xshift=-6cm]
+\draw[line width=1pt,fill=white] (-0.3,-2) rectangle (0.3,2);
+\draw[line width=1pt,fill=warningred!70] (-0.15,-2) rectangle (0.15,0.5);
+\draw[line width=1pt,fill=warningred!70] (0,0.5) circle (0.3cm);
+\foreach \y in {-2,-1.5,...,2}
+\draw[line width=0.5pt] (0.3,\y) -- (0.5,\y);
+\node at (1,0) {\degC};
+\end{scope}
+\end{tikzpicture}
+
+\vspace{2cm}
+
+\begin{tcolorbox}[colback=lightgrey,colframe=darkgrey,width=10cm,arc=2mm]
+\begin{tabular}{rl}
+\textbf{Name:} & \underline{\hspace{6cm}} \\[8pt]
+\textbf{Class:} & \underline{\hspace{6cm}} \\[8pt]
+\textbf{Teacher:} & \underline{\hspace{6cm}}
+\end{tabular}
+\end{tcolorbox}
+
+\vfill
+
+{\large This booklet contains comprehensive lessons and exercises on measurement and time.\par}
+\vspace{0.3cm}
+{\large Work through each section carefully, showing all your working clearly.\par}
+
+\end{center}
+\end{titlepage}
+
+% ================= TABLE OF CONTENTS =================
+\tableofcontents
+\newpage
+
+% ================= SECTION 1: READING SCALES =================
+\section{Reading Scales and Measuring Instruments}
+
+\subsection{Introduction to Reading Scales}
+
+\begin{conceptbox}{Why Do We Need to Read Scales?}
+In everyday life, we constantly use measuring instruments:
+\begin{itemize}[leftmargin=*]
+\item \textbf{At home:} Kitchen scales for baking, thermometers for checking temperature, measuring jugs for liquids
+\item \textbf{In shops:} Weighing scales at the checkout, petrol pumps showing litres
+\item \textbf{In science:} Thermometers, measuring cylinders, force metres
+\item \textbf{In medicine:} Blood pressure monitors, scales for weighing patients
+\end{itemize}
+
+All these instruments have \textbf{scales} that we must read accurately. A scale is a series of marks at regular intervals used for measurement.
+\end{conceptbox}
+
+\begin{tipbox}{The Golden Rules for Reading Scales}
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Identify the units} -- What are you measuring? (cm, kg, litres, \degC, etc.)
+\item \textbf{Find the labelled numbers} -- These are your reference points
+\item \textbf{Count the divisions} -- How many small gaps between the numbers?
+\item \textbf{Calculate each division's value} -- Divide the difference by the number of divisions
+\item \textbf{Read at eye level} -- Avoid parallax errors (reading from an angle)
+\end{enumerate}
+\end{tipbox}
+
+\subsection{Understanding Scale Divisions}
+
+\begin{conceptbox}{What is a Division?}
+A \textbf{division} is the gap or space between two consecutive marks on a scale. The \textbf{value of one division} tells us what each small step represents.
+
+\begin{center}
+\begin{tikzpicture}
+% Scale
+\draw[line width=1.5pt,|-|] (0,0) -- (10,0);
+\foreach \x in {0,2,...,10}
+\draw[line width=1.5pt] (\x,-0.3) -- (\x,0.3) node[above] {\x};
+\foreach \x in {0,0.5,...,10}
+\draw[line width=0.8pt] (\x,-0.15) -- (\x,0.15);
+
+% Annotations
+\draw[<->,primaryblue,line width=1pt] (0,-0.8) -- (2,-0.8);
+\node[below,primaryblue] at (1,-0.8) {Difference = 2};
+
+\draw[decorate,decoration={brace,amplitude=5pt,mirror},warningred,line width=1pt] (0,-1.3) -- (0.5,-1.3);
+\draw[decorate,decoration={brace,amplitude=5pt,mirror},warningred,line width=1pt] (0.5,-1.3) -- (1,-1.3);
+\draw[decorate,decoration={brace,amplitude=5pt,mirror},warningred,line width=1pt] (1,-1.3) -- (1.5,-1.3);
+\draw[decorate,decoration={brace,amplitude=5pt,mirror},warningred,line width=1pt] (1.5,-1.3) -- (2,-1.3);
+\node[below,warningred] at (1,-1.8) {4 divisions};
+
+\node[below,successgreen,font=\bfseries] at (5,-2.3) {Each division = 2 ÷ 4 = 0.5};
+\end{tikzpicture}
+\end{center}
+\end{conceptbox}
+
+
+\subsection{Step-by-Step Method for Reading Any Scale}
+
+\begin{examplebox}{Reading a Number Line}
+\textbf{Question:} Read the value indicated by the arrow.
+
+\begin{center}
+\begin{tikzpicture}
+% Scale
+\draw[line width=1.5pt] (0,0) -- (12,0);
+\foreach \x/\label in {0/50, 3/60, 6/70, 9/80, 12/90}
+\draw[line width=1.5pt] (\x,-0.3) -- (\x,0.3) node[above] {\label};
+\foreach \x in {0,0.6,...,12}
+\draw[line width=0.8pt] (\x,-0.15) -- (\x,0.15);
+
+% Arrow
+\draw[-{Stealth[length=5mm]},warningred,line width=2pt] (7.2,1) -- (7.2,0.4);
+\node[above,warningred,font=\bfseries] at (7.2,1.2) {?};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solution:}
+
+\textbf{Step 1:} Find the two labelled numbers either side of the arrow.
+\begin{itemize}
+\item The arrow is between \textbf{70} and \textbf{80}
+\end{itemize}
+
+\textbf{Step 2:} Work out the difference between these numbers.
+\begin{align*}
+\text{Difference} &= 80 - 70 \\
+&= 10
+\end{align*}
+
+\textbf{Step 3:} Count the number of divisions (gaps) between the two numbers.
+\begin{itemize}
+\item There are \textbf{5 divisions} between 70 and 80
+\end{itemize}
+
+\textbf{Step 4:} Calculate the value of each small division.
+\begin{align*}
+\text{Value of one division} &= \frac{\text{Difference}}{\text{Number of divisions}} \\
+&= \frac{10}{5} \\
+&= 2
+\end{align*}
+
+\textbf{Step 5:} Count from the lower labelled number up to the arrow.
+\begin{itemize}
+\item Starting at 70: \quad 70 $\to$ 72 $\to$ 74 $\to$ 76 $\to$ 78 $\to$ 80
+\item The arrow is at the second mark after 70
+\item $70 + (2 \times 2) = 70 + 4 = \boxed{74}$
+\end{itemize}
+
+\textbf{Answer:} The arrow points to \textbf{74}.
+\end{examplebox}
+
+\begin{examplebox}{Reading a Scale with Larger Numbers}
+\textbf{Question:} What value does the arrow indicate?
+
+\begin{center}
+\begin{tikzpicture}
+% Scale
+\draw[line width=1.5pt] (0,0) -- (12,0);
+\foreach \x/\label in {0/200, 6/400, 12/600}
+\draw[line width=1.5pt] (\x,-0.3) -- (\x,0.3) node[above] {\label};
+\foreach \x in {0,1.2,...,12}
+\draw[line width=0.8pt] (\x,-0.15) -- (\x,0.15);
+
+% Arrow
+\draw[-{Stealth[length=5mm]},warningred,line width=2pt] (8.4,1) -- (8.4,0.4);
+\node[above,warningred,font=\bfseries] at (8.4,1.2) {?};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solution:}
+
+\textbf{Step 1:} The arrow is between \textbf{400} and \textbf{600}.
+
+\textbf{Step 2:} Difference = $600 - 400 = 200$
+
+\textbf{Step 3:} Count divisions: There are \textbf{10 divisions} between 400 and 600.
+
+\textbf{Step 4:} Value of one division = $\frac{200}{10} = 20$
+
+\textbf{Step 5:} Count from 400:
+\begin{itemize}
+\item The arrow is at the 2nd mark after 400
+\item $400 + (2 \times 20) = 400 + 40 = \boxed{440}$
+\end{itemize}
+
+\textbf{Answer:} The arrow points to \textbf{440}.
+\end{examplebox}
+
+\begin{warningbox}{Avoiding This Common Error}
+\textbf{Mistake:} Thinking the arrow is at 420 because it's "about halfway" between 400 and 600.
+
+\textbf{Why it's wrong:} You must count the divisions properly! Each division has a specific value. Don't guess!
+
+\textbf{Correct approach:} Always follow the 5-step method systematically.
+\end{warningbox}
+
+\begin{examplebox}{Reading a Scale with Decimals}
+\textbf{Question:} Read the measurement shown on this kitchen scale.
+
+\begin{center}
+\begin{tikzpicture}
+% Scale
+\draw[line width=1.5pt] (0,0) -- (10,0);
+\foreach \x/\label in {0/1.0, 5/1.5, 10/2.0}
+\draw[line width=1.5pt] (\x,-0.3) -- (\x,0.3) node[above] {\label\,kg};
+\foreach \x in {0,1,...,10}
+\draw[line width=0.8pt] (\x,-0.15) -- (\x,0.15);
+
+% Arrow
+\draw[-{Stealth[length=5mm]},warningred,line width=2pt] (7,1) -- (7,0.4);
+\node[above,warningred,font=\bfseries] at (7,1.2) {?};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solution:}
+
+\textbf{Step 1:} Arrow is between \textbf{1.5\,kg} and \textbf{2.0\,kg}.
+
+\textbf{Step 2:} Difference = $2.0 - 1.5 = 0.5$\,kg
+
+\textbf{Step 3:} There are \textbf{5 divisions} between 1.5 and 2.0.
+
+\textbf{Step 4:} Each division = $\frac{0.5}{5} = 0.1$\,kg
+
+\textbf{Step 5:} From 1.5\,kg, the arrow is at the 2nd mark:
+\begin{align*}
+1.5 + (2 \times 0.1) &= 1.5 + 0.2 \\
+&= \boxed{1.7\text{\,kg}}
+\end{align*}
+
+\textbf{Answer:} The scale shows \textbf{1.7\,kg}.
+\end{examplebox}
+
+
+\begin{exercisebox}{1.1 -- Basic Number Lines}
+Read the value indicated by each arrow. \hint{Follow the 5-step method for each one!}
+
+\textbf{a)}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[line width=1.5pt] (0,0) -- (12,0);
+\foreach \x/\label in {0/10, 6/30, 12/50}
+\draw[line width=1.5pt] (\x,-0.3) -- (\x,0.3) node[above] {\label};
+\foreach \x in {0,2,...,12}
+\draw[line width=0.8pt] (\x,-0.15) -- (\x,0.15);
+\draw[-{Stealth[length=4mm]},warningred,line width=2pt] (8,0.8) -- (8,0.4);
+\end{tikzpicture}
+\end{center}
+Answer: \underline{\hspace{3cm}}
+
+\textbf{b)}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[line width=1.5pt] (0,0) -- (12,0);
+\foreach \x/\label in {0/100, 4/200, 8/300, 12/400}
+\draw[line width=1.5pt] (\x,-0.3) -- (\x,0.3) node[above] {\label};
+\foreach \x in {0,0.8,...,12}
+\draw[line width=0.8pt] (\x,-0.15) -- (\x,0.15);
+\draw[-{Stealth[length=4mm]},warningred,line width=2pt] (2.4,0.8) -- (2.4,0.4);
+\end{tikzpicture}
+\end{center}
+Answer: \underline{\hspace{3cm}}
+
+\textbf{c)}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[line width=1.5pt] (0,0) -- (12,0);
+\foreach \x/\label in {0/500, 6/1000, 12/1500}
+\draw[line width=1.5pt] (\x,-0.3) -- (\x,0.3) node[above] {\label};
+\foreach \x in {0,1.2,...,12}
+\draw[line width=0.8pt] (\x,-0.15) -- (\x,0.15);
+\draw[-{Stealth[length=4mm]},warningred,line width=2pt] (7.2,0.8) -- (7.2,0.4);
+\end{tikzpicture}
+\end{center}
+Answer: \underline{\hspace{3cm}}
+
+\textbf{d)}
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+\draw[line width=1.5pt] (0,0) -- (12,0);
+\foreach \x/\label in {0/0, 4/20, 8/40, 12/60}
+\draw[line width=1.5pt] (\x,-0.3) -- (\x,0.3) node[above] {\label};
+\foreach \x in {0,1,...,12}
+\draw[line width=0.8pt] (\x,-0.15) -- (\x,0.15);
+\draw[-{Stealth[length=4mm]},warningred,line width=2pt] (10,0.8) -- (10,0.4);
+\end{tikzpicture}
+\end{center}
+Answer: \underline{\hspace{3cm}}
+\end{exercisebox}
+
+\subsection{Reading Thermometers}
+
+\begin{conceptbox}{Understanding Temperature}
+\textbf{Temperature} measures how hot or cold something is. We measure it in \textbf{degrees Celsius} (\degC).
+
+\textbf{Key temperatures to remember:}
+\begin{itemize}[leftmargin=*]
+\item \textbf{0\degC} -- Water freezes (ice forms)
+\item \textbf{100\degC} -- Water boils
+\item \textbf{37\degC} -- Normal human body temperature
+\item \textbf{20--22\degC} -- Comfortable room temperature
+\item \textbf{Below 0\degC} -- Negative temperatures (freezing cold!)
+\end{itemize}
+
+Thermometers show positive temperatures \textit{above} zero and negative temperatures \textit{below} zero.
+\end{conceptbox}
+
+\begin{examplebox}{Reading a Thermometer (Positive Temperature)}
+\textbf{Question:} What temperature is shown on this thermometer?
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Thermometer body
+\draw[line width=1.5pt,fill=white] (-0.5,-4) rectangle (0.5,4);
+\draw[line width=1.5pt,fill=warningred!70] (-0.25,-4) rectangle (0.25,0.8);
+\draw[line width=1.5pt,fill=warningred!70] (0,0.8) circle (0.4cm);
+
+% Scale
+\foreach \y/\label in {-4/-10, -3/0, -2/10, -1/20, 0/30, 1/40, 2/50, 3/60, 4/70}
+\draw[line width=1pt] (0.5,\y) -- (1,\y) node[right] {\label};
+\foreach \y in {-4,-3.8,...,4}
+\draw[line width=0.5pt] (0.5,\y) -- (0.7,\y);
+
+% Label
+\node at (2,4) {\degC};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solution:}
+
+\textbf{Step 1:} The red liquid is between \textbf{30\degC} and \textbf{40\degC}.
+
+\textbf{Step 2:} Difference = $40 - 30 = 10$\degC
+
+\textbf{Step 3:} Count small divisions: There are \textbf{10 divisions}.
+
+\textbf{Step 4:} Each division = $\frac{10}{10} = 1$\degC
+
+\textbf{Step 5:} The liquid reaches 4 marks above 30\degC:
+\begin{align*}
+30 + (4 \times 1) &= 30 + 4 \\
+&= \boxed{34\text{\degC}}
+\end{align*}
+
+\textbf{Answer:} The temperature is \textbf{34\degC}.
+\end{examplebox}
+
+
+\begin{examplebox}{Reading a Thermometer (Negative Temperature)}
+\textbf{Question:} What temperature is shown?
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Thermometer body
+\draw[line width=1.5pt,fill=white] (-0.5,-4) rectangle (0.5,4);
+\draw[line width=1.5pt,fill=primaryblue!70] (-0.25,-4) rectangle (0.25,-1.4);
+\draw[line width=1.5pt,fill=primaryblue!70] (0,-1.4) circle (0.4cm);
+
+% Scale
+\foreach \y/\label in {-4/-20, -3/-10, -2/0, -1/10, 0/20, 1/30, 2/40, 3/50, 4/60}
+\draw[line width=1pt] (0.5,\y) -- (1,\y) node[right] {\label};
+\foreach \y in {-4,-3.8,...,4}
+\draw[line width=0.5pt] (0.5,\y) -- (0.7,\y);
+
+% Label
+\node at (2,4) {\degC};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Solution:}
+
+\textbf{Step 1:} The liquid is between \textbf{$-10$\degC} and \textbf{0\degC}.
+
+\textbf{Step 2:} Difference = $0 - (-10) = 10$\degC
+
+\textbf{Step 3:} There are \textbf{10 divisions}.
+
+\textbf{Step 4:} Each division = $1$\degC
+
+\textbf{Step 5:} The liquid is at 3 marks above $-10$\degC:
+\begin{align*}
+-10 + (3 \times 1) &= -10 + 3 \\
+&= \boxed{-7\text{\degC}}
+\end{align*}
+
+\textbf{Answer:} The temperature is \textbf{$-7$\degC} (7 degrees below zero).
+\end{examplebox}
+
+\begin{tipbox}{Understanding Negative Temperatures}
+\textbf{Remember:}
+\begin{itemize}[leftmargin=*]
+\item $-5$\degC is \textbf{colder} than $-2$\degC
+\item The further below zero, the colder it is
+\item Think of it like debt: $-£10$ is worse than $-£5$!
+\end{itemize}
+
+\textbf{Number line for negative numbers:}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+\draw[<->,line width=1.5pt] (-6,0) -- (6,0);
+\foreach \x in {-5,-4,...,5}
+\draw[line width=1pt] (\x,-0.2) -- (\x,0.2) node[above] {\x};
+\draw[<-,warningred,line width=2pt] (-3,0.8) -- (-3,0.3);
+\node[above,warningred] at (-3,0.8) {Colder};
+\draw[->,successgreen,line width=2pt] (3,0.8) -- (3,0.3);
+\node[above,successgreen] at (3,0.8) {Warmer};
+\end{tikzpicture}
+\end{center}
+\end{tipbox}
+
+\begin{exercisebox}{1.2 -- Reading Thermometers}
+Read the temperature shown on each thermometer carefully.
+
+\textbf{a)} 
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+\draw[line width=1.5pt,fill=white] (-0.5,-3) rectangle (0.5,3);
+\draw[line width=1.5pt,fill=warningred!70] (-0.25,-3) rectangle (0.25,1.2);
+\draw[line width=1.5pt,fill=warningred!70] (0,1.2) circle (0.4cm);
+\foreach \y/\label in {-3/0, -2/10, -1/20, 0/30, 1/40, 2/50, 3/60}
+\draw[line width=1pt] (0.5,\y) -- (1,\y) node[right] {\label};
+\foreach \y in {-3,-2.8,...,3}
+\draw[line width=0.5pt] (0.5,\y) -- (0.7,\y);
+\node at (2,3) {\degC};
+\end{tikzpicture}
+\end{center}
+Temperature: \underline{\hspace{3cm}}\degC
+
+\textbf{b)}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+\draw[line width=1.5pt,fill=white] (-0.5,-3) rectangle (0.5,3);
+\draw[line width=1.5pt,fill=primaryblue!70] (-0.25,-3) rectangle (0.25,-0.6);
+\draw[line width=1.5pt,fill=primaryblue!70] (0,-0.6) circle (0.4cm);
+\foreach \y/\label in {-3/-20, -2/-10, -1/0, 0/10, 1/20, 2/30, 3/40}
+\draw[line width=1pt] (0.5,\y) -- (1,\y) node[right] {\label};
+\foreach \y in {-3,-2.8,...,3}
+\draw[line width=0.5pt] (0.5,\y) -- (0.7,\y);
+\node at (2,3) {\degC};
+\end{tikzpicture}
+\end{center}
+Temperature: \underline{\hspace{3cm}}\degC
+
+\textbf{c)}
+\begin{center}
+\begin{tikzpicture}[scale=0.6]
+\draw[line width=1.5pt,fill=white] (-0.5,-3) rectangle (0.5,3);
+\draw[line width=1.5pt,fill=warningred!70] (-0.25,-3) rectangle (0.25,2.5);
+\draw[line width=1.5pt,fill=warningred!70] (0,2.5) circle (0.4cm);
+\foreach \y/\label in {-3/50, -1.5/60, 0/70, 1.5/80, 3/90}
+\draw[line width=1pt] (0.5,\y) -- (1,\y) node[right] {\label};
+\foreach \y in {-3,-2.7,...,3}
+\draw[line width=0.5pt] (0.5,\y) -- (0.7,\y);
+\node at (2,3) {\degC};
+\end{tikzpicture}
+\end{center}
+Temperature: \underline{\hspace{3cm}}\degC
+\end{exercisebox}
+
+\begin{challengebox}{Real-World Temperature Challenge}
+\textbf{The weather forecast says:}
+\begin{itemize}
+\item Monday: $-3$\degC
+\item Tuesday: $-7$\degC
+\item Wednesday: $2$\degC
+\end{itemize}
+
+\textbf{Questions:}
+\begin{enumerate}[label=\alph*)]
+\item Which day was the coldest?
+\item Which day was the warmest?
+\item What is the temperature difference between Monday and Wednesday?
+\end{enumerate}
+
+\textit{Answers at the end of the booklet!}
+\end{challengebox}
+
+\newpage
+
+% ================= SECTION 2: UNITS AND CONVERSIONS =================
+\section{Units and Conversions}
+
+\subsection{Introduction to the Metric System}
+
+\begin{conceptbox}{The Metric System}
+The \textbf{metric system} is used worldwide for measurements. It's based on powers of 10, which makes conversions easy!
+
+\textbf{Main types of measurement:}
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+\textbf{Measurement} & \textbf{Units} & \textbf{Symbol} \\
+\midrule
+Length & millimetre, centimetre, metre, kilometre & mm, cm, m, km \\
+Mass & gram, kilogram, tonne & g, kg, t \\
+Capacity/Volume & millilitre, litre & ml, l \\
+Time & second, minute, hour, day & s, min, h, d \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Why is it called "metric"?} The word comes from "metre", the base unit for length!
+\end{conceptbox}
+
+\subsection{Length Conversions}
+
+\begin{conceptbox}{Understanding Length Units}
+\textbf{Length} measures distance or how long something is.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+% Boxes
+\node[draw,fill=tipyellow!30,minimum width=2cm,minimum height=1.2cm] (mm) at (0,0) {\textbf{mm}};
+\node[draw,fill=successgreen!30,minimum width=2cm,minimum height=1.2cm] (cm) at (3.5,0) {\textbf{cm}};
+\node[draw,fill=primaryblue!30,minimum width=2cm,minimum height=1.2cm] (m) at (7,0) {\textbf{m}};
+\node[draw,fill=infopurple!30,minimum width=2cm,minimum height=1.2cm] (km) at (10.5,0) {\textbf{km}};
+
+% Arrows going right (multiply)
+\draw[-{Stealth[length=3mm]},line width=1.5pt] (mm) -- (cm) node[midway,above] {$\div 10$};
+\draw[-{Stealth[length=3mm]},line width=1.5pt] (cm) -- (m) node[midway,above] {$\div 100$};
+\draw[-{Stealth[length=3mm]},line width=1.5pt] (m) -- (km) node[midway,above] {$\div 1000$};
+
+% Arrows going left (divide)
+\draw[{Stealth[length=3mm]}-,line width=1.5pt] (mm) -- (cm) node[midway,below] {$\times 10$};
+\draw[{Stealth[length=3mm]}-,line width=1.5pt] (cm) -- (m) node[midway,below] {$\times 100$};
+\draw[{Stealth[length=3mm]}-,line width=1.5pt] (m) -- (km) node[midway,below] {$\times 1000$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Key facts:}
+\begin{itemize}[leftmargin=*]
+\item 10 millimetres (mm) = 1 centimetre (cm)
+\item 100 centimetres (cm) = 1 metre (m)
+\item 1000 metres (m) = 1 kilometre (km)
+\end{itemize}
+
+\textbf{Real-life examples:}
+\begin{itemize}[leftmargin=*]
+\item Thickness of a coin $\approx$ 2\,mm
+\item Width of your finger $\approx$ 1\,cm
+\item Height of a door $\approx$ 2\,m
+\item Walking distance to school $\approx$ 1--2\,km
+\end{itemize}
+\end{conceptbox}
+
+\begin{tipbox}{The "Multiply or Divide?" Trick}
+\textbf{Rule:} When you convert to a \textit{smaller} unit, the number gets \textit{bigger}, so you \textbf{multiply}.
+
+When you convert to a \textit{larger} unit, the number gets \textit{smaller}, so you \textbf{divide}.
+
+\textbf{Examples:}
+\begin{itemize}[leftmargin=*]
+\item m $\to$ cm: metres are bigger than centimetres, so \textbf{multiply} by 100
+\item mm $\to$ cm: millimetres are smaller than centimetres, so \textbf{divide} by 10
+\end{itemize}
+\end{tipbox}
+
+
+\begin{examplebox}{Converting Metres to Centimetres}
+\textbf{Question:} Convert 3.5\,m to centimetres.
+
+\textbf{Solution:}
+
+\textbf{Step 1:} Identify the conversion factor.
+\begin{itemize}
+\item 1\,m = 100\,cm
+\end{itemize}
+
+\textbf{Step 2:} Decide whether to multiply or divide.
+\begin{itemize}
+\item We're converting to a \textit{smaller} unit (m $\to$ cm)
+\item So we \textbf{multiply}
+\end{itemize}
+
+\textbf{Step 3:} Perform the calculation.
+\begin{align*}
+3.5\text{\,m} &= 3.5 \times 100\text{\,cm} \\
+&= \boxed{350\text{\,cm}}
+\end{align*}
+
+\textbf{Check:} 350\,cm is a bigger number than 3.5\,m -- this makes sense because centimetres are smaller!
+
+\textbf{Answer:} 3.5\,m = \textbf{350\,cm}
+\end{examplebox}
+
+\begin{examplebox}{Converting Kilometres to Metres}
+\textbf{Question:} Convert 2.45\,km to metres.
+
+\textbf{Solution:}
+
+1\,km = 1000\,m, and we're converting to a smaller unit, so multiply:
+\begin{align*}
+2.45\text{\,km} &= 2.45 \times 1000\text{\,m} \\
+&= \boxed{2450\text{\,m}}
+\end{align*}
+
+\textbf{Answer:} 2.45\,km = \textbf{2450\,m}
+\end{examplebox}
+
+\begin{examplebox}{Converting Centimetres to Metres}
+\textbf{Question:} Convert 750\,cm to metres.
+
+\textbf{Solution:}
+
+100\,cm = 1\,m, and we're converting to a larger unit, so divide:
+\begin{align*}
+750\text{\,cm} &= 750 \div 100\text{\,m} \\
+&= \boxed{7.5\text{\,m}}
+\end{align*}
+
+\textbf{Answer:} 750\,cm = \textbf{7.5\,m}
+\end{examplebox}
+
+\begin{examplebox}{Two-Step Conversion: mm to m}
+\textbf{Question:} Convert 5400\,mm to metres.
+
+\textbf{Solution:}
+
+\textbf{Method 1: Convert in two steps}
+
+Step 1: mm $\to$ cm (divide by 10):
+\[5400\text{\,mm} = 5400 \div 10 = 540\text{\,cm}\]
+
+Step 2: cm $\to$ m (divide by 100):
+\[540\text{\,cm} = 540 \div 100 = 5.4\text{\,m}\]
+
+\textbf{Method 2: Convert in one step}
+
+Since 1\,m = 1000\,mm, divide by 1000:
+\[5400\text{\,mm} = 5400 \div 1000 = 5.4\text{\,m}\]
+
+\textbf{Answer:} 5400\,mm = \textbf{5.4\,m}
+\end{examplebox}
+
+\begin{warningbox}{Don't Forget the Decimal Point!}
+\textbf{Common mistake:} Writing $3.5 \times 100 = 3.500$ instead of $350$.
+
+\textbf{Remember:}
+\begin{itemize}[leftmargin=*]
+\item To multiply by 10: Move decimal point 1 place right
+\item To multiply by 100: Move decimal point 2 places right
+\item To multiply by 1000: Move decimal point 3 places right
+\item To divide: Move decimal point left!
+\end{itemize}
+
+\textbf{Example:} $3.5 \times 100 = 350.0 = 350$
+\end{warningbox}
+
+\begin{exercisebox}{2.1 -- Length Conversions}
+Complete these conversions. \hint{Draw the conversion diagram to help you!}
+
+\textbf{Part A: Converting to smaller units (multiply)}
+\begin{enumerate}[leftmargin=*]
+\item 4\,m = \underline{\hspace{3cm}}\,cm
+\item 2.8\,km = \underline{\hspace{3cm}}\,m
+\item 6.5\,cm = \underline{\hspace{3cm}}\,mm
+\item 0.75\,m = \underline{\hspace{3cm}}\,cm
+\end{enumerate}
+
+\textbf{Part B: Converting to larger units (divide)}
+\begin{enumerate}[resume,leftmargin=*]
+\item 3500\,m = \underline{\hspace{3cm}}\,km
+\item 480\,cm = \underline{\hspace{3cm}}\,m
+\item 90\,mm = \underline{\hspace{3cm}}\,cm
+\item 12500\,m = \underline{\hspace{3cm}}\,km
+\end{enumerate}
+
+\textbf{Part C: Challenge conversions}
+\begin{enumerate}[resume,leftmargin=*]
+\item 6300\,mm = \underline{\hspace{3cm}}\,m
+\item 0.085\,km = \underline{\hspace{3cm}}\,cm
+\end{enumerate}
+\end{exercisebox}
+
+\subsection{Mass Conversions}
+
+\begin{conceptbox}{Understanding Mass}
+\textbf{Mass} (or weight) measures how heavy something is.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw,fill=tipyellow!30,minimum width=2.5cm,minimum height=1.2cm] (g) at (0,0) {\textbf{grams (g)}};
+\node[draw,fill=successgreen!30,minimum width=2.5cm,minimum height=1.2cm] (kg) at (4.5,0) {\textbf{kilograms (kg)}};
+\node[draw,fill=primaryblue!30,minimum width=2.5cm,minimum height=1.2cm] (t) at (9,0) {\textbf{tonnes (t)}};
+
+\draw[-{Stealth[length=3mm]},line width=1.5pt] (g) -- (kg) node[midway,above] {$\div 1000$};
+\draw[-{Stealth[length=3mm]},line width=1.5pt] (kg) -- (t) node[midway,above] {$\div 1000$};
+
+\draw[{Stealth[length=3mm]}-,line width=1.5pt] (g) -- (kg) node[midway,below] {$\times 1000$};
+\draw[{Stealth[length=3mm]}-,line width=1.5pt] (kg) -- (t) node[midway,below] {$\times 1000$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Key facts:}
+\begin{itemize}[leftmargin=*]
+\item 1000 grams (g) = 1 kilogram (kg)
+\item 1000 kilograms (kg) = 1 tonne (t)
+\end{itemize}
+
+\textbf{Real-life examples:}
+\begin{itemize}[leftmargin=*]
+\item Paper clip $\approx$ 1\,g
+\item Bag of sugar = 1\,kg
+\item Small car $\approx$ 1\,t
+\end{itemize}
+\end{conceptbox}
+
+\begin{examplebox}{Converting Kilograms to Grams}
+\textbf{Question:} A recipe needs 2.5\,kg of flour. How many grams is this?
+
+\textbf{Solution:}
+
+1\,kg = 1000\,g, and we're converting to a smaller unit, so multiply:
+\begin{align*}
+2.5\text{\,kg} &= 2.5 \times 1000\text{\,g} \\
+&= \boxed{2500\text{\,g}}
+\end{align*}
+
+\textbf{Answer:} 2.5\,kg = \textbf{2500\,g}
+\end{examplebox}
+
+\begin{examplebox}{Converting Grams to Kilograms}
+\textbf{Question:} A parcel weighs 3750\,g. What is this in kilograms?
+
+\textbf{Solution:}
+
+1000\,g = 1\,kg, and we're converting to a larger unit, so divide:
+\begin{align*}
+3750\text{\,g} &= 3750 \div 1000\text{\,kg} \\
+&= \boxed{3.75\text{\,kg}}
+\end{align*}
+
+\textbf{Answer:} 3750\,g = \textbf{3.75\,kg}
+\end{examplebox}
+
+\begin{exercisebox}{2.2 -- Mass Conversions}
+Complete these conversions.
+
+\begin{enumerate}[leftmargin=*]
+\item 4.2\,kg = \underline{\hspace{3cm}}\,g
+\item 5600\,g = \underline{\hspace{3cm}}\,kg
+\item 0.85\,kg = \underline{\hspace{3cm}}\,g
+\item 12450\,g = \underline{\hspace{3cm}}\,kg
+\item 3.5\,t = \underline{\hspace{3cm}}\,kg
+\item 7250\,kg = \underline{\hspace{3cm}}\,t
+\end{enumerate}
+\end{exercisebox}
+
+\subsection{Volume and Capacity Conversions}
+
+\begin{conceptbox}{Understanding Volume and Capacity}
+\textbf{Volume} or \textbf{capacity} measures how much liquid a container can hold.
+
+\begin{center}
+\begin{tikzpicture}[scale=0.9]
+\node[draw,fill=primaryblue!30,minimum width=3cm,minimum height=1.2cm] (ml) at (0,0) {\textbf{millilitres (ml)}};
+\node[draw,fill=successgreen!30,minimum width=3cm,minimum height=1.2cm] (l) at (5,0) {\textbf{litres (l)}};
+
+\draw[-{Stealth[length=3mm]},line width=1.5pt] (ml) -- (l) node[midway,above] {$\div 1000$};
+\draw[{Stealth[length=3mm]}-,line width=1.5pt] (ml) -- (l) node[midway,below] {$\times 1000$};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Key fact:}
+\begin{itemize}[leftmargin=*]
+\item 1000 millilitres (ml) = 1 litre (l)
+\end{itemize}
+
+\textbf{Real-life examples:}
+\begin{itemize}[leftmargin=*]
+\item Teaspoon $\approx$ 5\,ml
+\item Can of drink = 330\,ml
+\item Bottle of water = 500\,ml or 1\,l
+\item Large bottle of fizzy drink = 2\,l
+\end{itemize}
+\end{conceptbox}
+
+
+\begin{examplebox}{Converting Litres to Millilitres}
+\textbf{Question:} A jug contains 2.3\,l of juice. How many millilitres is this?
+
+\textbf{Solution:}
+
+1\,l = 1000\,ml, converting to smaller unit, so multiply:
+\begin{align*}
+2.3\text{\,l} &= 2.3 \times 1000\text{\,ml} \\
+&= \boxed{2300\text{\,ml}}
+\end{align*}
+
+\textbf{Answer:} 2.3\,l = \textbf{2300\,ml}
+\end{examplebox}
+
+\begin{examplebox}{Converting Millilitres to Litres}
+\textbf{Question:} A bottle contains 4750\,ml of water. How many litres is this?
+
+\textbf{Solution:}
+
+1000\,ml = 1\,l, converting to larger unit, so divide:
+\begin{align*}
+4750\text{\,ml} &= 4750 \div 1000\text{\,l} \\
+&= \boxed{4.75\text{\,l}}
+\end{align*}
+
+\textbf{Answer:} 4750\,ml = \textbf{4.75\,l}
+\end{examplebox}
+
+\begin{exercisebox}{2.3 -- Volume/Capacity Conversions}
+Complete these conversions.
+
+\begin{enumerate}[leftmargin=*]
+\item 3.6\,l = \underline{\hspace{3cm}}\,ml
+\item 2800\,ml = \underline{\hspace{3cm}}\,l
+\item 0.75\,l = \underline{\hspace{3cm}}\,ml
+\item 6250\,ml = \underline{\hspace{3cm}}\,l
+\item 1.05\,l = \underline{\hspace{3cm}}\,ml
+\item 950\,ml = \underline{\hspace{3cm}}\,l
+\end{enumerate}
+\end{exercisebox}
+
+\begin{challengebox}{Mixed Units Challenge}
+\textbf{Real-world problem:}
+
+Sarah is making fruit punch for a party. She uses:
+\begin{itemize}
+\item 2.5\,l of orange juice
+\item 1500\,ml of lemonade
+\item 750\,ml of pineapple juice
+\end{itemize}
+
+\textbf{Questions:}
+\begin{enumerate}[label=\alph*)]
+\item Convert all measurements to millilitres
+\item How many millilitres of fruit punch does she make in total?
+\item Express your answer in litres
+\end{enumerate}
+
+\textit{Answers at the end of the booklet!}
+\end{challengebox}
+
+\newpage
+
+% ================= SECTION 3: TIME =================
+\section{Time}
+
+\subsection{Understanding Time}
+
+\begin{conceptbox}{Why Do We Measure Time?}
+Time helps us organise our day and know when things happen. We use different units depending on what we're measuring:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+\textbf{Unit} & \textbf{When We Use It} \\
+\midrule
+Seconds & Very short events (running 100\,m) \\
+Minutes & Short activities (cooking, travelling) \\
+Hours & Longer activities (school day, sleeping) \\
+Days & Events spread over time (holidays) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Key conversions:}
+\begin{itemize}[leftmargin=*]
+\item 60 seconds = 1 minute
+\item 60 minutes = 1 hour
+\item 24 hours = 1 day
+\end{itemize}
+\end{conceptbox}
+
+\subsection{12-Hour and 24-Hour Time}
+
+\begin{conceptbox}{Two Ways to Tell the Time}
+There are \textbf{two systems} for writing time:
+
+\textbf{1. 12-Hour Time} uses \textbf{am} and \textbf{pm}:
+\begin{itemize}[leftmargin=*]
+\item \textbf{am} = \textit{ante meridiem} (Latin: "before midday")
+\item Used from midnight (12:00\,am) until noon (12:00\,pm)
+\item \textbf{pm} = \textit{post meridiem} (Latin: "after midday")
+\item Used from noon (12:00\,pm) until midnight (12:00\,am)
+\end{itemize}
+
+\textbf{2. 24-Hour Time} counts from 00:00 to 23:59:
+\begin{itemize}[leftmargin=*]
+\item Also called "military time" or "railway time"
+\item No am/pm needed!
+\item Used on timetables, in hospitals, by the military
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+% Clock face
+\draw[line width=2pt] (0,0) circle (3cm);
+\foreach \angle/\time in {90/12, 60/1, 30/2, 0/3, 330/4, 300/5, 270/6, 240/7, 210/8, 180/9, 150/10, 120/11}
+\node at (\angle:2.5cm) {\Large\textbf{\time}};
+\foreach \angle in {0,30,...,330}
+\draw[line width=1pt] (\angle:2.8cm) -- (\angle:3cm);
+
+% Labels
+\node[primaryblue] at (0,1) {\textbf{am}};
+\node[warningred] at (0,-1) {\textbf{pm}};
+\end{tikzpicture}
+\end{center}
+\end{conceptbox}
+
+\begin{tipbox}{Understanding Midnight and Noon}
+\textbf{Tricky times!}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Midnight} = 12:00\,am = 00:00 (start of the day)
+\item \textbf{Noon/Midday} = 12:00\,pm = 12:00 (middle of the day)
+\end{itemize}
+
+\textbf{Memory trick:} 
+\begin{itemize}[leftmargin=*]
+\item "am" sounds like "morning" -- use it for morning times!
+\item "pm" sounds like "afternoon/evening" -- use it after noon!
+\end{itemize}
+\end{tipbox}
+
+\begin{conceptbox}{Conversion Table: 12-Hour ↔ 24-Hour}
+\begin{center}
+\begin{tabular}{cc|cc}
+\toprule
+\textbf{12-Hour} & \textbf{24-Hour} & \textbf{12-Hour} & \textbf{24-Hour} \\
+\midrule
+12:00\,am & 00:00 & 12:00\,pm & 12:00 \\
+1:00\,am & 01:00 & 1:00\,pm & 13:00 \\
+2:00\,am & 02:00 & 2:00\,pm & 14:00 \\
+3:00\,am & 03:00 & 3:00\,pm & 15:00 \\
+6:00\,am & 06:00 & 6:00\,pm & 18:00 \\
+9:00\,am & 09:00 & 9:00\,pm & 21:00 \\
+11:00\,am & 11:00 & 11:00\,pm & 23:00 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{conceptbox}
+
+\subsection{Converting Between Time Formats}
+
+\begin{examplebox}{Converting 12-Hour to 24-Hour Time (am)}
+\textbf{Question:} Convert 7:30\,am to 24-hour time.
+
+\textbf{Solution:}
+
+\textbf{Rule for am times:} Keep the same, but write with leading zero if needed.
+\begin{itemize}
+\item 7:30\,am is in the morning (am)
+\item In 24-hour time: \boxed{07:30}
+\end{itemize}
+
+\textbf{Answer:} 7:30\,am = \textbf{07:30}
+\end{examplebox}
+
+\begin{examplebox}{Converting 12-Hour to 24-Hour Time (pm)}
+\textbf{Question:} Convert 4:15\,pm to 24-hour time.
+
+\textbf{Solution:}
+
+\textbf{Rule for pm times (except 12:00\,pm):} Add 12 to the hour.
+\begin{align*}
+\text{Hour: } 4 + 12 &= 16 \\
+\text{Minutes: } &= 15 \text{ (stay the same)}
+\end{align*}
+
+\textbf{Answer:} 4:15\,pm = \textbf{16:15}
+\end{examplebox}
+
+
+\begin{examplebox}{Converting 12-Hour to 24-Hour Time (Special Cases)}
+\textbf{Question:} Convert these times to 24-hour time:
+\begin{enumerate}[label=\alph*)]
+\item 12:30\,pm (lunchtime)
+\item 12:45\,am (just after midnight)
+\end{enumerate}
+
+\textbf{Solution:}
+
+\textbf{a)} 12:30\,pm
+\begin{itemize}
+\item This is just after noon
+\item \textbf{Special rule:} 12:00\,pm stays as 12:00 in 24-hour time
+\item Answer: \boxed{12:30}
+\end{itemize}
+
+\textbf{b)} 12:45\,am
+\begin{itemize}
+\item This is just after midnight
+\item \textbf{Special rule:} 12:00\,am becomes 00:00 in 24-hour time
+\item Answer: \boxed{00:45}
+\end{itemize}
+\end{examplebox}
+
+\begin{examplebox}{Converting 24-Hour to 12-Hour Time}
+\textbf{Question:} Convert these 24-hour times to 12-hour time:
+\begin{enumerate}[label=\alph*)]
+\item 15:40
+\item 08:25
+\item 23:50
+\end{enumerate}
+
+\textbf{Solution:}
+
+\textbf{a)} 15:40
+\begin{itemize}
+\item 15 is greater than 12, so it's a pm time
+\item Subtract 12: $15 - 12 = 3$
+\item Answer: \boxed{3:40\text{\,pm}}
+\end{itemize}
+
+\textbf{b)} 08:25
+\begin{itemize}
+\item 08 is less than 12, so it's an am time
+\item Just remove the leading zero
+\item Answer: \boxed{8:25\text{\,am}}
+\end{itemize}
+
+\textbf{c)} 23:50
+\begin{itemize}
+\item 23 is greater than 12, so it's a pm time
+\item Subtract 12: $23 - 12 = 11$
+\item Answer: \boxed{11:50\text{\,pm}}
+\end{itemize}
+\end{examplebox}
+
+\begin{warningbox}{Don't Make This Mistake!}
+\textbf{Wrong:} 15:00 = 15:00\,pm
+
+\textbf{Why it's wrong:} You can't mix 24-hour and 12-hour formats!
+
+\textbf{Correct:} 15:00 = 3:00\,pm (subtract 12 from the hour)
+\end{warningbox}
+
+\begin{exercisebox}{3.1 -- Time Conversions Part A}
+Convert these 12-hour times to 24-hour time.
+
+\begin{enumerate}[leftmargin=*]
+\item 6:00\,am = \underline{\hspace{3cm}}
+\item 2:30\,pm = \underline{\hspace{3cm}}
+\item 11:45\,am = \underline{\hspace{3cm}}
+\item 8:15\,pm = \underline{\hspace{3cm}}
+\item 12:00\,pm (noon) = \underline{\hspace{3cm}}
+\item 12:00\,am (midnight) = \underline{\hspace{3cm}}
+\item 9:50\,pm = \underline{\hspace{3cm}}
+\item 5:35\,am = \underline{\hspace{3cm}}
+\end{enumerate}
+\end{exercisebox}
+
+\begin{exercisebox}{3.2 -- Time Conversions Part B}
+Convert these 24-hour times to 12-hour time.
+
+\begin{enumerate}[leftmargin=*]
+\item 14:20 = \underline{\hspace{3cm}}
+\item 07:45 = \underline{\hspace{3cm}}
+\item 19:30 = \underline{\hspace{3cm}}
+\item 22:15 = \underline{\hspace{3cm}}
+\item 00:30 = \underline{\hspace{3cm}}
+\item 12:00 = \underline{\hspace{3cm}}
+\item 16:55 = \underline{\hspace{3cm}}
+\item 03:10 = \underline{\hspace{3cm}}
+\end{enumerate}
+\end{exercisebox}
+
+\subsection{Adding and Subtracting Time}
+
+\begin{conceptbox}{Why Do We Add and Subtract Time?}
+We often need to calculate time in everyday life:
+\begin{itemize}[leftmargin=*]
+\item "If I leave at 2:30\,pm and the journey takes 1 hour 45 minutes, when will I arrive?"
+\item "The film starts at 7:15\,pm and ends at 9:40\,pm. How long is it?"
+\end{itemize}
+
+\textbf{Important reminders:}
+\begin{itemize}[leftmargin=*]
+\item 60 minutes = 1 hour
+\item When adding/subtracting, we need to "carry" or "borrow" between hours and minutes
+\end{itemize}
+\end{conceptbox}
+
+\begin{examplebox}{Adding Time (No Carrying Needed)}
+\textbf{Question:} Add 2 hours 25 minutes $+$ 1 hour 30 minutes.
+
+\textbf{Solution:}
+
+\textbf{Step 1:} Add the hours together.
+\[2\text{ hours} + 1\text{ hour} = 3\text{ hours}\]
+
+\textbf{Step 2:} Add the minutes together.
+\[25\text{ minutes} + 30\text{ minutes} = 55\text{ minutes}\]
+
+\textbf{Step 3:} Check if minutes $<$ 60. If yes, we're done!
+\[55 < 60 \checkmark\]
+
+\textbf{Answer:} \boxed{3\text{ hours }55\text{ minutes}}
+\end{examplebox}
+
+\begin{examplebox}{Adding Time (Carrying Required)}
+\textbf{Question:} Add 2 hours 35 minutes $+$ 1 hour 40 minutes.
+
+\textbf{Solution:}
+
+\textbf{Step 1:} Add hours and minutes separately.
+\begin{align*}
+\text{Hours: } 2 + 1 &= 3\text{ hours} \\
+\text{Minutes: } 35 + 40 &= 75\text{ minutes}
+\end{align*}
+
+\textbf{Step 2:} Convert minutes to hours (if $\geq 60$).
+\begin{align*}
+75\text{ minutes} &= 60\text{ minutes} + 15\text{ minutes} \\
+&= 1\text{ hour} + 15\text{ minutes}
+\end{align*}
+
+\textbf{Step 3:} Add the extra hour to our total.
+\begin{align*}
+3\text{ hours} + 1\text{ hour} + 15\text{ minutes} &= 4\text{ hours }15\text{ minutes}
+\end{align*}
+
+\textbf{Answer:} \boxed{4\text{ hours }15\text{ minutes}}
+\end{examplebox}
+
+\begin{tipbox}{The Column Method for Adding Time}
+You can add time like you add regular numbers:
+
+\begin{center}
+\begin{tabular}{r|rr}
+& \textbf{h} & \textbf{min} \\
+\hline
+& 2 & 35 \\
+$+$ & 1 & 40 \\
+\hline
+& 3 & 75 \\
+\end{tabular}
+\quad $\rightarrow$ \quad
+\begin{tabular}{r|rr}
+& \textbf{h} & \textbf{min} \\
+\hline
+& 2 & 35 \\
+$+$ & 1 & 40 \\
+\hline
+& 3 & 75 \\
+& $+1$ & $-60$ \\
+\hline
+& 4 & 15 \\
+\end{tabular}
+\end{center}
+
+When minutes $\geq 60$, subtract 60 and add 1 to hours!
+\end{tipbox}
+
+
+\begin{examplebox}{Subtracting Time (No Borrowing Needed)}
+\textbf{Question:} Subtract 5 hours 40 minutes $-$ 2 hours 20 minutes.
+
+\textbf{Solution:}
+
+\textbf{Step 1:} Subtract hours and minutes separately.
+\begin{align*}
+\text{Hours: } 5 - 2 &= 3\text{ hours} \\
+\text{Minutes: } 40 - 20 &= 20\text{ minutes}
+\end{align*}
+
+\textbf{Answer:} \boxed{3\text{ hours }20\text{ minutes}}
+\end{examplebox}
+
+\begin{examplebox}{Subtracting Time (Borrowing Required)}
+\textbf{Question:} Subtract 5 hours 20 minutes $-$ 2 hours 45 minutes.
+
+\textbf{Solution:}
+
+\textbf{Step 1:} Try to subtract minutes.
+\[20 - 45 = ?\]
+We can't do this! 20 is smaller than 45.
+
+\textbf{Step 2:} Borrow 1 hour from the hours column.
+\begin{itemize}
+\item 5 hours 20 minutes becomes 4 hours 80 minutes
+\item (We converted 1 hour to 60 minutes: $20 + 60 = 80$)
+\end{itemize}
+
+\textbf{Step 3:} Now subtract.
+\begin{align*}
+\text{Hours: } 4 - 2 &= 2\text{ hours} \\
+\text{Minutes: } 80 - 45 &= 35\text{ minutes}
+\end{align*}
+
+\textbf{Answer:} \boxed{2\text{ hours }35\text{ minutes}}
+\end{examplebox}
+
+\begin{warningbox}{Common Borrowing Mistake}
+\textbf{Wrong:} When borrowing, adding 10 instead of 60 to the minutes.
+
+\textbf{Example:} 5 h 20 min $\rightarrow$ 4 h 30 min ✗
+
+\textbf{Correct:} 5 h 20 min $\rightarrow$ 4 h 80 min ✓
+
+\textbf{Remember:} 1 hour = \textbf{60} minutes, not 10!
+\end{warningbox}
+
+\begin{examplebox}{Real-World Time Problem}
+\textbf{Question:} A train leaves at 14:25 and the journey takes 2 hours 50 minutes. What time does it arrive?
+
+\textbf{Solution:}
+
+\textbf{Method 1: Add the times}
+\begin{align*}
+\text{Start time: } &14:25 \\
+\text{Add: } &+ 2\text{ h }50\text{ min} \\
+\hline
+\text{Hours: } &14 + 2 = 16 \\
+\text{Minutes: } &25 + 50 = 75\text{ min}
+\end{align*}
+
+Convert: $75\text{ min} = 1\text{ h }15\text{ min}$
+
+So: $16:00 + 1:15 = 17:15$
+
+\textbf{Answer:} The train arrives at \boxed{17:15} (or 5:15\,pm).
+\end{examplebox}
+
+\begin{exercisebox}{3.3 -- Adding Time}
+Calculate the following. Show your working!
+
+\begin{enumerate}[leftmargin=*]
+\item 3 h 20 min $+$ 2 h 15 min = \underline{\hspace{4cm}}
+\item 1 h 45 min $+$ 2 h 30 min = \underline{\hspace{4cm}}
+\item 5 h 50 min $+$ 3 h 25 min = \underline{\hspace{4cm}}
+\item 4 h 35 min $+$ 1 h 55 min = \underline{\hspace{4cm}}
+\end{enumerate}
+\end{exercisebox}
+
+\begin{exercisebox}{3.4 -- Subtracting Time}
+Calculate the following. Show your working!
+
+\begin{enumerate}[leftmargin=*]
+\item 6 h 40 min $-$ 3 h 20 min = \underline{\hspace{4cm}}
+\item 5 h 15 min $-$ 2 h 35 min = \underline{\hspace{4cm}}
+\item 8 h 10 min $-$ 3 h 45 min = \underline{\hspace{4cm}}
+\item 7 h 05 min $-$ 4 h 50 min = \underline{\hspace{4cm}}
+\end{enumerate}
+\end{exercisebox}
+
+\begin{exercisebox}{3.5 -- Time Word Problems}
+Solve these problems using addition or subtraction of time.
+
+\textbf{1.} A film starts at 19:30 and lasts 2 hours 25 minutes. What time does it finish?
+
+Answer: \underline{\hspace{4cm}}
+
+\textbf{2.} Sophie leaves home at 08:15 and arrives at school at 08:55. How long does her journey take?
+
+Answer: \underline{\hspace{4cm}}
+
+\textbf{3.} A flight departs at 06:45 and arrives at 10:20. How long is the flight?
+
+Answer: \underline{\hspace{4cm}}
+
+\textbf{4.} Ben spends 1 hour 35 minutes doing homework and 45 minutes playing football. How much time did he spend on both activities?
+
+Answer: \underline{\hspace{4cm}}
+\end{exercisebox}
+
+\newpage
+
+% ================= SECTION 4: TIMETABLES =================
+\section{Timetables}
+
+\subsection{Introduction to Timetables}
+
+\begin{conceptbox}{What is a Timetable?}
+A \textbf{timetable} is a table that shows when transport (buses, trains, aeroplanes) departs from and arrives at different locations.
+
+\textbf{Key vocabulary:}
+\begin{itemize}[leftmargin=*]
+\item \textbf{Depart/Departure} -- leaving a place
+\item \textbf{Arrive/Arrival} -- reaching a place
+\item \textbf{Journey time/Duration} -- how long a trip takes
+\item \textbf{Stop/Station} -- a place where the transport stops
+\end{itemize}
+
+\textbf{Why are timetables important?}
+\begin{itemize}[leftmargin=*]
+\item Plan journeys to arrive on time
+\item Work out how long a journey will take
+\item Decide which bus/train to catch
+\end{itemize}
+\end{conceptbox}
+
+\subsection{Reading a Simple Timetable}
+
+\begin{examplebox}{Understanding a Bus Timetable}
+\textbf{Question:} Study this bus timetable and answer the questions.
+
+\begin{center}
+\begin{tabular}{l|cccc}
+\toprule
+\textbf{Stop} & \textbf{Bus 1} & \textbf{Bus 2} & \textbf{Bus 3} & \textbf{Bus 4} \\
+\midrule
+Town Centre & 08:00 & 09:15 & 10:30 & 11:45 \\
+Library & 08:12 & 09:27 & 10:42 & 11:57 \\
+Hospital & 08:25 & 09:40 & 10:55 & 12:10 \\
+School & 08:35 & 09:50 & 11:05 & 12:20 \\
+Shopping Centre & 08:50 & 10:05 & 11:20 & 12:35 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{a)} What time does Bus 2 depart from Town Centre?
+
+\textbf{b)} If I catch Bus 3 from the Library, what time will I arrive at School?
+
+\textbf{c)} How long does the journey take from Town Centre to Shopping Centre on Bus 1?
+
+\textbf{Solution:}
+
+\textbf{a)} Find the Bus 2 column and Town Centre row:
+\[\text{Answer: } \boxed{09:15}\]
+
+\textbf{b)} Find Bus 3 column:
+\begin{itemize}
+\item Library (depart): 10:42
+\item School (arrive): 11:05
+\item Answer: \boxed{11:05}
+\end{itemize}
+
+\textbf{c)} Journey time calculation:
+\begin{align*}
+\text{Depart Town Centre: } &08:00 \\
+\text{Arrive Shopping Centre: } &08:50 \\
+\text{Journey time: } &08:50 - 08:00 = \boxed{50\text{ minutes}}
+\end{align*}
+\end{examplebox}
+
+
+\begin{tipbox}{How to Use a Timetable Effectively}
+\textbf{Step-by-step approach:}
+\begin{enumerate}[leftmargin=*]
+\item Identify your \textit{starting point} (departure location)
+\item Identify your \textit{destination} (arrival location)
+\item Find the correct \textit{column} (which bus/train)
+\item Read across to find \textit{departure time}
+\item Read down to find \textit{arrival time}
+\item Calculate \textit{journey time} by subtracting
+\end{enumerate}
+\end{tipbox}
+
+\begin{examplebox}{Working Backwards from an Arrival Time}
+\textbf{Question:} I need to be at the Hospital by 10:00. What is the latest bus I can catch from Town Centre?
+
+\textbf{Bus timetable:}
+\begin{center}
+\begin{tabular}{l|cccc}
+\toprule
+\textbf{Stop} & \textbf{Bus 1} & \textbf{Bus 2} & \textbf{Bus 3} & \textbf{Bus 4} \\
+\midrule
+Town Centre & 08:00 & 09:15 & 10:30 & 11:45 \\
+Hospital & 08:25 & 09:40 & 10:55 & 12:10 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Solution:}
+
+\textbf{Step 1:} Look at Hospital arrival times: 08:25, 09:40, 10:55, 12:10
+
+\textbf{Step 2:} Which arrives \textit{before} 10:00?
+\begin{itemize}
+\item 08:25 ✓ (too early though!)
+\item 09:40 ✓ (this is the latest before 10:00)
+\item 10:55 ✗ (too late)
+\item 12:10 ✗ (too late)
+\end{itemize}
+
+\textbf{Step 3:} Bus 2 arrives at 09:40. When does it depart Town Centre?
+\begin{itemize}
+\item Answer: \boxed{09:15}
+\end{itemize}
+
+\textbf{Answer:} The latest bus from Town Centre is \textbf{Bus 2 at 09:15}.
+\end{examplebox}
+
+\subsection{Complex Timetable Problems}
+
+\begin{examplebox}{Multiple Stops and Connections}
+\textbf{Question:} Using the timetable below, answer these questions:
+
+\begin{center}
+\begin{tabular}{l|ccccc}
+\toprule
+\textbf{Stop} & \textbf{Bus A} & \textbf{Bus B} & \textbf{Bus C} & \textbf{Bus D} & \textbf{Bus E} \\
+\midrule
+Station & 07:15 & 08:30 & 09:45 & 11:00 & 12:15 \\
+Park Road & 07:28 & 08:43 & 09:58 & 11:13 & 12:28 \\
+High Street & 07:35 & 08:50 & 10:05 & 11:20 & 12:35 \\
+College & 07:47 & 09:02 & 10:17 & 11:32 & 12:47 \\
+Museum & 08:00 & 09:15 & 10:30 & 11:45 & 13:00 \\
+Beach & 08:20 & 09:35 & 10:50 & 12:05 & 13:20 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{a)} What time does Bus C arrive at the Beach?
+
+\textbf{b)} How long does the complete journey from Station to Beach take on Bus B?
+
+\textbf{c)} I need to be at College by 10:00. What is the latest bus I can catch from High Street?
+
+\textbf{Solution:}
+
+\textbf{a)} Look at Bus C column, Beach row: \boxed{10:50}
+
+\textbf{b)} Bus B journey time:
+\begin{align*}
+\text{Depart Station: } &08:30 \\
+\text{Arrive Beach: } &09:35 \\
+\text{Journey time: } &09:35 - 08:30
+\end{align*}
+
+Calculate:
+\begin{align*}
+9\text{ h }35\text{ min} - 8\text{ h }30\text{ min} &= (9-8)\text{ h } + (35-30)\text{ min} \\
+&= 1\text{ h }5\text{ min} \\
+&= \boxed{1\text{ hour }5\text{ minutes}}
+\end{align*}
+
+\textbf{c)} College arrival times: 07:47, 09:02, 10:17, 11:32, 12:47
+
+Latest before 10:00 is 09:02 (Bus B).
+
+But we're catching from High Street, not Station!
+
+Look at Bus B, High Street row: \boxed{08:50}
+
+\textbf{Answer:} Catch Bus B at 08:50 from High Street.
+\end{examplebox}
+
+\begin{exercisebox}{4.1 -- Bus Timetable Practice}
+Use this timetable to answer the questions:
+
+\begin{center}
+\begin{tabular}{l|ccccc}
+\toprule
+\textbf{Stop} & \textbf{Bus 10} & \textbf{Bus 20} & \textbf{Bus 30} & \textbf{Bus 40} & \textbf{Bus 50} \\
+\midrule
+City Centre & 06:00 & 07:30 & 09:00 & 10:30 & 12:00 \\
+Park & 06:15 & 07:45 & 09:15 & 10:45 & 12:15 \\
+University & 06:30 & 08:00 & 09:30 & 11:00 & 12:30 \\
+Hospital & 06:50 & 08:20 & 09:50 & 11:20 & 12:50 \\
+Airport & 07:20 & 08:50 & 10:20 & 11:50 & 13:20 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{1.} What time does Bus 20 depart from City Centre?
+
+Answer: \underline{\hspace{4cm}}
+
+\textbf{2.} If I catch Bus 30 from the University, when will I arrive at the Airport?
+
+Answer: \underline{\hspace{4cm}}
+
+\textbf{3.} How long does it take to travel from Park to Hospital on Bus 40?
+
+Answer: \underline{\hspace{4cm}}
+
+\textbf{4.} I need to be at the Hospital by 10:00. What is the latest bus I can catch from City Centre?
+
+Answer: \underline{\hspace{4cm}}
+
+\textbf{5.} What is the total journey time from City Centre to Airport on Bus 10?
+
+Answer: \underline{\hspace{4cm}}
+\end{exercisebox}
+
+\begin{challengebox}{Timetable Challenge}
+\textbf{Multi-step problem:}
+
+Using the timetable from Exercise 4.1:
+
+James needs to meet his friend at the Airport at 11:00. He lives near the Park stop.
+
+\begin{enumerate}[label=\alph*)]
+\item Which bus should he catch from the Park?
+\item What time should he leave Park?
+\item What time will he arrive at the Airport?
+\item How early will he be?
+\end{enumerate}
+
+\textit{Hint: Work backwards from 11:00!}
+\end{challengebox}
+
+\newpage
+
+% ================= SECTION 5: TIME ZONES =================
+\section{Introduction to Time Zones}
+
+\subsection{Why Do We Have Time Zones?}
+
+\begin{conceptbox}{The Earth's Rotation and Time}
+The Earth rotates (spins) once every \textbf{24 hours}. As it rotates:
+\begin{itemize}[leftmargin=*]
+\item Different parts of the Earth face the Sun
+\item When it's daytime in one place, it's night-time in another
+\item This means different places have different \textit{local times}
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+% Sun
+\shade[ball color=tipyellow] (-4,0) circle (0.8cm);
+\node at (-4,-1.5) {\textbf{Sun}};
+
+% Earth
+\shade[ball color=primaryblue!50] (2,0) circle (1.5cm);
+
+% Day/Night
+\fill[black,opacity=0.7] (2,0) -- (2,-1.5) arc (-90:90:1.5cm) -- cycle;
+\node[white] at (1,0) {\textbf{Night}};
+\node at (3,0) {\textbf{Day}};
+
+% Rays
+\foreach \y in {-1,0,1}
+\draw[-{Stealth[length=2mm]},tipyellow,line width=1pt] (-3.2,\y*0.5) -- (0.5,\y*0.5);
+
+% Rotation arrow
+\draw[-{Stealth[length=3mm]},warningred,line width=2pt] (2,2.5) arc (90:180:1cm);
+\node[warningred] at (3.5,2) {\textbf{Rotation}};
+\end{tikzpicture}
+\end{center}
+
+\textbf{Time zones} divide the world into regions where everyone uses the same time.
+\end{conceptbox}
+
+\begin{conceptbox}{Understanding UTC}
+\textbf{UTC} stands for \textbf{Coordinated Universal Time}.
+
+\begin{itemize}[leftmargin=*]
+\item It's the "reference time" for the whole world
+\item Also called \textbf{GMT} (Greenwich Mean Time) -- based on time in London, UK
+\item Time zones are described as UTC+1, UTC+2, etc. or UTC-1, UTC-2, etc.
+\end{itemize}
+
+\textbf{What do the numbers mean?}
+\begin{itemize}[leftmargin=*]
+\item UTC+3 = 3 hours \textit{ahead} of London
+\item UTC-5 = 5 hours \textit{behind} London
+\end{itemize}
+\end{conceptbox}
+
+\subsection{Calculating Time in Different Zones}
+
+\begin{examplebox}{Basic Time Zone Calculation}
+\textbf{Question:} It is 14:00 in London (UTC). What time is it in Dubai (UTC+4)?
+
+\textbf{Solution:}
+
+\textbf{Step 1:} Identify the time zone difference.
+\begin{itemize}
+\item Dubai is UTC+4
+\item This means Dubai is 4 hours \textit{ahead} of London
+\end{itemize}
+
+\textbf{Step 2:} Add 4 hours to London time.
+\begin{align*}
+14:00 + 4\text{ hours} &= 18:00
+\end{align*}
+
+\textbf{Answer:} When it's 14:00 in London, it's \boxed{18:00} in Dubai.
+\end{examplebox}
+
+\begin{tipbox}{The Easy Time Zone Rule}
+\textbf{UTC+} means the time is \textit{later} (ahead) -- so \textbf{ADD} hours
+
+\textbf{UTC-} means the time is \textit{earlier} (behind) -- so \textbf{SUBTRACT} hours
+
+\textbf{Memory trick:} The + and - signs tell you what to do!
+\end{tipbox}
+
+\begin{examplebox}{Time Zone Across Midnight}
+\textbf{Question:} It is 21:00 in Los Angeles (UTC-8). What time is it in London (UTC)?
+
+\textbf{Solution:}
+
+\textbf{Step 1:} Los Angeles is UTC-8, meaning it's 8 hours \textit{behind} London.
+
+So London is 8 hours \textit{ahead} of Los Angeles.
+
+\textbf{Step 2:} Add 8 hours to Los Angeles time.
+\begin{align*}
+21:00 + 8\text{ hours} &= 29:00
+\end{align*}
+
+Wait! 29:00 doesn't exist!
+
+\textbf{Step 3:} When we go past 24:00, we go into the next day.
+\begin{align*}
+29:00 &= 24:00 + 5:00 \\
+&= 05:00 \text{ (next day)}
+\end{align*}
+
+\textbf{Answer:} When it's 21:00 in Los Angeles, it's \boxed{05:00} the next day in London.
+\end{examplebox}
+
+\subsection{Australian Time Zones}
+
+\begin{conceptbox}{Time Zones in Australia}
+Australia is a huge country with \textbf{three main time zones}:
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Time Zone} & \textbf{States/Territories} & \textbf{UTC Offset} \\
+\midrule
+Western Standard Time (WST) & Western Australia & UTC+8 \\
+Central Standard Time (CST) & South Australia, NT & UTC+9.5 \\
+Eastern Standard Time (EST) & QLD, NSW, VIC, TAS & UTC+10 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Notice:} Central time is UTC+9.5 -- a half-hour difference!
+\end{conceptbox}
+
+\begin{examplebox}{Australian Time Zone Problem}
+\textbf{Question:} It is 15:00 in Perth (WST, UTC+8). What time is it in:
+\begin{enumerate}[label=\alph*)]
+\item Adelaide (CST, UTC+9.5)?
+\item Sydney (EST, UTC+10)?
+\end{enumerate}
+
+\textbf{Solution:}
+
+\textbf{a)} Adelaide time zone difference:
+\begin{align*}
+\text{Adelaide: } &\text{UTC+9.5} \\
+\text{Perth: } &\text{UTC+8} \\
+\text{Difference: } &9.5 - 8 = 1.5\text{ hours}
+\end{align*}
+
+Adelaide is 1.5 hours (1 hour 30 minutes) ahead:
+\begin{align*}
+15:00 + 1:30 &= \boxed{16:30}
+\end{align*}
+
+\textbf{b)} Sydney time zone difference:
+\begin{align*}
+\text{Sydney: } &\text{UTC+10} \\
+\text{Perth: } &\text{UTC+8} \\
+\text{Difference: } &10 - 8 = 2\text{ hours}
+\end{align*}
+
+Sydney is 2 hours ahead:
+\begin{align*}
+15:00 + 2:00 &= \boxed{17:00}
+\end{align*}
+\end{examplebox}
+
+\begin{exercisebox}{5.1 -- Time Zone Practice}
+Calculate the time in each location.
+
+\textbf{1.} It is 12:00 in London (UTC). What time is it in:
+\begin{enumerate}[label=\alph*)]
+\item Paris (UTC+1): \underline{\hspace{3cm}}
+\item New York (UTC-5): \underline{\hspace{3cm}}
+\item Tokyo (UTC+9): \underline{\hspace{3cm}}
+\end{enumerate}
+
+\textbf{2.} It is 18:00 in Sydney (UTC+10). What time is it in:
+\begin{enumerate}[label=\alph*)]
+\item Perth (UTC+8): \underline{\hspace{3cm}}
+\item London (UTC): \underline{\hspace{3cm}}
+\item Los Angeles (UTC-8): \underline{\hspace{3cm}}
+\end{enumerate}
+
+\textbf{3.} It is 09:30 in Adelaide (UTC+9.5). What time is it in Brisbane (UTC+10)?
+
+Answer: \underline{\hspace{4cm}}
+\end{exercisebox}
+
+\begin{challengebox}{Time Zone Challenge}
+\textbf{Real-world problem:}
+
+Your pen pal in New York (UTC-5) says they will call you at 19:00 their time.
+
+You live in Melbourne, Australia (UTC+10).
+
+\textbf{What time should you expect the call in Melbourne?}
+
+\textit{Hint: Melbourne is 15 hours ahead of New York!}
+\end{challengebox}
+
+\newpage
+
+% ================= ANSWERS SECTION =================
+\section{Answers}
+
+\subsection{Section 1: Reading Scales}
+
+\textbf{Exercise 1.1:}
+\begin{enumerate}[label=\alph*)]
+\item 38
+\item 160
+\item 1100
+\item 50
+\end{enumerate}
+
+\textbf{Exercise 1.2:}
+\begin{enumerate}[label=\alph*)]
+\item 42°C
+\item −6°C
+\item 85°C
+\end{enumerate}
+
+\textbf{Challenge (Page 6):}
+\begin{enumerate}[label=\alph*)]
+\item Tuesday was coldest (−7°C)
+\item Wednesday was warmest (2°C)
+\item Difference: $2 - (-3) = 2 + 3 = 5$°C
+\end{enumerate}
+
+\subsection{Section 2: Units and Conversions}
+
+\textbf{Exercise 2.1:}
+\begin{enumerate}
+\item 400\,cm
+\item 2800\,m
+\item 65\,mm
+\item 75\,cm
+\item 3.5\,km
+\item 4.8\,m
+\item 9\,cm
+\item 12.5\,km
+\item 6.3\,m (or 630\,cm)
+\item 8500\,cm (or 85\,m)
+\end{enumerate}
+
+\textbf{Exercise 2.2:}
+\begin{enumerate}
+\item 4200\,g
+\item 5.6\,kg
+\item 850\,g
+\item 12.45\,kg
+\item 3500\,kg
+\item 7.25\,t
+\end{enumerate}
+
+\textbf{Exercise 2.3:}
+\begin{enumerate}
+\item 3600\,ml
+\item 2.8\,l
+\item 750\,ml
+\item 6.25\,l
+\item 1050\,ml
+\item 0.95\,l
+\end{enumerate}
+
+\textbf{Challenge (Page 18):}
+\begin{enumerate}[label=\alph*)]
+\item Orange juice: 2.5\,l = 2500\,ml; Lemonade: 1500\,ml; Pineapple: 750\,ml
+\item Total: $2500 + 1500 + 750 = 4750$\,ml
+\item 4750\,ml = 4.75\,l
+\end{enumerate}
+
+\subsection{Section 3: Time}
+
+\textbf{Exercise 3.1:}
+\begin{enumerate}
+\item 06:00
+\item 14:30
+\item 11:45
+\item 20:15
+\item 12:00
+\item 00:00
+\item 21:50
+\item 05:35
+\end{enumerate}
+
+\textbf{Exercise 3.2:}
+\begin{enumerate}
+\item 2:20\,pm
+\item 7:45\,am
+\item 7:30\,pm
+\item 10:15\,pm
+\item 12:30\,am
+\item 12:00\,pm (noon)
+\item 4:55\,pm
+\item 3:10\,am
+\end{enumerate}
+
+\textbf{Exercise 3.3:}
+\begin{enumerate}
+\item 5 h 35 min
+\item 4 h 15 min
+\item 9 h 15 min
+\item 6 h 30 min
+\end{enumerate}
+
+\textbf{Exercise 3.4:}
+\begin{enumerate}
+\item 3 h 20 min
+\item 2 h 40 min
+\item 4 h 25 min
+\item 2 h 15 min
+\end{enumerate}
+
+\textbf{Exercise 3.5:}
+\begin{enumerate}
+\item 21:55 (or 9:55\,pm)
+\item 40 minutes
+\item 3 h 35 min
+\item 2 h 20 min
+\end{enumerate}
+
+\subsection{Section 4: Timetables}
+
+\textbf{Exercise 4.1:}
+\begin{enumerate}
+\item 07:30
+\item 10:20
+\item 30 minutes
+\item Bus 20 at 07:30
+\item 1 h 20 min
+\end{enumerate}
+
+\textbf{Challenge (Page 33):}
+\begin{enumerate}[label=\alph*)]
+\item Bus 40
+\item 10:45
+\item 11:50
+\item 50 minutes early
+\end{enumerate}
+
+\subsection{Section 5: Time Zones}
+
+\textbf{Exercise 5.1:}
+
+\textbf{1.}
+\begin{enumerate}[label=\alph*)]
+\item 13:00
+\item 07:00
+\item 21:00
+\end{enumerate}
+
+\textbf{2.}
+\begin{enumerate}[label=\alph*)]
+\item 16:00
+\item 08:00
+\item 00:00 (midnight) same day
+\end{enumerate}
+
+\textbf{3.} 10:00
+
+\textbf{Challenge (Page 36):}
+
+Melbourne is UTC+10, New York is UTC-5.
+
+Difference: $10 - (-5) = 15$ hours ahead
+
+New York time: 19:00
+
+Melbourne time: $19:00 + 15:00 = 34:00 = 10:00$ next day
+
+\textbf{Answer:} 10:00 (morning) the next day
+
+\vfill
+
+\begin{center}
+\begin{tcolorbox}[colback=successgreen!20,colframe=successgreen!80!black,width=12cm,arc=3mm]
+\centering
+\Large\textbf{Well Done!}
+
+You've completed the Form 2 Measurement and Time booklet.
+
+Remember to ask your teacher about anything you found difficult.
+
+Keep practising and you'll become an expert at reading scales, converting units, telling the time, and understanding timetables!
+\end{tcolorbox}
+\end{center}
+
+\end{document}

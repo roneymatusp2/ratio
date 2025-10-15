@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Trophy, Target, RotateCcw, CheckCircle, XCircle, ArrowRight, Sparkles, Star, Zap, Award } from 'lucide-react';
+import { BookOpen, Trophy, Target, RotateCcw, CheckCircle, XCircle, ArrowRight, Sparkles, Star, Zap, Award, Ruler, Clock, Thermometer } from 'lucide-react';
 import { questions } from './data/questions';
 import { Question } from './types';
 
@@ -21,6 +21,14 @@ const revisionTips: Record<string, string> = {
   combining: 'Match the shared letter so the middle term is equal before weaving the ratios together.',
   sharing: 'Add the parts, find one share, then multiply up to see who receives what.',
   division: 'Translate the ratio into total parts so you can rebuild the whole quantity accurately.',
+  'reading-scales': 'Count the divisions carefully and work out what each small mark represents before reading the value.',
+  'length-conversion': 'Remember: converting to smaller units means multiply, converting to larger units means divide.',
+  'mass-conversion': '1000 grams = 1 kilogram. Move the decimal point three places when converting.',
+  'volume-conversion': '1000 millilitres = 1 litre. Think about the size of the unit to decide multiply or divide.',
+  'time-conversion': 'For PM times (except 12:00 pm), add 12 to convert to 24-hour. For AM times, just add a leading zero.',
+  'time-calculation': 'Remember: 60 minutes = 1 hour. When adding or subtracting, carry or borrow carefully.',
+  timetables: 'Work backwards from your arrival time to find the latest departure. Check each column carefully.',
+  temperature: 'Negative temperatures go below zero. The further below zero, the colder it is.',
   mixed: 'Break each problem down: a quick sketch or jot can make the relationship clearer.',
   default: 'Look for structure in the numbers and keep an eye on place value as you reason it through.',
 };
@@ -53,6 +61,14 @@ function App() {
     { id: 'combining', name: 'Combining Ratios', icon: Trophy, color: 'from-yellow-500 via-orange-500 to-amber-500', accent: 'bg-yellow-100 text-yellow-700' },
     { id: 'sharing', name: 'Sharing in a Ratio', icon: Target, color: 'from-teal-500 via-cyan-500 to-sky-500', accent: 'bg-teal-100 text-teal-700' },
     { id: 'division', name: 'Proportional Division', icon: CheckCircle, color: 'from-indigo-500 via-purple-500 to-violet-500', accent: 'bg-purple-100 text-purple-700' },
+    { id: 'reading-scales', name: 'Reading Scales', icon: Ruler, color: 'from-cyan-500 via-blue-500 to-indigo-500', accent: 'bg-cyan-100 text-cyan-700' },
+    { id: 'length-conversion', name: 'Length Conversions', icon: Ruler, color: 'from-lime-500 via-green-500 to-emerald-500', accent: 'bg-lime-100 text-lime-700' },
+    { id: 'mass-conversion', name: 'Mass Conversions', icon: Target, color: 'from-violet-500 via-purple-500 to-fuchsia-500', accent: 'bg-violet-100 text-violet-700' },
+    { id: 'volume-conversion', name: 'Volume Conversions', icon: Trophy, color: 'from-sky-500 via-blue-500 to-cyan-500', accent: 'bg-sky-100 text-sky-700' },
+    { id: 'time-conversion', name: 'Time Conversions', icon: Clock, color: 'from-amber-500 via-orange-500 to-red-500', accent: 'bg-amber-100 text-amber-700' },
+    { id: 'time-calculation', name: 'Time Calculations', icon: Clock, color: 'from-pink-500 via-rose-500 to-red-500', accent: 'bg-pink-100 text-pink-700' },
+    { id: 'timetables', name: 'Timetables', icon: BookOpen, color: 'from-teal-500 via-emerald-500 to-green-500', accent: 'bg-teal-100 text-teal-700' },
+    { id: 'temperature', name: 'Temperature', icon: Thermometer, color: 'from-red-500 via-orange-500 to-yellow-500', accent: 'bg-red-100 text-red-700' },
     { id: 'mixed', name: 'Mixed Review', icon: Sparkles, color: 'from-pink-500 via-fuchsia-500 to-rose-500', accent: 'bg-pink-100 text-pink-700' },
   ];
 

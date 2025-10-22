@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Trophy, Target, RotateCcw, CheckCircle, XCircle, ArrowRight, Sparkles, Star, Zap, Award, Ruler, Clock, Thermometer } from 'lucide-react';
+import { BookOpen, Trophy, Target, RotateCcw, CheckCircle, XCircle, ArrowRight, Sparkles, Star, Zap, Award, Ruler, Clock, Thermometer, FileText, Lightbulb, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Send } from 'lucide-react';
 import { questions } from './data/questions';
 import { Question } from './types';
+import { extraExercises, ExtraExercise, exerciseTopics } from './data/extra-exercises-new';
 
 const shuffleArray = <T,>(items: T[]): T[] => {
   const result = [...items];
@@ -36,7 +37,7 @@ const revisionTips: Record<string, string> = {
 const TARGET_QUESTION_COUNT = 12;
 
 function App() {
-  const [gameState, setGameState] = useState<'menu' | 'playing' | 'results'>('menu');
+  const [gameState, setGameState] = useState<'menu' | 'playing' | 'results' | 'exercises'>('menu');
   const [selectedTopic, setSelectedTopic] = useState<string>('all');
   const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -51,6 +52,13 @@ function App() {
   const [showCelebration, setShowCelebration] = useState(false);
   const [streak, setStreak] = useState(0);
   const [bestStreak, setBestStreak] = useState(0);
+  const [selectedExerciseTopic, setSelectedExerciseTopic] = useState<string | null>(null);
+  const [currentExercise, setCurrentExercise] = useState<ExtraExercise | null>(null);
+  const [currentPartIndex, setCurrentPartIndex] = useState(0);
+  const [userAnswer, setUserAnswer] = useState('');
+  const [showExerciseHint, setShowExerciseHint] = useState(false);
+  const [showExerciseSolution, setShowExerciseSolution] = useState(false);
+  const [submittedAnswer, setSubmittedAnswer] = useState(false);
 
   const topics = [
     { id: 'all', name: 'All Topics', icon: BookOpen, color: 'from-indigo-500 via-violet-500 to-sky-500', accent: 'bg-indigo-100 text-indigo-700' },
@@ -216,8 +224,18 @@ function App() {
                 <h2 className="text-3xl font-semibold text-slate-900">Choose your challenge</h2>
                 <p className="mt-1 text-sm text-slate-500">Select a strand or sample the lot.</p>
               </div>
-              <div className="text-sm text-slate-500">
-                {TARGET_QUESTION_COUNT} questions per session · Answers reshuffle every run
+              <div className="flex items-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => setGameState('exercises')}
+                  className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 px-5 py-2 text-sm font-medium text-white shadow-lg transition hover:from-purple-700 hover:to-pink-700"
+                >
+                  <FileText className="h-4 w-4" />
+                  Extra Exercises
+                </button>
+                <div className="text-sm text-slate-500">
+                  {TARGET_QUESTION_COUNT} questions per session · Answers reshuffle every run
+                </div>
               </div>
             </div>
 
@@ -427,6 +445,365 @@ function App() {
                 Remember: in British English we <span className="font-semibold">practise</span> regularly to build fluency. Have another go whenever you’re ready.
               </div>
             </aside>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (gameState === 'exercises') {
+    // Se não há tópico selecionado, mostrar lista de tópicos
+    if (!selectedExerciseTopic) {
+      return (
+        <div className="relative min-h-screen overflow-hidden bg-slate-100">
+          <div className="mesh-overlay" />
+          <div className="pattern-grid opacity-40" />
+          <div className="absolute -left-24 top-32 h-72 w-72 rounded-full bg-purple-200/50 blur-3xl" />
+          <div className="absolute bottom-[-140px] right-[-100px] h-[420px] w-[420px] rounded-full bg-pink-200/40 blur-3xl" />
+
+          <div className="relative z-10 mx-auto max-w-6xl px-6 py-14 lg:px-10">
+            <div className="flex flex-wrap items-start justify-between gap-6 mb-8">
+              <div>
+                <p className="text-sm font-medium uppercase tracking-[0.3em] text-purple-500">Practice & Learn</p>
+                <h1 className="mt-2 text-4xl font-semibold text-slate-900">Extra Exercises</h1>
+                <p className="mt-3 text-slate-600">
+                  Choose a topic to start practising. Work through exercises at your own pace.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={resetGame}
+                className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-indigo-700"
+              >
+                <ArrowRight className="h-4 w-4 rotate-180" />
+                Back to Quiz
+              </button>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {exerciseTopics.map((topic) => {
+                const topicExercises = extraExercises.filter(ex => ex.topic === topic.id);
+                return (
+                  <button
+                    key={topic.id}
+                    type="button"
+                    onClick={() => setSelectedExerciseTopic(topic.id)}
+                    className="group flex flex-col items-start gap-4 rounded-3xl border border-white/70 bg-white/90 p-8 text-left shadow-xl backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl"
+                  >
+                    <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${topic.color} text-white shadow-lg text-3xl`}>
+                      {topic.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-slate-900">{topic.name}</h3>
+                      <p className="mt-2 text-sm text-slate-500">
+                        {topicExercises.length} exercise{topicExercises.length === 1 ? '' : 's'} available
+                      </p>
+                    </div>
+                    <span className="mt-auto inline-flex items-center gap-2 text-sm font-medium text-indigo-600">
+                      Start practising
+                      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-12 rounded-3xl border border-white/70 bg-white/90 p-8 shadow-xl backdrop-blur">
+              <div className="flex items-start gap-4">
+                <div className="rounded-2xl bg-indigo-100 p-3 text-indigo-600">
+                  <Star className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-slate-900">How It Works</h3>
+                  <ul className="mt-3 space-y-2 text-sm text-slate-600">
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>Choose a topic and select an exercise</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>Read the question and write your answer in the text box</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>Use the hint if you need help</span>
+                    </li>
+                    <li className="flex gap-2">
+                      <span>•</span>
+                      <span>Check the step-by-step solution to learn the method</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Se não há exercício selecionado, mostrar lista de exercícios do tópico
+    if (!currentExercise) {
+      const topicData = exerciseTopics.find(t => t.id === selectedExerciseTopic);
+      const topicExercises = extraExercises.filter(ex => ex.topic === selectedExerciseTopic);
+
+      return (
+        <div className="relative min-h-screen overflow-hidden bg-slate-100">
+          <div className="mesh-overlay" />
+          <div className="pattern-grid opacity-40" />
+          <div className="absolute -left-24 top-32 h-72 w-72 rounded-full bg-purple-200/50 blur-3xl" />
+          <div className="absolute bottom-[-140px] right-[-100px] h-[420px] w-[420px] rounded-full bg-pink-200/40 blur-3xl" />
+
+          <div className="relative z-10 mx-auto max-w-6xl px-6 py-14 lg:px-10">
+            <div className="flex flex-wrap items-start justify-between gap-6 mb-8">
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setSelectedExerciseTopic(null)}
+                  className="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-700 mb-3"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                  Back to topics
+                </button>
+                <div className="flex items-center gap-3">
+                  <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${topicData?.color} text-white text-2xl`}>
+                    {topicData?.icon}
+                  </div>
+                  <div>
+                    <h1 className="text-3xl font-semibold text-slate-900">{topicData?.name}</h1>
+                    <p className="text-sm text-slate-500">{topicExercises.length} exercises</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              {topicExercises.map((exercise) => (
+                <button
+                  key={exercise.id}
+                  type="button"
+                  onClick={() => {
+                    setCurrentExercise(exercise);
+                    setCurrentPartIndex(0);
+                    setUserAnswer('');
+                    setShowExerciseHint(false);
+                    setShowExerciseSolution(false);
+                    setSubmittedAnswer(false);
+                  }}
+                  className="group flex flex-col items-start gap-4 rounded-3xl border border-white/70 bg-white/90 p-6 text-left shadow-xl backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl"
+                >
+                  <div className="flex items-start gap-4 w-full">
+                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${topicData?.color} text-white font-bold flex-shrink-0`}>
+                      {exercise.id}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-slate-900">{exercise.title}</h3>
+                      <p className="mt-1 text-xs text-slate-500">
+                        {exercise.parts.length} part{exercise.parts.length === 1 ? '' : 's'} • {exercise.difficulty}
+                      </p>
+                    </div>
+                  </div>
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-indigo-600">
+                    Start exercise
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Mostrar exercício atual
+    const currentPart = currentExercise.parts[currentPartIndex];
+    const topicData = exerciseTopics.find(t => t.id === currentExercise.topic);
+    const isLastPart = currentPartIndex === currentExercise.parts.length - 1;
+
+    return (
+      <div className="relative min-h-screen overflow-hidden bg-slate-100">
+        <div className="mesh-overlay" />
+        <div className="pattern-grid opacity-40" />
+        <div className="absolute -left-24 top-32 h-72 w-72 rounded-full bg-purple-200/50 blur-3xl" />
+        <div className="absolute bottom-[-140px] right-[-100px] h-[420px] w-[420px] rounded-full bg-pink-200/40 blur-3xl" />
+
+        <div className="relative z-10 mx-auto max-w-4xl px-6 py-14 lg:px-10">
+          {/* Header */}
+          <div className="mb-8">
+            <button
+              type="button"
+              onClick={() => {
+                setCurrentExercise(null);
+                setCurrentPartIndex(0);
+                setUserAnswer('');
+                setShowExerciseHint(false);
+                setShowExerciseSolution(false);
+                setSubmittedAnswer(false);
+              }}
+              className="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-700 mb-4"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              Back to exercises
+            </button>
+
+            <div className="flex items-center gap-3 mb-2">
+              <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${topicData?.color} text-white font-bold`}>
+                {currentExercise.id}
+              </div>
+              <div>
+                <h1 className="text-2xl font-semibold text-slate-900">{currentExercise.title}</h1>
+                <p className="text-sm text-slate-500">
+                  Part {currentPartIndex + 1} of {currentExercise.parts.length}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Question Card */}
+          <div className="rounded-3xl border border-white/70 bg-white/90 p-8 shadow-xl backdrop-blur mb-6">
+            <h2 className="text-lg font-semibold text-slate-900 mb-4">Question</h2>
+            <p className="text-base text-slate-700 leading-relaxed">{currentPart.question}</p>
+
+            {/* Answer Input */}
+            <div className="mt-6">
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                Your Answer
+              </label>
+              <textarea
+                value={userAnswer}
+                onChange={(e) => setUserAnswer(e.target.value)}
+                placeholder="Write your answer here..."
+                className="w-full rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-200 transition"
+                rows={4}
+                disabled={submittedAnswer}
+              />
+              {!submittedAnswer && (
+                <button
+                  type="button"
+                  onClick={() => setSubmittedAnswer(true)}
+                  disabled={!userAnswer.trim()}
+                  className="mt-3 inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Send className="h-4 w-4" />
+                  Submit Answer
+                </button>
+              )}
+              {submittedAnswer && (
+                <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-700">
+                  <CheckCircle className="h-4 w-4" />
+                  Answer submitted
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Hint Card */}
+          <div className="rounded-3xl border border-amber-200 bg-amber-50/90 p-6 shadow-lg backdrop-blur mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <Lightbulb className="h-5 w-5 text-amber-600" />
+                <h3 className="text-base font-semibold text-amber-900">Hint</h3>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowExerciseHint(!showExerciseHint)}
+                className="text-sm font-medium text-amber-700 hover:text-amber-900 transition"
+              >
+                {showExerciseHint ? 'Hide' : 'Show'} hint
+              </button>
+            </div>
+            {showExerciseHint && (
+              <p className="text-sm text-amber-800 leading-relaxed">{currentPart.hint}</p>
+            )}
+          </div>
+
+          {/* Solution Card */}
+          {submittedAnswer && (
+            <div className="rounded-3xl border border-emerald-200 bg-emerald-50/90 p-6 shadow-lg backdrop-blur mb-6">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="h-5 w-5 text-emerald-600" />
+                  <h3 className="text-base font-semibold text-emerald-900">Step-by-Step Solution</h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowExerciseSolution(!showExerciseSolution)}
+                  className="text-sm font-medium text-emerald-700 hover:text-emerald-900 transition"
+                >
+                  {showExerciseSolution ? 'Hide' : 'Show'} solution
+                </button>
+              </div>
+              {showExerciseSolution && (
+                <div className="space-y-2">
+                  {currentPart.solution.map((line, idx) => (
+                    <p
+                      key={idx}
+                      className={`text-sm leading-relaxed ${
+                        line.startsWith('•') || line.startsWith('Step') || line.startsWith('Answer')
+                          ? 'font-medium text-emerald-900'
+                          : line === ''
+                          ? 'h-2'
+                          : 'text-emerald-800 ml-4'
+                      }`}
+                    >
+                      {line}
+                    </p>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Navigation */}
+          <div className="flex items-center justify-between">
+            <button
+              type="button"
+              onClick={() => {
+                setCurrentPartIndex(currentPartIndex - 1);
+                setUserAnswer('');
+                setShowExerciseHint(false);
+                setShowExerciseSolution(false);
+                setSubmittedAnswer(false);
+              }}
+              disabled={currentPartIndex === 0}
+              className="inline-flex items-center gap-2 rounded-full border-2 border-slate-200 bg-white px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              Previous
+            </button>
+
+            {!isLastPart ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setCurrentPartIndex(currentPartIndex + 1);
+                  setUserAnswer('');
+                  setShowExerciseHint(false);
+                  setShowExerciseSolution(false);
+                  setSubmittedAnswer(false);
+                }}
+                className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-indigo-700"
+              >
+                Next Part
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => {
+                  setCurrentExercise(null);
+                  setCurrentPartIndex(0);
+                  setUserAnswer('');
+                  setShowExerciseHint(false);
+                  setShowExerciseSolution(false);
+                  setSubmittedAnswer(false);
+                }}
+                className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-emerald-700"
+              >
+                <CheckCircle className="h-4 w-4" />
+                Complete Exercise
+              </button>
+            )}
           </div>
         </div>
       </div>

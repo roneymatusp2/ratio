@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Trophy, Target, RotateCcw, CheckCircle, XCircle, ArrowRight, Sparkles, Star, Zap, Award, Ruler, Clock, Thermometer, FileText, Lightbulb, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Send } from 'lucide-react';
+import { BookOpen, Trophy, Target, RotateCcw, CheckCircle, XCircle, ArrowRight, Sparkles, Star, Zap, Award, Ruler, Clock, Thermometer, FileText, Lightbulb, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Send, AlertCircle } from 'lucide-react';
 import { questions } from './data/questions';
 import { Question } from './types';
 import { extraExercises, ExtraExercise, exerciseTopics } from './data/extra-exercises-new';
+import { evaluateAnswer } from './utils/answerEvaluation';
 
 const shuffleArray = <T,>(items: T[]): T[] => {
   const result = [...items];
@@ -59,6 +60,13 @@ function App() {
   const [showExerciseHint, setShowExerciseHint] = useState(false);
   const [showExerciseSolution, setShowExerciseSolution] = useState(false);
   const [submittedAnswer, setSubmittedAnswer] = useState(false);
+  const [evaluationResult, setEvaluationResult] = useState<{
+    isCorrect: boolean;
+    confidence: number;
+    feedback: string;
+    suggestions?: string[];
+  } | null>(null);
+  const [isEvaluating, setIsEvaluating] = useState(false);
 
   const topics = [
     { id: 'all', name: 'All Topics', icon: BookOpen, color: 'from-indigo-500 via-violet-500 to-sky-500', accent: 'bg-indigo-100 text-indigo-700' },
@@ -589,6 +597,8 @@ function App() {
                     setShowExerciseHint(false);
                     setShowExerciseSolution(false);
                     setSubmittedAnswer(false);
+                    setEvaluationResult(null);
+                    setIsEvaluating(false);
                   }}
                   className="group flex flex-col items-start gap-4 rounded-3xl border border-white/70 bg-white/90 p-6 text-left shadow-xl backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl"
                 >
@@ -639,6 +649,8 @@ function App() {
                 setShowExerciseHint(false);
                 setShowExerciseSolution(false);
                 setSubmittedAnswer(false);
+                setEvaluationResult(null);
+                setIsEvaluating(false);
               }}
               className="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-700 mb-4"
             >
@@ -677,21 +689,77 @@ function App() {
                 rows={4}
                 disabled={submittedAnswer}
               />
+              
               {!submittedAnswer && (
                 <button
                   type="button"
-                  onClick={() => setSubmittedAnswer(true)}
-                  disabled={!userAnswer.trim()}
+                  onClick={async () => {
+                    setIsEvaluating(true);
+                    setSubmittedAnswer(true);
+                    
+                    // Avaliar resposta
+                    const result = await evaluateAnswer(
+                      userAnswer,
+                      currentPart.answer || '',
+                      currentPart.question,
+                      currentPart.hint,
+                      false // Mude para true para usar IA
+                    );
+                    
+                    setEvaluationResult(result);
+                    setIsEvaluating(false);
+                  }}
+                  disabled={!userAnswer.trim() || isEvaluating}
                   className="mt-3 inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="h-4 w-4" />
-                  Submit Answer
+                  {isEvaluating ? 'Evaluating...' : 'Submit Answer'}
                 </button>
               )}
-              {submittedAnswer && (
-                <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-700">
-                  <CheckCircle className="h-4 w-4" />
-                  Answer submitted
+              
+              {submittedAnswer && evaluationResult && (
+                <div className={`mt-4 rounded-2xl border-2 p-4 ${
+                  evaluationResult.isCorrect
+                    ? 'border-emerald-200 bg-emerald-50'
+                    : 'border-amber-200 bg-amber-50'
+                }`}>
+                  <div className="flex items-start gap-3">
+                    {evaluationResult.isCorrect ? (
+                      <CheckCircle className="h-6 w-6 text-emerald-600 flex-shrink-0 mt-0.5" />
+                    ) : (
+                      <AlertCircle className="h-6 w-6 text-amber-600 flex-shrink-0 mt-0.5" />
+                    )}
+                    <div className="flex-1">
+                      <p className={`font-semibold ${
+                        evaluationResult.isCorrect ? 'text-emerald-900' : 'text-amber-900'
+                      }`}>
+                        {evaluationResult.feedback}
+                      </p>
+                      {evaluationResult.suggestions && evaluationResult.suggestions.length > 0 && (
+                        <ul className="mt-2 space-y-1">
+                          {evaluationResult.suggestions.map((suggestion, idx) => (
+                            <li key={idx} className="text-sm text-amber-800 flex gap-2">
+                              <span>•</span>
+                              <span>{suggestion}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {!evaluationResult.isCorrect && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSubmittedAnswer(false);
+                            setEvaluationResult(null);
+                            setUserAnswer('');
+                          }}
+                          className="mt-3 text-sm font-medium text-amber-700 hover:text-amber-900 underline"
+                        >
+                          Try again
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
@@ -764,6 +832,8 @@ function App() {
                 setShowExerciseHint(false);
                 setShowExerciseSolution(false);
                 setSubmittedAnswer(false);
+                setEvaluationResult(null);
+                setIsEvaluating(false);
               }}
               disabled={currentPartIndex === 0}
               className="inline-flex items-center gap-2 rounded-full border-2 border-slate-200 bg-white px-5 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -781,6 +851,8 @@ function App() {
                   setShowExerciseHint(false);
                   setShowExerciseSolution(false);
                   setSubmittedAnswer(false);
+                  setEvaluationResult(null);
+                  setIsEvaluating(false);
                 }}
                 className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-5 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-indigo-700"
               >
@@ -797,6 +869,8 @@ function App() {
                   setShowExerciseHint(false);
                   setShowExerciseSolution(false);
                   setSubmittedAnswer(false);
+                  setEvaluationResult(null);
+                  setIsEvaluating(false);
                 }}
                 className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-emerald-700"
               >

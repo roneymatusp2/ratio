@@ -197,16 +197,104 @@ export const extraExercises: ExtraExercise[] = [
           "Answer: Michael = 8 laps, Sophie = 12 laps, James = 6 laps"
         ],
         correctAnswers: [
+          // Order: Michael, Sophie, James
           "Michael: 8, Sophie: 12, James: 6",
           "Michael 8, Sophie 12, James 6",
-          "8, 12, 6",
+          "Michael 8 Sophie 12 James 6",
           "Michael = 8, Sophie = 12, James = 6",
-          "M: 8, S: 12, J: 6",
-          "8 laps, 12 laps, 6 laps",
-          "Michael 8 laps, Sophie 12 laps, James 6 laps",
+          "Michael=8, Sophie=12, James=6",
           "Michael: 8 laps, Sophie: 12 laps, James: 6 laps",
+          "Michael 8 laps, Sophie 12 laps, James 6 laps",
+          "M: 8, S: 12, J: 6",
+          "M 8, S 12, J 6",
+          "M=8, S=12, J=6",
+          "8, 12, 6",
+          "8 12 6",
+          "8,12,6",
+          
+          // Order: Sophie, Michael, James
+          "Sophie: 12, Michael: 8, James: 6",
+          "Sophie 12, Michael 8, James 6",
+          "Sophie 12 Michael 8 James 6",
+          "Sophie = 12, Michael = 8, James = 6",
+          "Sophie=12, Michael=8, James=6",
+          "Sophie: 12 laps, Michael: 8 laps, James: 6 laps",
+          "Sophie 12 laps, Michael 8 laps, James 6 laps",
+          "S: 12, M: 8, J: 6",
+          "S 12, M 8, J 6",
+          "S=12, M=8, J=6",
+          "12, 8, 6",
+          "12 8 6",
+          "12,8,6",
+          
+          // Order: James, Michael, Sophie
+          "James: 6, Michael: 8, Sophie: 12",
+          "James 6, Michael 8, Sophie 12",
+          "James 6 Michael 8 Sophie 12",
+          "James = 6, Michael = 8, Sophie = 12",
+          "James=6, Michael=8, Sophie=12",
+          "James: 6 laps, Michael: 8 laps, Sophie: 12 laps",
+          "James 6 laps, Michael 8 laps, Sophie 12 laps",
+          "J: 6, M: 8, S: 12",
+          "J 6, M 8, S 12",
+          "J=6, M=8, S=12",
+          "6, 8, 12",
+          "6 8 12",
+          "6,8,12",
+          
+          // Order: James, Sophie, Michael
+          "James: 6, Sophie: 12, Michael: 8",
+          "James 6, Sophie 12, Michael 8",
+          "James 6 Sophie 12 Michael 8",
+          "James = 6, Sophie = 12, Michael = 8",
+          "James=6, Sophie=12, Michael=8",
+          "J: 6, S: 12, M: 8",
+          "J 6, S 12, M 8",
+          "J=6, S=12, M=8",
+          "6, 12, 8",
+          "6 12 8",
+          "6,12,8",
+          
+          // Order: Sophie, James, Michael
+          "Sophie: 12, James: 6, Michael: 8",
+          "Sophie 12, James 6, Michael 8",
+          "Sophie 12 James 6 Michael 8",
+          "Sophie = 12, James = 6, Michael = 8",
+          "Sophie=12, James=6, Michael=8",
+          "S: 12, J: 6, M: 8",
+          "S 12, J 6, M 8",
+          "S=12, J=6, M=8",
+          "12, 6, 8",
+          "12 6 8",
+          "12,6,8",
+          
+          // Order: Michael, James, Sophie
+          "Michael: 8, James: 6, Sophie: 12",
+          "Michael 8, James 6, Sophie 12",
+          "Michael 8 James 6 Sophie 12",
+          "Michael = 8, James = 6, Sophie = 12",
+          "Michael=8, James=6, Sophie=12",
+          "M: 8, J: 6, S: 12",
+          "M 8, J 6, S 12",
+          "M=8, J=6, S=12",
+          "8, 6, 12",
+          "8 6 12",
+          "8,6,12",
+          
+          // With "laps" word
+          "8 laps, 12 laps, 6 laps",
+          "12 laps, 8 laps, 6 laps",
+          "6 laps, 8 laps, 12 laps",
+          "8 laps 12 laps 6 laps",
+          "12 laps 8 laps 6 laps",
+          "6 laps 8 laps 12 laps",
+          
+          // Descriptive
+          "Michael completes 8, Sophie completes 12, James completes 6",
+          "Sophie completes 12, Michael completes 8, James completes 6",
           "8 (Michael), 12 (Sophie), 6 (James)",
-          "Michael completes 8, Sophie completes 12, James completes 6"
+          "12 (Sophie), 8 (Michael), 6 (James)",
+          "6 (James), 8 (Michael), 12 (Sophie)"
         ],
         commonMistakes: [
           {
@@ -450,11 +538,78 @@ export const extraExercises: ExtraExercise[] = [
           "Answer: A and B contain composite numbers (not prime)"
         ],
         correctAnswers: [
+          // Direct statements
           "A and B contain non-prime factors",
           "A and B have composite numbers",
-          "6, 21, 8, and 63 are not prime",
+          "A and B contain composite numbers",
           "They contain composite numbers",
-          "Not all factors are prime"
+          "Not all factors are prime",
+          "They have non-prime numbers",
+          "Some factors are not prime",
+          "They contain non-prime numbers",
+          
+          // Specific to numbers
+          "6, 21, 8, and 63 are not prime",
+          "6, 21, 8, 63 are not prime",
+          "6 and 21 are not prime",
+          "8 and 63 are not prime",
+          "6, 21, 8 and 63 are composite",
+          "6 and 21 are composite",
+          "8 and 63 are composite",
+          
+          // Explaining 6
+          "6 is not prime",
+          "6 = 2 × 3",
+          "6 is composite",
+          "6 is not a prime number",
+          "6 can be factored",
+          
+          // Explaining 21
+          "21 is not prime",
+          "21 = 3 × 7",
+          "21 is composite",
+          "21 is not a prime number",
+          "21 can be factored",
+          
+          // Explaining 8
+          "8 is not prime",
+          "8 = 2 × 2 × 2",
+          "8 = 2³",
+          "8 is composite",
+          "8 is not a prime number",
+          "8 can be factored",
+          
+          // Explaining 63
+          "63 is not prime",
+          "63 = 9 × 7",
+          "63 = 3 × 3 × 7",
+          "63 is composite",
+          "63 is not a prime number",
+          "63 can be factored",
+          
+          // Combined explanations
+          "6 is 2×3 and 21 is 3×7, so not prime",
+          "8 is 2×2×2 and 63 is 9×7, so not prime",
+          "A has 6 and 21 which are not prime",
+          "B has 8 and 63 which are not prime",
+          "A: 6 and 21 are composite",
+          "B: 8 and 63 are composite",
+          "Option A has 6=2×3 and 21=3×7",
+          "Option B has 8=2³ and 63=9×7",
+          
+          // Definition-based
+          "Prime factors must be prime numbers only",
+          "All factors must be prime",
+          "Prime factorisation requires only prime numbers",
+          "They don't use only prime numbers",
+          "Not all numbers are prime",
+          
+          // Logical reasoning
+          "6, 8, 21, and 63 can be factored further",
+          "These numbers can be broken down further",
+          "They are not fully factorised",
+          "The factorisation is incomplete",
+          "They need to be factored more"
         ]
       },
       {
@@ -479,12 +634,77 @@ export const extraExercises: ExtraExercise[] = [
           "Answer: D is correct (all prime factors, product = 504)"
         ],
         correctAnswers: [
-          "D is correct",
+          // Simple answers
           "D",
+          "D is correct",
           "Option D",
+          "D is the correct answer",
+          "The answer is D",
+          "It's D",
+          "D is right",
+          
+          // With factorisation
           "2 × 2 × 2 × 3 × 3 × 7",
+          "2 * 2 * 2 * 3 * 3 * 7",
+          "2×2×2×3×3×7",
+          "2*2*2*3*3*7",
+          "2 x 2 x 2 x 3 x 3 x 7",
+          
+          // With exponents
           "2³ × 3² × 7",
-          "D is the correct answer"
+          "2^3 × 3^2 × 7",
+          "2³ * 3² * 7",
+          "2^3 * 3^2 * 7",
+          "2³×3²×7",
+          "2^3×3^2×7",
+          
+          // With calculation
+          "8 × 9 × 7",
+          "8 * 9 * 7",
+          "8×9×7",
+          "72 × 7",
+          "72 * 7",
+          "72×7",
+          "8 × 9 × 7 = 504",
+          "72 × 7 = 504",
+          
+          // Explaining why D is correct
+          "D has all prime factors",
+          "D contains only prime numbers",
+          "All factors in D are prime",
+          "D is fully factorised",
+          "D uses only primes",
+          "2, 3, and 7 are all prime",
+          "2, 3, 7 are prime numbers",
+          
+          // Verification
+          "D equals 504",
+          "D = 504",
+          "D multiplies to 504",
+          "2³ × 3² × 7 = 504",
+          "2^3 × 3^2 × 7 = 504",
+          "8 × 9 × 7 = 504",
+          
+          // Combined reasoning
+          "D has all prime factors and equals 504",
+          "D is correct because all factors are prime",
+          "D is correct because 2, 3, 7 are prime",
+          "D works because 8×9×7=504",
+          "D: all prime and product is 504",
+          "Option D has only prime numbers",
+          "Option D is fully factorised into primes",
+          
+          // Eliminating C
+          "C has 64 which is not prime",
+          "C is wrong because 64 is not prime",
+          "64 is not prime, so D is correct",
+          "C: 64 = 2⁶ (not prime)",
+          
+          // Full explanation
+          "D is correct: 2, 3, and 7 are all prime, and 2³×3²×7 = 504",
+          "D: all factors are prime (2, 3, 7) and product = 504",
+          "Option D because all numbers are prime and multiply to 504",
+          "D has only primes: 2×2×2×3×3×7 = 504"
         ]
       }
     ]

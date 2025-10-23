@@ -700,10 +700,11 @@ function App() {
                     // Avaliar resposta
                     const result = await evaluateAnswer(
                       userAnswer,
-                      currentPart.answer || '',
+                      currentPart.correctAnswers,
+                      currentPart.commonMistakes,
                       currentPart.question,
                       currentPart.hint,
-                      false // Mude para true para usar IA
+                      false // Change to true to use AI
                     );
                     
                     setEvaluationResult(result);

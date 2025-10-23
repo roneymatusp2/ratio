@@ -98,7 +98,8 @@ function areEquivalent(userAnswer: string, correctAnswer: string): boolean {
  */
 export function evaluateAnswerLocally(
   userAnswer: string,
-  correctAnswer: string
+  correctAnswers: string[],
+  commonMistakes?: { answer: string; feedback: string }[]
 ): EvaluationResult {
   if (!userAnswer.trim()) {
     return {
@@ -109,7 +110,8 @@ export function evaluateAnswerLocally(
     };
   }
 
-  const isCorrect = areEquivalent(userAnswer, correctAnswer);
+  // Check if answer is correct
+  const isCorrect = correctAnswers.some(correct => areEquivalent(userAnswer, correct));
 
   if (isCorrect) {
     return {
@@ -119,13 +121,27 @@ export function evaluateAnswerLocally(
     };
   }
 
-  // Análise de erro comum
+  // Check for common mistakes
+  if (commonMistakes) {
+    for (const mistake of commonMistakes) {
+      if (areEquivalent(userAnswer, mistake.answer)) {
+        return {
+          isCorrect: false,
+          confidence: 1,
+          feedback: 'Not quite right.',
+          suggestions: [mistake.feedback]
+        };
+      }
+    }
+  }
+
+  // General error analysis
   const userNumbers = extractNumbers(userAnswer);
-  const correctNumbers = extractNumbers(correctAnswer);
+  const correctNumbers = extractNumbers(correctAnswers[0]);
 
   const suggestions: string[] = [];
 
-  // Se tem números mas estão errados
+  // If has numbers but they're wrong
   if (userNumbers.length > 0 && correctNumbers.length > 0) {
     if (userNumbers.length !== correctNumbers.length) {
       suggestions.push('Check if you have all the required values in your answer.');
@@ -134,14 +150,14 @@ export function evaluateAnswerLocally(
     }
   }
 
-  // Se não tem números mas deveria ter
+  // If missing numbers
   if (userNumbers.length === 0 && correctNumbers.length > 0) {
     suggestions.push('Your answer should include numerical values.');
   }
 
-  // Se tem unidades erradas
+  // If missing units
   const hasUnit = /\b(cm|kg|g|l|ml|m|£|minutes?|seconds?|hours?)\b/i.test(userAnswer);
-  const needsUnit = /\b(cm|kg|g|l|ml|m|£|minutes?|seconds?|hours?)\b/i.test(correctAnswer);
+  const needsUnit = /\b(cm|kg|g|l|ml|m|£|minutes?|seconds?|hours?)\b/i.test(correctAnswers[0]);
   
   if (!hasUnit && needsUnit) {
     suggestions.push('Don\'t forget to include the correct units in your answer.');
@@ -212,22 +228,23 @@ Respond in JSON format:
 
 /**
  * Função principal de avaliação
- * Tenta IA primeiro, depois fallback para local
+ * Usa avaliação local com múltiplas respostas corretas
  */
 export async function evaluateAnswer(
   userAnswer: string,
-  correctAnswer: string,
-  question: string,
-  hint: string,
+  correctAnswers: string[],
+  commonMistakes?: { answer: string; feedback: string }[],
+  question?: string,
+  hint?: string,
   useAI: boolean = false
 ): Promise<EvaluationResult> {
-  if (useAI) {
+  if (useAI && question && hint) {
     try {
-      return await evaluateAnswerWithAI(userAnswer, correctAnswer, question, hint);
+      return await evaluateAnswerWithAI(userAnswer, correctAnswers[0], question, hint);
     } catch (error) {
       console.error('AI evaluation failed, using local evaluation:', error);
     }
   }
   
-  return evaluateAnswerLocally(userAnswer, correctAnswer);
+  return evaluateAnswerLocally(userAnswer, correctAnswers, commonMistakes);
 }

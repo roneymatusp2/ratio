@@ -2,7 +2,11 @@ export interface ExercisePart {
   question: string;
   hint: string;
   solution: string[];
-  answer?: string;
+  correctAnswers: string[]; // All accepted correct answers
+  commonMistakes?: {
+    answer: string;
+    feedback: string;
+  }[]; // Common errors with specific feedback
 }
 
 export interface ExtraExercise {
@@ -44,7 +48,35 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 1800 cm³"
         ],
-        answer: "1800 cm³"
+        correctAnswers: [
+          "1800 cm³",
+          "1800cm³",
+          "1800 cm3",
+          "1800cm3",
+          "1800 cubic centimetres",
+          "1800 cubic centimeters",
+          "1800 cc",
+          "1800cc",
+          "1800",
+          "1,800 cm³",
+          "1,800 cm3",
+          "1,800 cc",
+          "1,800"
+        ],
+        commonMistakes: [
+          {
+            answer: "180",
+            feedback: "You've divided instead of multiplied. Remember: converting to a smaller unit means multiply by 1000."
+          },
+          {
+            answer: "18000",
+            feedback: "You've multiplied by 10000 instead of 1000. Check the conversion factor: 1 L = 1000 cm³."
+          },
+          {
+            answer: "0.0018",
+            feedback: "You've divided by 1000 instead of multiplying. To convert litres to cm³, multiply by 1000."
+          }
+        ]
       },
       {
         question: "Another engine has a capacity of 2200 cc. What is this in litres?",
@@ -59,7 +91,30 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 2.2 L"
         ],
-        answer: "2.2 L"
+        correctAnswers: [
+          "2.2 L",
+          "2.2L",
+          "2.2 litres",
+          "2.2 liters",
+          "2.2l",
+          "2.20 L",
+          "2.20 litres",
+          "2.2"
+        ],
+        commonMistakes: [
+          {
+            answer: "22",
+            feedback: "You've divided by 100 instead of 1000. Remember: 1000 cm³ = 1 L."
+          },
+          {
+            answer: "0.22",
+            feedback: "You've divided by 10000 instead of 1000. Check: 2200 ÷ 1000 = 2.2."
+          },
+          {
+            answer: "2200000",
+            feedback: "You've multiplied instead of divided. To convert cm³ to litres, divide by 1000."
+          }
+        ]
       }
     ]
   },
@@ -146,7 +201,40 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: £40 and £56"
         ],
-        answer: "£40 and £56"
+        correctAnswers: [
+          "£40 and £56",
+          "£40 and 56",
+          "40 and £56",
+          "40 and 56",
+          "£40, £56",
+          "£40,£56",
+          "40, 56",
+          "40,56",
+          "£40 & £56",
+          "40 & 56",
+          "First share: £40, Second share: £56",
+          "First: £40, Second: £56",
+          "5 parts = £40, 7 parts = £56",
+          "£40 (first share) and £56 (second share)"
+        ],
+        commonMistakes: [
+          {
+            answer: "£40",
+            feedback: "You've only given one share. The ratio 5:7 means two shares are needed. What is the second share?"
+          },
+          {
+            answer: "£56",
+            feedback: "You've only given one share. The ratio 5:7 means two shares are needed. What is the first share?"
+          },
+          {
+            answer: "£48 and £48",
+            feedback: "You've divided equally, but the ratio 5:7 means unequal shares. Find the value of one part first: £96 ÷ 12 = £8."
+          },
+          {
+            answer: "£35 and £61",
+            feedback: "Check your calculation. Total parts = 5 + 7 = 12. One part = £96 ÷ 12 = £8. Then multiply: 5 × £8 and 7 × £8."
+          }
+        ]
       }
     ]
   },
@@ -204,7 +292,35 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 4:7"
         ],
-        answer: "4:7"
+        correctAnswers: [
+          "4:7",
+          "4 : 7",
+          "4 to 7",
+          "4/7",
+          "4-7",
+          "4 vowels to 7 consonants",
+          "4 vowels : 7 consonants",
+          "vowels 4 : consonants 7",
+          "4 (vowels) : 7 (consonants)"
+        ],
+        commonMistakes: [
+          {
+            answer: "7:4",
+            feedback: "You've written consonants to vowels, but the question asks for vowels to consonants. The order matters in ratios."
+          },
+          {
+            answer: "3:8",
+            feedback: "Check your counting. MATHEMATICS has 4 vowels (A, E, A, I) and 7 consonants (M, T, H, M, T, C, S)."
+          },
+          {
+            answer: "5:6",
+            feedback: "Recount carefully. Remember: vowels are A, E, I, O, U. Count each letter even if it repeats."
+          },
+          {
+            answer: "2:3.5",
+            feedback: "Don't simplify by dividing. Keep the ratio in whole numbers: 4:7."
+          }
+        ]
       }
     ]
   },

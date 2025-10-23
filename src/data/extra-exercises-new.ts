@@ -140,7 +140,25 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: They will meet at 24 minutes"
         ],
-        answer: "24 minutes"
+        correctAnswers: [
+          "24 minutes",
+          "24 mins",
+          "24min",
+          "24 min",
+          "24",
+          "twenty-four minutes",
+          "24 minutes after the start"
+        ],
+        commonMistakes: [
+          {
+            answer: "12",
+            feedback: "That's the LCM of 4 and 6, but you need the LCM of all three: 4, 6, and 8."
+          },
+          {
+            answer: "48",
+            feedback: "That's when they all finish, but they meet earlier. Find the LCM of 6, 4, and 8."
+          }
+        ]
       },
       {
         question: "If they run continuously for 48 minutes, how many laps will each person complete?",
@@ -153,7 +171,15 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: Michael = 8 laps, Sophie = 12 laps, James = 6 laps"
         ],
-        answer: "Michael: 8, Sophie: 12, James: 6"
+        correctAnswers: [
+          "Michael: 8, Sophie: 12, James: 6",
+          "Michael 8, Sophie 12, James 6",
+          "8, 12, 6",
+          "Michael = 8, Sophie = 12, James = 6",
+          "M: 8, S: 12, J: 6",
+          "8 laps, 12 laps, 6 laps",
+          "Michael 8 laps, Sophie 12 laps, James 6 laps"
+        ]
       },
       {
         question: "How many times does Sophie overtake Michael during this 48-minute race?",
@@ -170,7 +196,19 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 4 times"
         ],
-        answer: "4 times"
+        correctAnswers: [
+          "4 times",
+          "4",
+          "four times",
+          "4 overtakes",
+          "four"
+        ],
+        commonMistakes: [
+          {
+            answer: "8",
+            feedback: "That's how many laps Michael completes. Sophie overtakes him once for each extra lap she does: 12 - 8 = 4."
+          }
+        ]
       }
     ]
   },
@@ -259,7 +297,21 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 63"
         ],
-        answer: "63"
+        correctAnswers: [
+          "63",
+          "sixty-three",
+          "63 is the LCM"
+        ],
+        commonMistakes: [
+          {
+            answer: "1",
+            feedback: "That's the HCF, not the LCM. The LCM is the smallest number that appears in both lists of multiples."
+          },
+          {
+            answer: "630",
+            feedback: "That's too large. Look for the first number that appears in both lists: 7, 14, 21... and 9, 18, 27..."
+          }
+        ]
       }
     ]
   },
@@ -349,7 +401,13 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: A and B contain composite numbers (not prime)"
         ],
-        answer: "A and B contain non-prime factors"
+        correctAnswers: [
+          "A and B contain non-prime factors",
+          "A and B have composite numbers",
+          "6, 21, 8, and 63 are not prime",
+          "They contain composite numbers",
+          "Not all factors are prime"
+        ]
       },
       {
         question: "Show that option D is the correct answer.",
@@ -372,7 +430,14 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: D is correct (all prime factors, product = 504)"
         ],
-        answer: "D is correct"
+        correctAnswers: [
+          "D is correct",
+          "D",
+          "Option D",
+          "2 × 2 × 2 × 3 × 3 × 7",
+          "2³ × 3² × 7",
+          "D is the correct answer"
+        ]
       }
     ]
   },
@@ -411,7 +476,21 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: No, the load does NOT exceed capacity (930 kg spare)"
         ],
-        answer: "No, 3570 kg < 4500 kg"
+        correctAnswers: [
+          "No",
+          "No, it does not exceed",
+          "No, 3570 kg < 4500 kg",
+          "No, the load is 3570 kg",
+          "No, there is 930 kg spare",
+          "Does not exceed",
+          "No, within capacity"
+        ],
+        commonMistakes: [
+          {
+            answer: "Yes",
+            feedback: "Check your calculation. Total load = 810 + 700 + 1040 + 1020 = 3570 kg, which is less than 4500 kg."
+          }
+        ]
       }
     ]
   },
@@ -438,7 +517,22 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 4"
         ],
-        answer: "4"
+        correctAnswers: [
+          "4",
+          "four",
+          "HCF = 4",
+          "The HCF is 4"
+        ],
+        commonMistakes: [
+          {
+            answer: "2",
+            feedback: "2 is a common factor, but it's not the highest. Look for the largest number in both lists."
+          },
+          {
+            answer: "140",
+            feedback: "That's the LCM, not the HCF. The HCF is the highest common factor."
+          }
+        ]
       }
     ]
   },
@@ -468,7 +562,23 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 51:4"
         ],
-        answer: "51:4"
+        correctAnswers: [
+          "51:4",
+          "51 : 4",
+          "51 to 4",
+          "51/4",
+          "students 51 : teachers 4"
+        ],
+        commonMistakes: [
+          {
+            answer: "102:8",
+            feedback: "This is correct but not simplified. Divide both numbers by their HCF (2) to get 51:4."
+          },
+          {
+            answer: "4:51",
+            feedback: "You've written teachers to students, but the question asks for students to teachers."
+          }
+        ]
       }
     ]
   },
@@ -504,7 +614,19 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 19 minutes 44 seconds"
         ],
-        answer: "19 minutes 44 seconds"
+        correctAnswers: [
+          "19 minutes 44 seconds",
+          "19 min 44 sec",
+          "19:44",
+          "19 minutes and 44 seconds",
+          "19m 44s"
+        ],
+        commonMistakes: [
+          {
+            answer: "18 minutes 104 seconds",
+            feedback: "You need to convert seconds to minutes. 104 seconds = 1 minute 44 seconds, so add this to 18 minutes."
+          }
+        ]
       }
     ]
   },
@@ -538,7 +660,23 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: Emma is 117 cm tall"
         ],
-        answer: "117 cm"
+        correctAnswers: [
+          "117 cm",
+          "117cm",
+          "117 centimetres",
+          "117 centimeters",
+          "117"
+        ],
+        commonMistakes: [
+          {
+            answer: "171",
+            feedback: "That's David's height. Emma is shorter. Use 13 parts, not 19."
+          },
+          {
+            answer: "54",
+            feedback: "That's the difference, not Emma's height. Find the value of one part first: 54 ÷ 6 = 9, then multiply by 13."
+          }
+        ]
       }
     ]
   },
@@ -563,7 +701,14 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 3000 g"
         ],
-        answer: "3000 g"
+        correctAnswers: [
+          "3000 g",
+          "3000g",
+          "3000 grammes",
+          "3000 grams",
+          "3,000 g",
+          "3000"
+        ]
       },
       {
         question: "What is the mass of the box in kilogrammes?",
@@ -578,7 +723,14 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 3 kg"
         ],
-        answer: "3 kg"
+        correctAnswers: [
+          "3 kg",
+          "3kg",
+          "3 kilograms",
+          "3 kilogrammes",
+          "3.0 kg",
+          "3"
+        ]
       }
     ]
   },
@@ -609,7 +761,23 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: Rachel spent £400 on books"
         ],
-        answer: "£400"
+        correctAnswers: [
+          "£400",
+          "400",
+          "£400.00",
+          "400 pounds",
+          "four hundred pounds"
+        ],
+        commonMistakes: [
+          {
+            answer: "£320",
+            feedback: "That's what she spent on her phone. The ratio is 4:5, so books should be more than phone."
+          },
+          {
+            answer: "£256",
+            feedback: "Check your calculation. If phone is £320 and ratio is 4:5, then books = (320 ÷ 4) × 5 = £400."
+          }
+        ]
       }
     ]
   },
@@ -641,7 +809,12 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: HCF = 140"
         ],
-        answer: "140"
+        correctAnswers: [
+          "140",
+          "HCF = 140",
+          "one hundred and forty",
+          "The HCF is 140"
+        ]
       },
       {
         question: "Find the LCM (Lowest Common Multiple) of 280 and 420.",
@@ -660,7 +833,12 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: LCM = 840"
         ],
-        answer: "840"
+        correctAnswers: [
+          "840",
+          "LCM = 840",
+          "eight hundred and forty",
+          "The LCM is 840"
+        ]
       }
     ]
   },
@@ -691,7 +869,19 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 5:4"
         ],
-        answer: "5:4"
+        correctAnswers: [
+          "5:4",
+          "5 : 4",
+          "5 to 4",
+          "5/4",
+          "shaded 5 : unshaded 4"
+        ],
+        commonMistakes: [
+          {
+            answer: "4:5",
+            feedback: "You've written unshaded to shaded, but the question asks for shaded to unshaded."
+          }
+        ]
       }
     ]
   },
@@ -719,7 +909,12 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 4:7"
         ],
-        answer: "4:7"
+        correctAnswers: [
+          "4:7",
+          "4 : 7",
+          "4 to 7",
+          "4/7"
+        ]
       },
       {
         question: "Find the ratio of rubbers to all pens.",
@@ -742,7 +937,12 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 6:5"
         ],
-        answer: "6:5"
+        correctAnswers: [
+          "6:5",
+          "6 : 5",
+          "6 to 5",
+          "6/5"
+        ]
       }
     ]
   },
@@ -767,7 +967,13 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 12 kg and 12,000 g are the same"
         ],
-        answer: "12 kg = 12,000 g"
+        correctAnswers: [
+          "12 kg = 12,000 g",
+          "12 kg and 12,000 g",
+          "12 kg = 12000 g",
+          "12kg = 12000g",
+          "12 kg and 12000 g are the same"
+        ]
       },
       {
         question: "For Group B: 4.8 tonnes, 480 kg, 4,800 kg - which measurements are the same?",
@@ -783,7 +989,13 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 4.8 tonnes and 4,800 kg are the same"
         ],
-        answer: "4.8 tonnes = 4,800 kg"
+        correctAnswers: [
+          "4.8 tonnes = 4,800 kg",
+          "4.8 tonnes and 4,800 kg",
+          "4.8 tonnes = 4800 kg",
+          "4.8t = 4800kg",
+          "4.8 tonnes and 4800 kg are the same"
+        ]
       }
     ]
   },
@@ -813,7 +1025,13 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 2³ × 3³"
         ],
-        answer: "2³ × 3³"
+        correctAnswers: [
+          "2³ × 3³",
+          "2^3 × 3^3",
+          "2 × 2 × 2 × 3 × 3 × 3",
+          "8 × 27",
+          "2³ * 3³"
+        ]
       },
       {
         question: "Express 144 in prime factor form.",
@@ -834,7 +1052,13 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 2⁴ × 3²"
         ],
-        answer: "2⁴ × 3²"
+        correctAnswers: [
+          "2⁴ × 3²",
+          "2^4 × 3^2",
+          "2 × 2 × 2 × 2 × 3 × 3",
+          "16 × 9",
+          "2⁴ * 3²"
+        ]
       },
       {
         question: "By considering the prime factor form, determine the HCF of 216 and 144.",
@@ -858,7 +1082,12 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: HCF = 72"
         ],
-        answer: "72"
+        correctAnswers: [
+          "72",
+          "HCF = 72",
+          "seventy-two",
+          "The HCF is 72"
+        ]
       }
     ]
   },
@@ -889,7 +1118,18 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: 60"
         ],
-        answer: "60"
+        correctAnswers: [
+          "60",
+          "LCM = 60",
+          "sixty",
+          "The LCM is 60"
+        ],
+        commonMistakes: [
+          {
+            answer: "1",
+            feedback: "That's the HCF, not the LCM. The LCM is the smallest number that appears in both lists of multiples."
+          }
+        ]
       }
     ]
   },
@@ -928,7 +1168,21 @@ export const extraExercises: ExtraExercise[] = [
           "",
           "Answer: No, the load does NOT exceed capacity (1893 kg spare)"
         ],
-        answer: "No, 3907 kg < 5800 kg"
+        correctAnswers: [
+          "No",
+          "No, it does not exceed",
+          "No, 3907 kg < 5800 kg",
+          "No, the load is 3907 kg",
+          "No, there is 1893 kg spare",
+          "Does not exceed",
+          "No, within capacity"
+        ],
+        commonMistakes: [
+          {
+            answer: "Yes",
+            feedback: "Check your calculation. Total load = 912 + 700 + 1125 + 1170 = 3907 kg, which is less than 5800 kg."
+          }
+        ]
       }
     ]
   }

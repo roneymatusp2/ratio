@@ -1013,7 +1013,83 @@ function App() {
               )}
             </div>
 
-            <div className="mt-8 space-y-4">
+            {/* Answer Input */}
+            <div className="mt-8">
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                Your Answer
+              </label>
+              <textarea
+                value={selectedAnswer}
+                onChange={(e) => setSelectedAnswer(e.target.value)}
+                placeholder="Write your answer here..."
+                className="w-full rounded-2xl border-2 border-slate-200 bg-white px-4 py-3 text-base text-slate-900 placeholder-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-200 transition"
+                rows={3}
+                disabled={showResult}
+              />
+              
+              {!showResult && (
+                <button
+                  type="button"
+                  onClick={async () => {
+                    if (!selectedAnswer.trim()) return;
+                    
+                    setShowResult(true);
+                    setQuestionsAnswered(previous => previous + 1);
+                    
+                    // Avaliar resposta com Gemini
+                    const result = await evaluateAnswer(
+                      selectedAnswer,
+                      currentQuestion.correctAnswers || [currentQuestion.correct],
+                      undefined,
+                      currentQuestion.question,
+                      currentQuestion.explanation || '',
+                      true // Usando Gemini AI
+                    );
+                    
+                    const isCorrect = result.isCorrect;
+
+                    if (isCorrect) {
+                      setScore(previous => previous + 1);
+                      setStreak(previous => {
+                        const updated = previous + 1;
+                        setBestStreak(current => Math.max(current, updated));
+                        return updated;
+                      });
+
+                      setShowCelebration(true);
+                      setTimeout(() => setShowCelebration(false), 1500);
+                    } else {
+                      setStreak(0);
+                    }
+
+                    setTopicScores(previous => ({
+                      ...previous,
+                      [currentQuestion.topic]: {
+                        correct: (previous[currentQuestion.topic]?.correct || 0) + (isCorrect ? 1 : 0),
+                        total: (previous[currentQuestion.topic]?.total || 0) + 1,
+                      },
+                    }));
+
+                    setTimeout(() => {
+                      if (questionIndex < gameQuestions.length - 1) {
+                        setQuestionIndex(previous => previous + 1);
+                        setSelectedAnswer('');
+                        setShowResult(false);
+                      } else {
+                        setGameState('results');
+                      }
+                    }, 3500);
+                  }}
+                  disabled={!selectedAnswer.trim()}
+                  className="mt-3 inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  <Send className="h-4 w-4" />
+                  Submit Answer
+                </button>
+              )}
+            </div>
+
+            <div className="mt-8 hidden">
               {currentQuestion.options.map((option, index) => {
                 const isSelected = selectedAnswer === option;
                 const isCorrect = option === currentQuestion.correct;

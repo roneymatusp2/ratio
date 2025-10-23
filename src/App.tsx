@@ -697,14 +697,14 @@ function App() {
                     setIsEvaluating(true);
                     setSubmittedAnswer(true);
                     
-                    // Avaliar resposta
+                    // Avaliar resposta com Gemini AI
                     const result = await evaluateAnswer(
                       userAnswer,
                       currentPart.correctAnswers,
                       currentPart.commonMistakes,
                       currentPart.question,
                       currentPart.hint,
-                      false // Change to true to use AI
+                      true // Usando Gemini AI para Extra Exercises
                     );
                     
                     setEvaluationResult(result);

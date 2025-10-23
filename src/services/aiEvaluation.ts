@@ -98,6 +98,57 @@ export class ClaudeProvider implements AIProvider {
 }
 
 /**
+ * Gemini Provider (Google)
+ */
+export class GeminiProvider implements AIProvider {
+  name = 'Gemini';
+  private apiKey: string;
+  private model: string;
+
+  constructor(apiKey: string, model: string = 'gemini-1.5-flash') {
+    this.apiKey = apiKey;
+    this.model = model;
+  }
+
+  async evaluate(prompt: string): Promise<any> {
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:generateContent?key=${this.apiKey}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: prompt + '\n\nRespond only with valid JSON.'
+            }]
+          }],
+          generationConfig: {
+            temperature: 0.3,
+            topK: 1,
+            topP: 1,
+            maxOutputTokens: 1024,
+          }
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(`Gemini API error: ${error.error?.message || response.statusText}`);
+    }
+
+    const data = await response.json();
+    const text = data.candidates[0].content.parts[0].text;
+    
+    // Remove markdown code blocks if present
+    const cleanText = text.replace(/```json\n?|\n?```/g, '').trim();
+    return JSON.parse(cleanText);
+  }
+}
+
+/**
  * Ollama Provider (Local)
  */
 export class OllamaProvider implements AIProvider {

@@ -175,7 +175,7 @@ export function evaluateAnswerLocally(
 }
 
 /**
- * Avalia a resposta usando IA (OpenAI, Claude, etc.)
+ * Avalia a resposta usando Gemini AI
  */
 export async function evaluateAnswerWithAI(
   userAnswer: string,
@@ -183,46 +183,85 @@ export async function evaluateAnswerWithAI(
   question: string,
   hint: string
 ): Promise<EvaluationResult> {
-  // Esta função pode ser implementada com diferentes provedores de IA
-  // Por enquanto, vou criar uma estrutura que pode ser expandida
-  
   try {
-    // Exemplo de prompt para IA
-    const prompt = `You are a mathematics teacher evaluating a student's answer.
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    
+    if (!apiKey) {
+      console.warn('Gemini API key not found, using local evaluation');
+      return evaluateAnswerLocally(userAnswer, [correctAnswer]);
+    }
+
+    const prompt = `You are a patient and encouraging mathematics teacher evaluating a Form 2 student's answer.
 
 Question: ${question}
 Hint: ${hint}
 Correct Answer: ${correctAnswer}
 Student's Answer: ${userAnswer}
 
-Evaluate if the student's answer is correct. Consider:
-- Mathematical equivalence (e.g., "4:7" = "4 to 7")
-- Different units (e.g., "1800 cm³" = "1800 cc")
+Evaluate if the student's answer is correct. Be flexible and consider:
+- Mathematical equivalence (e.g., "4:7" = "4 to 7" = "4 : 7")
+- Different units (e.g., "1800 cm³" = "1800 cc" = "1800 cubic centimetres")
 - Rounding differences (accept if within 0.01)
-- Different formats (e.g., "£40 and £56" = "40, 56")
+- Different formats (e.g., "£40 and £56" = "40, 56" = "£40, £56")
+- Partial credit for showing correct method even if final answer is slightly off
 
-Respond in JSON format:
+Respond ONLY with valid JSON in this exact format:
 {
-  "isCorrect": boolean,
-  "confidence": number (0-1),
-  "feedback": "Brief feedback for the student",
-  "suggestions": ["suggestion1", "suggestion2"] (optional, only if incorrect)
-}`;
+  "isCorrect": true or false,
+  "confidence": 0.95,
+  "feedback": "Brief, encouraging feedback (1-2 sentences)",
+  "suggestions": ["specific suggestion 1", "specific suggestion 2"]
+}
 
-    // Aqui você pode integrar com:
-    // - OpenAI API
-    // - Claude API
-    // - Google Gemini
-    // - Ollama (local)
-    // - Qualquer outro modelo
+If correct, keep feedback positive and brief. If incorrect, provide helpful suggestions.`;
 
-    // Por enquanto, retorna avaliação local
-    return evaluateAnswerLocally(userAnswer, correctAnswer);
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          contents: [{
+            parts: [{
+              text: prompt
+            }]
+          }],
+          generationConfig: {
+            temperature: 0.3,
+            topK: 1,
+            topP: 1,
+            maxOutputTokens: 512,
+          }
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      console.error('Gemini API error:', error);
+      return evaluateAnswerLocally(userAnswer, [correctAnswer]);
+    }
+
+    const data = await response.json();
+    const text = data.candidates[0].content.parts[0].text;
+    
+    // Remove markdown code blocks if present
+    const cleanText = text.replace(/```json\n?|\n?```/g, '').trim();
+    const result = JSON.parse(cleanText);
+
+    return {
+      isCorrect: result.isCorrect,
+      confidence: result.confidence || 0.9,
+      feedback: result.feedback,
+      suggestions: result.suggestions || []
+    };
 
   } catch (error) {
     console.error('AI evaluation failed:', error);
     // Fallback para avaliação local
-    return evaluateAnswerLocally(userAnswer, correctAnswer);
+    return evaluateAnswerLocally(userAnswer, [correctAnswer]);
   }
 }
 

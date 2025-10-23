@@ -922,6 +922,14 @@ function App() {
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-10 lg:px-10">
         <header className="flex flex-wrap items-center justify-between gap-4">
           <div>
+            <button
+              type="button"
+              onClick={resetGame}
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition mb-2"
+            >
+              <ChevronLeft className="h-4 w-4" />
+              Exit quiz
+            </button>
             <div className="inline-flex items-center gap-2 rounded-full border border-indigo-100 bg-white/70 px-4 py-1 text-xs font-medium text-indigo-600 shadow-sm backdrop-blur">
               <Target className="h-3.5 w-3.5" />
               {topicName}

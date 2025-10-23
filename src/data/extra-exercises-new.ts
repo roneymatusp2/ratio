@@ -147,16 +147,41 @@ export const extraExercises: ExtraExercise[] = [
           "24 min",
           "24",
           "twenty-four minutes",
-          "24 minutes after the start"
+          "24 minutes after the start",
+          "at 24 minutes",
+          "after 24 minutes",
+          "24 minutes after they start",
+          "They meet at 24 minutes",
+          "24m"
         ],
         commonMistakes: [
           {
             answer: "12",
-            feedback: "That's the LCM of 4 and 6, but you need the LCM of all three: 4, 6, and 8."
+            feedback: "12 is the LCM of 4 and 6, but you need the LCM of all three numbers: 4, 6, and 8. Check: does 12 divide evenly into 8?"
+          },
+          {
+            answer: "12 minutes",
+            feedback: "12 is the LCM of 4 and 6, but you need the LCM of all three numbers: 4, 6, and 8. At 12 minutes, James hasn't completed a full lap yet."
           },
           {
             answer: "48",
-            feedback: "That's when they all finish, but they meet earlier. Find the LCM of 6, 4, and 8."
+            feedback: "48 is when they all finish running, but they meet earlier than that. Find the LCM of 6, 4, and 8."
+          },
+          {
+            answer: "48 minutes",
+            feedback: "48 is when they all finish running, but they meet earlier than that. Find the smallest common multiple of 6, 4, and 8."
+          },
+          {
+            answer: "6",
+            feedback: "At 6 minutes, only Michael has completed a lap. Sophie and James are still running. You need the LCM of all three times."
+          },
+          {
+            answer: "8",
+            feedback: "At 8 minutes, only James and Sophie have completed laps. Michael is still running. You need the LCM of all three times."
+          },
+          {
+            answer: "192",
+            feedback: "That's the product of 6 × 4 × 8, which is too large. The LCM is always less than or equal to the product. Try listing multiples instead."
           }
         ]
       },
@@ -178,7 +203,20 @@ export const extraExercises: ExtraExercise[] = [
           "Michael = 8, Sophie = 12, James = 6",
           "M: 8, S: 12, J: 6",
           "8 laps, 12 laps, 6 laps",
-          "Michael 8 laps, Sophie 12 laps, James 6 laps"
+          "Michael 8 laps, Sophie 12 laps, James 6 laps",
+          "Michael: 8 laps, Sophie: 12 laps, James: 6 laps",
+          "8 (Michael), 12 (Sophie), 6 (James)",
+          "Michael completes 8, Sophie completes 12, James completes 6"
+        ],
+        commonMistakes: [
+          {
+            answer: "8, 12, 8",
+            feedback: "Check James's calculation. He takes 8 minutes per lap, so in 48 minutes: 48 ÷ 8 = 6 laps, not 8."
+          },
+          {
+            answer: "6, 12, 8",
+            feedback: "You've mixed up Michael and James. Michael takes 6 minutes per lap (48 ÷ 6 = 8 laps), James takes 8 minutes (48 ÷ 8 = 6 laps)."
+          }
         ]
       },
       {
@@ -201,12 +239,22 @@ export const extraExercises: ExtraExercise[] = [
           "4",
           "four times",
           "4 overtakes",
-          "four"
+          "four",
+          "Sophie overtakes Michael 4 times",
+          "4x"
         ],
         commonMistakes: [
           {
             answer: "8",
-            feedback: "That's how many laps Michael completes. Sophie overtakes him once for each extra lap she does: 12 - 8 = 4."
+            feedback: "8 is how many laps Michael completes. Sophie overtakes him once for each extra lap she does: 12 - 8 = 4 times."
+          },
+          {
+            answer: "12",
+            feedback: "12 is how many laps Sophie completes. She overtakes Michael once for each extra lap: 12 - 8 = 4 times."
+          },
+          {
+            answer: "3",
+            feedback: "Check your calculation. Sophie completes 12 laps and Michael completes 8 laps. The difference is 12 - 8 = 4 overtakes."
           }
         ]
       }

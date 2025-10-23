@@ -786,8 +786,8 @@ function App() {
             )}
           </div>
 
-          {/* Solution Card */}
-          {submittedAnswer && (
+          {/* Solution Card - Only show if answer is CORRECT */}
+          {submittedAnswer && evaluationResult && evaluationResult.isCorrect && (
             <div className="rounded-3xl border border-emerald-200 bg-emerald-50/90 p-6 shadow-lg backdrop-blur mb-6">
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">

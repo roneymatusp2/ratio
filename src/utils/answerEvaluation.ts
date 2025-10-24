@@ -10,10 +10,38 @@ export interface EvaluationResult {
 }
 
 /**
+ * Converte números escritos por extenso para dígitos
+ */
+function wordsToNumbers(text: string): string {
+  const numberWords: { [key: string]: string } = {
+    'zero': '0', 'one': '1', 'two': '2', 'three': '3', 'four': '4',
+    'five': '5', 'six': '6', 'seven': '7', 'eight': '8', 'nine': '9',
+    'ten': '10', 'eleven': '11', 'twelve': '12', 'thirteen': '13',
+    'fourteen': '14', 'fifteen': '15', 'sixteen': '16', 'seventeen': '17',
+    'eighteen': '18', 'nineteen': '19', 'twenty': '20', 'thirty': '30',
+    'forty': '40', 'fifty': '50', 'sixty': '60', 'seventy': '70',
+    'eighty': '80', 'ninety': '90', 'hundred': '100', 'thousand': '1000'
+  };
+
+  let result = text.toLowerCase();
+  
+  // Substituir números por extenso
+  for (const [word, digit] of Object.entries(numberWords)) {
+    const regex = new RegExp(`\\b${word}\\b`, 'gi');
+    result = result.replace(regex, digit);
+  }
+  
+  return result;
+}
+
+/**
  * Normaliza uma resposta para comparação
  */
 function normalizeAnswer(answer: string): string {
-  return answer
+  // Primeiro converte números escritos
+  let normalized = wordsToNumbers(answer);
+  
+  return normalized
     .toLowerCase()
     .trim()
     // Remove espaços extras
@@ -198,12 +226,33 @@ Hint: ${hint}
 Correct Answer: ${correctAnswer}
 Student's Answer: ${userAnswer}
 
-Evaluate if the student's answer is correct. Be flexible and consider:
-- Mathematical equivalence (e.g., "4:7" = "4 to 7" = "4 : 7")
-- Different units (e.g., "1800 cm³" = "1800 cc" = "1800 cubic centimetres")
-- Rounding differences (accept if within 0.01)
-- Different formats (e.g., "£40 and £56" = "40, 56" = "£40, £56")
-- Partial credit for showing correct method even if final answer is slightly off
+Evaluate if the student's answer is correct. Be VERY flexible and consider:
+
+1. NUMBERS - Accept both numeric and written forms:
+   - "3" = "three" = "Three"
+   - "15" = "fifteen" = "Fifteen"
+   - "100" = "one hundred" = "a hundred"
+   - "1.5" = "one point five" = "one and a half"
+
+2. RATIOS - Accept all equivalent forms:
+   - "4:7" = "4 to 7" = "4 : 7" = "four to seven" = "four:seven"
+   - "3:2" = "three to two" = "3 to 2"
+
+3. UNITS - Accept variations:
+   - "1800 cm³" = "1800 cc" = "1800 cubic centimetres" = "eighteen hundred cubic centimetres"
+   - "£20" = "20 pounds" = "twenty pounds"
+   - "5 kg" = "5 kilograms" = "five kilograms"
+
+4. FORMATS - Accept different presentations:
+   - "£40 and £56" = "40, 56" = "£40, £56" = "forty pounds and fifty-six pounds"
+   - "2.5 hours" = "2 hours 30 minutes" = "two and a half hours"
+
+5. MATHEMATICAL EQUIVALENCE:
+   - Rounding differences (accept if within 0.01)
+   - Simplified vs unsimplified (e.g., "6:8" = "3:4")
+   - Partial credit for correct method even if final answer is slightly off
+
+IMPORTANT: If the student wrote numbers as words (e.g., "three to four" instead of "3:4"), this is CORRECT! Accept it.
 
 Respond ONLY with valid JSON in this exact format:
 {

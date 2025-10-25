@@ -55,6 +55,8 @@ function App() {
   const [bestStreak, setBestStreak] = useState(0);
   const [selectedExerciseTopic, setSelectedExerciseTopic] = useState<string | null>(null);
   const [currentExercise, setCurrentExercise] = useState<ExtraExercise | null>(null);
+  const [topicExercises, setTopicExercises] = useState<ExtraExercise[]>([]);
+  const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
   const [currentPartIndex, setCurrentPartIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
   const [showExerciseHint, setShowExerciseHint] = useState(false);
@@ -496,7 +498,24 @@ function App() {
                   <button
                     key={topic.id}
                     type="button"
-                    onClick={() => setSelectedExerciseTopic(topic.id)}
+                    onClick={() => {
+                      // Pegar todos os exercícios do tópico
+                      const exercises = extraExercises.filter(ex => ex.topic === topic.id);
+                      if (exercises.length > 0) {
+                        // Configurar para fazer todos os exercícios em sequência
+                        setSelectedExerciseTopic(topic.id);
+                        setTopicExercises(exercises);
+                        setCurrentExerciseIndex(0);
+                        setCurrentExercise(exercises[0]);
+                        setCurrentPartIndex(0);
+                        setUserAnswer('');
+                        setShowExerciseHint(false);
+                        setShowExerciseSolution(false);
+                        setSubmittedAnswer(false);
+                        setEvaluationResult(null);
+                        setIsEvaluating(false);
+                      }
+                    }}
                     className="group flex flex-col items-start gap-4 rounded-3xl border border-white/70 bg-white/90 p-8 text-left shadow-xl backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl"
                   >
                     <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${topic.color} text-white shadow-lg text-3xl`}>
@@ -550,82 +569,17 @@ function App() {
       );
     }
 
-    // Se não há exercício selecionado, mostrar lista de exercícios do tópico
+    // Tela intermediária removida - agora vai direto para os exercícios
+
+    // Mostrar exercício atual
     if (!currentExercise) {
-      const topicData = exerciseTopics.find(t => t.id === selectedExerciseTopic);
-      const topicExercises = extraExercises.filter(ex => ex.topic === selectedExerciseTopic);
-
       return (
-        <div className="relative min-h-screen overflow-hidden bg-slate-100">
-          <div className="mesh-overlay" />
-          <div className="pattern-grid opacity-40" />
-          <div className="absolute -left-24 top-32 h-72 w-72 rounded-full bg-purple-200/50 blur-3xl" />
-          <div className="absolute bottom-[-140px] right-[-100px] h-[420px] w-[420px] rounded-full bg-pink-200/40 blur-3xl" />
-
-          <div className="relative z-10 mx-auto max-w-6xl px-6 py-14 lg:px-10">
-            <div className="flex flex-wrap items-start justify-between gap-6 mb-8">
-              <div>
-                <button
-                  type="button"
-                  onClick={() => setSelectedExerciseTopic(null)}
-                  className="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-700 mb-3"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                  Back to topics
-                </button>
-                <div className="flex items-center gap-3">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${topicData?.color} text-white text-2xl`}>
-                    {topicData?.icon}
-                  </div>
-                  <div>
-                    <h1 className="text-3xl font-semibold text-slate-900">{topicData?.name}</h1>
-                    <p className="text-sm text-slate-500">{topicExercises.length} exercises</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2">
-              {topicExercises.map((exercise) => (
-                <button
-                  key={exercise.id}
-                  type="button"
-                  onClick={() => {
-                    setCurrentExercise(exercise);
-                    setCurrentPartIndex(0);
-                    setUserAnswer('');
-                    setShowExerciseHint(false);
-                    setShowExerciseSolution(false);
-                    setSubmittedAnswer(false);
-                    setEvaluationResult(null);
-                    setIsEvaluating(false);
-                  }}
-                  className="group flex flex-col items-start gap-4 rounded-3xl border border-white/70 bg-white/90 p-6 text-left shadow-xl backdrop-blur transition hover:-translate-y-1 hover:shadow-2xl"
-                >
-                  <div className="flex items-start gap-4 w-full">
-                    <div className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${topicData?.color} text-white font-bold flex-shrink-0`}>
-                      {exercise.id}
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-slate-900">{exercise.title}</h3>
-                      <p className="mt-1 text-xs text-slate-500">
-                        {exercise.parts.length} part{exercise.parts.length === 1 ? '' : 's'} • {exercise.difficulty}
-                      </p>
-                    </div>
-                  </div>
-                  <span className="inline-flex items-center gap-2 text-sm font-medium text-indigo-600">
-                    Start exercise
-                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-                  </span>
-                </button>
-              ))}
-            </div>
-          </div>
+        <div className="flex min-h-screen items-center justify-center bg-slate-100">
+          <p className="text-base text-slate-600">Loading exercise…</p>
         </div>
       );
     }
 
-    // Mostrar exercício atual
     const currentPart = currentExercise.parts[currentPartIndex];
     const topicData = exerciseTopics.find(t => t.id === currentExercise.topic);
     const isLastPart = currentPartIndex === currentExercise.parts.length - 1;
@@ -644,6 +598,9 @@ function App() {
               type="button"
               onClick={() => {
                 setCurrentExercise(null);
+                setSelectedExerciseTopic(null);
+                setTopicExercises([]);
+                setCurrentExerciseIndex(0);
                 setCurrentPartIndex(0);
                 setUserAnswer('');
                 setShowExerciseHint(false);
@@ -655,7 +612,7 @@ function App() {
               className="inline-flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-700 mb-4"
             >
               <ChevronLeft className="h-4 w-4" />
-              Back to exercises
+              Exit topic
             </button>
 
             <div className="flex items-center gap-3 mb-2">
@@ -665,7 +622,7 @@ function App() {
               <div>
                 <h1 className="text-2xl font-semibold text-slate-900">{currentExercise.title}</h1>
                 <p className="text-sm text-slate-500">
-                  Part {currentPartIndex + 1} of {currentExercise.parts.length}
+                  Exercise {currentExerciseIndex + 1} of {topicExercises.length} • Part {currentPartIndex + 1} of {currentExercise.parts.length}
                 </p>
               </div>
             </div>
@@ -864,19 +821,47 @@ function App() {
               <button
                 type="button"
                 onClick={() => {
-                  setCurrentExercise(null);
-                  setCurrentPartIndex(0);
-                  setUserAnswer('');
-                  setShowExerciseHint(false);
-                  setShowExerciseSolution(false);
-                  setSubmittedAnswer(false);
-                  setEvaluationResult(null);
-                  setIsEvaluating(false);
+                  // Verificar se há mais exercícios no tópico
+                  const nextExerciseIndex = currentExerciseIndex + 1;
+                  if (nextExerciseIndex < topicExercises.length) {
+                    // Ir para o próximo exercício
+                    setCurrentExerciseIndex(nextExerciseIndex);
+                    setCurrentExercise(topicExercises[nextExerciseIndex]);
+                    setCurrentPartIndex(0);
+                    setUserAnswer('');
+                    setShowExerciseHint(false);
+                    setShowExerciseSolution(false);
+                    setSubmittedAnswer(false);
+                    setEvaluationResult(null);
+                    setIsEvaluating(false);
+                  } else {
+                    // Último exercício - voltar ao menu de tópicos
+                    setCurrentExercise(null);
+                    setSelectedExerciseTopic(null);
+                    setTopicExercises([]);
+                    setCurrentExerciseIndex(0);
+                    setCurrentPartIndex(0);
+                    setUserAnswer('');
+                    setShowExerciseHint(false);
+                    setShowExerciseSolution(false);
+                    setSubmittedAnswer(false);
+                    setEvaluationResult(null);
+                    setIsEvaluating(false);
+                  }
                 }}
                 className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-emerald-700"
               >
-                <CheckCircle className="h-4 w-4" />
-                Complete Exercise
+                {currentExerciseIndex < topicExercises.length - 1 ? (
+                  <>
+                    Next Exercise
+                    <ArrowRight className="h-4 w-4" />
+                  </>
+                ) : (
+                  <>
+                    <CheckCircle className="h-4 w-4" />
+                    Complete Topic
+                  </>
+                )}
               </button>
             )}
           </div>

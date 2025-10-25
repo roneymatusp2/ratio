@@ -1453,5 +1453,605 @@ export const extraExercises: ExtraExercise[] = [
         ]
       }
     ]
+  },
+
+  // ADDITIONAL VOLUME CONVERSIONS (9 more needed)
+  {
+    id: 21,
+    title: "Swimming Pool Capacity",
+    topic: 'volume',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A swimming pool holds 45,000 litres of water. How many cubic metres is this?",
+        hint: "Remember: 1 m³ = 1000 L. To convert from litres to m³, divide by 1000.",
+        solution: [
+          "Step 1: Identify the conversion factor",
+          "• 1000 L = 1 m³",
+          "",
+          "Step 2: Divide to convert to larger unit",
+          "• 45,000 L = 45,000 ÷ 1000",
+          "• 45,000 L = 45 m³",
+          "",
+          "Answer: 45 m³"
+        ],
+        correctAnswers: ["45 m³", "45m³", "45 m3", "45m3", "45 cubic metres", "45 cubic meters", "45"],
+        commonMistakes: [
+          { answer: "45000", feedback: "You forgot to convert. Divide by 1000 to convert litres to cubic metres." },
+          { answer: "4.5", feedback: "You've divided by 10,000 instead of 1000. Check the conversion: 1000 L = 1 m³." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 22,
+    title: "Juice Carton Conversion",
+    topic: 'volume',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "A juice carton contains 250 millilitres. How many litres is this?",
+        hint: "Remember: 1000 mL = 1 L. To convert from mL to L, divide by 1000.",
+        solution: [
+          "Step 1: Identify the conversion factor",
+          "• 1000 mL = 1 L",
+          "",
+          "Step 2: Divide to convert to larger unit",
+          "• 250 mL = 250 ÷ 1000",
+          "• 250 mL = 0.25 L",
+          "",
+          "Answer: 0.25 L"
+        ],
+        correctAnswers: ["0.25 L", "0.25L", "0.25 litres", "0.25 liters", "0.25", "1/4 L", "¼ L"],
+        commonMistakes: [
+          { answer: "2.5", feedback: "You've divided by 100 instead of 1000. Check: 1000 mL = 1 L." },
+          { answer: "250", feedback: "You forgot to convert. Divide by 1000 to get litres." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 23,
+    title: "Fish Tank Volume",
+    topic: 'volume',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A fish tank has a volume of 0.08 m³. How many litres of water does it hold?",
+        hint: "Remember: 1 m³ = 1000 L. To convert from m³ to L, multiply by 1000.",
+        solution: [
+          "Step 1: Identify the conversion factor",
+          "• 1 m³ = 1000 L",
+          "",
+          "Step 2: Multiply to convert to smaller unit",
+          "• 0.08 m³ = 0.08 × 1000",
+          "• 0.08 m³ = 80 L",
+          "",
+          "Answer: 80 L"
+        ],
+        correctAnswers: ["80 L", "80L", "80 litres", "80 liters", "80"],
+        commonMistakes: [
+          { answer: "8", feedback: "You've multiplied by 100 instead of 1000. Check: 1 m³ = 1000 L." },
+          { answer: "800", feedback: "You've multiplied by 10,000. The correct factor is 1000." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 24,
+    title: "Medicine Dosage",
+    topic: 'volume',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "A medicine bottle contains 5 mL of liquid. How many cubic centimetres is this?",
+        hint: "Remember: 1 mL = 1 cm³. They are equivalent units.",
+        solution: [
+          "Step 1: Identify the conversion factor",
+          "• 1 mL = 1 cm³",
+          "",
+          "Step 2: Convert",
+          "• 5 mL = 5 cm³",
+          "",
+          "Answer: 5 cm³"
+        ],
+        correctAnswers: ["5 cm³", "5cm³", "5 cm3", "5cm3", "5 cubic centimetres", "5 cubic centimeters", "5 cc", "5"],
+        commonMistakes: [
+          { answer: "5000", feedback: "mL and cm³ are the same. No conversion needed: 1 mL = 1 cm³." },
+          { answer: "0.005", feedback: "mL and cm³ are equivalent. 5 mL = 5 cm³." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 25,
+    title: "Water Bottle Capacity",
+    topic: 'volume',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "A water bottle holds 750 mL. How many litres is this?",
+        hint: "To convert from mL to L, divide by 1000.",
+        solution: [
+          "Step 1: Identify the conversion factor",
+          "• 1000 mL = 1 L",
+          "",
+          "Step 2: Divide to convert",
+          "• 750 mL = 750 ÷ 1000",
+          "• 750 mL = 0.75 L",
+          "",
+          "Answer: 0.75 L"
+        ],
+        correctAnswers: ["0.75 L", "0.75L", "0.75 litres", "0.75 liters", "0.75", "3/4 L", "¾ L"],
+        commonMistakes: [
+          { answer: "7.5", feedback: "You've divided by 100 instead of 1000." },
+          { answer: "750", feedback: "You forgot to convert. Divide by 1000." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 26,
+    title: "Petrol Tank Conversion",
+    topic: 'volume',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A car's petrol tank holds 55 litres. How many cubic centimetres is this?",
+        hint: "Remember: 1 L = 1000 cm³. Multiply by 1000.",
+        solution: [
+          "Step 1: Identify the conversion factor",
+          "• 1 L = 1000 cm³",
+          "",
+          "Step 2: Multiply to convert",
+          "• 55 L = 55 × 1000",
+          "• 55 L = 55,000 cm³",
+          "",
+          "Answer: 55,000 cm³"
+        ],
+        correctAnswers: ["55000 cm³", "55000cm³", "55000 cm3", "55,000 cm³", "55,000 cm3", "55000", "55,000"],
+        commonMistakes: [
+          { answer: "5500", feedback: "You've multiplied by 100 instead of 1000." },
+          { answer: "550", feedback: "You've multiplied by 10. The correct factor is 1000." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 27,
+    title: "Laboratory Beaker",
+    topic: 'volume',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "A laboratory beaker contains 150 cm³ of solution. How many millilitres is this?",
+        hint: "Remember: 1 cm³ = 1 mL. They are the same.",
+        solution: [
+          "Step 1: Identify the conversion factor",
+          "• 1 cm³ = 1 mL",
+          "",
+          "Step 2: Convert",
+          "• 150 cm³ = 150 mL",
+          "",
+          "Answer: 150 mL"
+        ],
+        correctAnswers: ["150 mL", "150mL", "150 millilitres", "150 milliliters", "150"],
+        commonMistakes: [
+          { answer: "0.15", feedback: "cm³ and mL are equivalent. No division needed: 150 cm³ = 150 mL." },
+          { answer: "150000", feedback: "cm³ and mL are the same unit. 150 cm³ = 150 mL." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 28,
+    title: "Cooking Oil Bottle",
+    topic: 'volume',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A bottle of cooking oil contains 1.5 litres. How many millilitres is this?",
+        hint: "To convert from litres to mL, multiply by 1000.",
+        solution: [
+          "Step 1: Identify the conversion factor",
+          "• 1 L = 1000 mL",
+          "",
+          "Step 2: Multiply to convert",
+          "• 1.5 L = 1.5 × 1000",
+          "• 1.5 L = 1500 mL",
+          "",
+          "Answer: 1500 mL"
+        ],
+        correctAnswers: ["1500 mL", "1500mL", "1500 millilitres", "1500 milliliters", "1500", "1,500 mL", "1,500"],
+        commonMistakes: [
+          { answer: "150", feedback: "You've multiplied by 100 instead of 1000." },
+          { answer: "15", feedback: "You've multiplied by 10. The correct factor is 1000." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 29,
+    title: "Aquarium Volume",
+    topic: 'volume',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "An aquarium measures 50 cm × 30 cm × 40 cm. What is its volume in litres?",
+        hint: "First calculate volume in cm³ (length × width × height), then convert to litres by dividing by 1000.",
+        solution: [
+          "Step 1: Calculate volume in cm³",
+          "• Volume = length × width × height",
+          "• Volume = 50 × 30 × 40",
+          "• Volume = 60,000 cm³",
+          "",
+          "Step 2: Convert to litres",
+          "• 1000 cm³ = 1 L",
+          "• 60,000 cm³ = 60,000 ÷ 1000",
+          "• 60,000 cm³ = 60 L",
+          "",
+          "Answer: 60 L"
+        ],
+        correctAnswers: ["60 L", "60L", "60 litres", "60 liters", "60"],
+        commonMistakes: [
+          { answer: "60000", feedback: "You forgot to convert cm³ to litres. Divide by 1000." },
+          { answer: "6", feedback: "You've divided by 10,000 instead of 1000." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 30,
+    title: "Milk Carton Comparison",
+    topic: 'volume',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "One milk carton holds 2.5 L and another holds 2800 mL. Which carton holds more milk and by how much (in mL)?",
+        hint: "Convert both to the same unit (mL), then compare and find the difference.",
+        solution: [
+          "Step 1: Convert 2.5 L to mL",
+          "• 2.5 L = 2.5 × 1000 = 2500 mL",
+          "",
+          "Step 2: Compare",
+          "• First carton: 2500 mL",
+          "• Second carton: 2800 mL",
+          "• 2800 mL > 2500 mL",
+          "",
+          "Step 3: Find the difference",
+          "• 2800 - 2500 = 300 mL",
+          "",
+          "Answer: The second carton holds more by 300 mL"
+        ],
+        correctAnswers: [
+          "second carton by 300 mL",
+          "second by 300 mL",
+          "2800 mL carton by 300 mL",
+          "300 mL more in second",
+          "second carton, 300 mL",
+          "300 mL",
+          "300"
+        ],
+        commonMistakes: [
+          { answer: "first", feedback: "Convert both to mL: 2.5 L = 2500 mL, which is less than 2800 mL." },
+          { answer: "2800", feedback: "The question asks by how much more. Find the difference: 2800 - 2500 = 300 mL." }
+        ]
+      }
+    ]
+  },
+
+  // ADDITIONAL TIME CALCULATIONS (9 more needed)
+  {
+    id: 31,
+    title: "School Day Duration",
+    topic: 'time',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "School starts at 08:45 and finishes at 15:20. How long is the school day in hours and minutes?",
+        hint: "Count the hours first, then add the minutes. From 08:45 to 15:45 is 7 hours, but we finish 25 minutes earlier.",
+        solution: [
+          "Step 1: Count the hours",
+          "• From 08:45 to 15:45 = 7 hours",
+          "",
+          "Step 2: Adjust for minutes",
+          "• We finish at 15:20, not 15:45",
+          "• 15:45 - 15:20 = 25 minutes less",
+          "• 7 hours - 25 minutes = 6 hours 35 minutes",
+          "",
+          "Answer: 6 hours 35 minutes"
+        ],
+        correctAnswers: [
+          "6 hours 35 minutes",
+          "6 hours and 35 minutes",
+          "6h 35m",
+          "6:35",
+          "6 hrs 35 mins",
+          "395 minutes"
+        ],
+        commonMistakes: [
+          { answer: "7 hours", feedback: "You forgot to account for the minutes. The time is 6 hours 35 minutes." },
+          { answer: "6 hours 45 minutes", feedback: "Check your minute calculation. 45 - 20 = 25, so it's 6 hours 35 minutes." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 32,
+    title: "Train Journey Time",
+    topic: 'time',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A train departs at 13:25 and arrives at 16:50. How long is the journey?",
+        hint: "Count hours first: 13:25 to 16:25 is 3 hours. Then add the extra 25 minutes.",
+        solution: [
+          "Step 1: Count the hours",
+          "• From 13:25 to 16:25 = 3 hours",
+          "",
+          "Step 2: Add remaining minutes",
+          "• From 16:25 to 16:50 = 25 minutes",
+          "• Total = 3 hours 25 minutes",
+          "",
+          "Answer: 3 hours 25 minutes"
+        ],
+        correctAnswers: [
+          "3 hours 25 minutes",
+          "3 hours and 25 minutes",
+          "3h 25m",
+          "3:25",
+          "3 hrs 25 mins",
+          "205 minutes"
+        ],
+        commonMistakes: [
+          { answer: "3 hours", feedback: "Don't forget the minutes. The journey is 3 hours 25 minutes." },
+          { answer: "4 hours", feedback: "Count carefully. From 13:25 to 16:50 is 3 hours 25 minutes." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 33,
+    title: "Cinema Film Duration",
+    topic: 'time',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "A film starts at 19:15 and ends at 21:40. How long is the film?",
+        hint: "From 19:15 to 21:15 is 2 hours. Then add the extra 25 minutes.",
+        solution: [
+          "Step 1: Count the hours",
+          "• From 19:15 to 21:15 = 2 hours",
+          "",
+          "Step 2: Add remaining minutes",
+          "• From 21:15 to 21:40 = 25 minutes",
+          "• Total = 2 hours 25 minutes",
+          "",
+          "Answer: 2 hours 25 minutes"
+        ],
+        correctAnswers: [
+          "2 hours 25 minutes",
+          "2 hours and 25 minutes",
+          "2h 25m",
+          "2:25",
+          "2 hrs 25 mins",
+          "145 minutes"
+        ],
+        commonMistakes: [
+          { answer: "2 hours", feedback: "Include the minutes. The film is 2 hours 25 minutes long." },
+          { answer: "2 hours 15 minutes", feedback: "Check the end time. From 19:15 to 21:40 is 2 hours 25 minutes." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 34,
+    title: "Cooking Time Calculation",
+    topic: 'time',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A roast needs to cook for 2 hours 45 minutes. If you want it ready by 18:00, what time should you start cooking?",
+        hint: "Work backwards from 18:00. Subtract 2 hours first, then subtract 45 minutes.",
+        solution: [
+          "Step 1: Subtract the hours",
+          "• 18:00 - 2 hours = 16:00",
+          "",
+          "Step 2: Subtract the minutes",
+          "• 16:00 - 45 minutes = 15:15",
+          "",
+          "Answer: 15:15"
+        ],
+        correctAnswers: [
+          "15:15",
+          "3:15 pm",
+          "3:15pm",
+          "quarter past three",
+          "15 15",
+          "1515"
+        ],
+        commonMistakes: [
+          { answer: "16:15", feedback: "You only subtracted 2 hours. Remember to also subtract 45 minutes." },
+          { answer: "15:45", feedback: "You subtracted 15 minutes instead of 45. The correct time is 15:15." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 35,
+    title: "Bus Timetable Reading",
+    topic: 'time',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "Buses leave the station every 25 minutes. If the first bus leaves at 07:10, what time does the fourth bus leave?",
+        hint: "Add 25 minutes three times (to get from 1st to 4th bus).",
+        solution: [
+          "Step 1: Calculate total time",
+          "• From 1st to 4th bus = 3 intervals",
+          "• 3 × 25 minutes = 75 minutes",
+          "• 75 minutes = 1 hour 15 minutes",
+          "",
+          "Step 2: Add to start time",
+          "• 07:10 + 1 hour = 08:10",
+          "• 08:10 + 15 minutes = 08:25",
+          "",
+          "Answer: 08:25"
+        ],
+        correctAnswers: [
+          "08:25",
+          "8:25 am",
+          "8:25am",
+          "twenty-five past eight",
+          "08 25",
+          "0825"
+        ],
+        commonMistakes: [
+          { answer: "08:10", feedback: "You only added 1 hour. Don't forget the extra 15 minutes." },
+          { answer: "07:35", feedback: "You only added one interval. From 1st to 4th bus is 3 intervals (75 minutes)." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 36,
+    title: "Sports Match Duration",
+    topic: 'time',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "A football match has two 45-minute halves with a 15-minute break. How long is the total time from start to finish?",
+        hint: "Add all the time periods: first half + break + second half.",
+        solution: [
+          "Step 1: Add all time periods",
+          "• First half: 45 minutes",
+          "• Break: 15 minutes",
+          "• Second half: 45 minutes",
+          "• Total = 45 + 15 + 45 = 105 minutes",
+          "",
+          "Step 2: Convert to hours and minutes",
+          "• 105 minutes = 1 hour 45 minutes",
+          "",
+          "Answer: 1 hour 45 minutes"
+        ],
+        correctAnswers: [
+          "1 hour 45 minutes",
+          "1 hour and 45 minutes",
+          "1h 45m",
+          "1:45",
+          "1 hr 45 mins",
+          "105 minutes"
+        ],
+        commonMistakes: [
+          { answer: "90 minutes", feedback: "You forgot the 15-minute break. Total is 105 minutes." },
+          { answer: "1 hour 30 minutes", feedback: "Check your addition. 45 + 15 + 45 = 105 minutes = 1 hour 45 minutes." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 37,
+    title: "Homework Time Management",
+    topic: 'time',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "You have 3 homework tasks: Maths (35 minutes), English (40 minutes), and Science (25 minutes). If you start at 16:30, what time will you finish?",
+        hint: "Add all the times together first, then add to the start time.",
+        solution: [
+          "Step 1: Calculate total time",
+          "• 35 + 40 + 25 = 100 minutes",
+          "• 100 minutes = 1 hour 40 minutes",
+          "",
+          "Step 2: Add to start time",
+          "• 16:30 + 1 hour = 17:30",
+          "• 17:30 + 40 minutes = 18:10",
+          "",
+          "Answer: 18:10"
+        ],
+        correctAnswers: [
+          "18:10",
+          "6:10 pm",
+          "6:10pm",
+          "ten past six",
+          "18 10",
+          "1810"
+        ],
+        commonMistakes: [
+          { answer: "17:30", feedback: "You only added 1 hour. Don't forget the extra 40 minutes." },
+          { answer: "18:00", feedback: "Check your calculation. 100 minutes = 1 hour 40 minutes, so finish time is 18:10." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 38,
+    title: "Sleep Duration",
+    topic: 'time',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "You go to bed at 22:45 and wake up at 06:30. How many hours and minutes did you sleep?",
+        hint: "Count from 22:45 to midnight (00:00), then from midnight to 06:30.",
+        solution: [
+          "Step 1: Time until midnight",
+          "• From 22:45 to 00:00 = 1 hour 15 minutes",
+          "",
+          "Step 2: Time after midnight",
+          "• From 00:00 to 06:30 = 6 hours 30 minutes",
+          "",
+          "Step 3: Add together",
+          "• 1 hour 15 minutes + 6 hours 30 minutes",
+          "• = 7 hours 45 minutes",
+          "",
+          "Answer: 7 hours 45 minutes"
+        ],
+        correctAnswers: [
+          "7 hours 45 minutes",
+          "7 hours and 45 minutes",
+          "7h 45m",
+          "7:45",
+          "7 hrs 45 mins",
+          "465 minutes"
+        ],
+        commonMistakes: [
+          { answer: "8 hours", feedback: "Count more carefully. From 22:45 to 06:30 is 7 hours 45 minutes." },
+          { answer: "7 hours 30 minutes", feedback: "Check the minutes. From 22:45 to 06:30 is 7 hours 45 minutes." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 39,
+    title: "Meeting Schedule",
+    topic: 'time',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A meeting starts at 14:20 and lasts for 1 hour 35 minutes. What time does it end?",
+        hint: "Add 1 hour first, then add 35 minutes.",
+        solution: [
+          "Step 1: Add the hour",
+          "• 14:20 + 1 hour = 15:20",
+          "",
+          "Step 2: Add the minutes",
+          "• 15:20 + 35 minutes = 15:55",
+          "",
+          "Answer: 15:55"
+        ],
+        correctAnswers: [
+          "15:55",
+          "3:55 pm",
+          "3:55pm",
+          "five to four",
+          "15 55",
+          "1555"
+        ],
+        commonMistakes: [
+          { answer: "15:20", feedback: "You only added the hour. Don't forget to add 35 minutes." },
+          { answer: "16:00", feedback: "You added 40 minutes instead of 35. The correct time is 15:55." }
+        ]
+      }
+    ]
   }
 ];

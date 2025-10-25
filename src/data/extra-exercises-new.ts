@@ -2097,5 +2097,978 @@ export const extraExercises: ExtraExercise[] = [
         ]
       }
     ]
+  },
+
+  // RATIOS - 3 more needed (41-43)
+  {
+    id: 41,
+    title: "Paint Mixing Ratio",
+    topic: 'ratios',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "To make purple paint, you mix red and blue in the ratio 3:5. If you use 15 litres of red paint, how much blue paint do you need?",
+        hint: "Find the value of one part first, then multiply to find the blue paint amount.",
+        solution: [
+          "Step 1: Find the value of one part",
+          "• Red paint = 3 parts = 15 litres",
+          "• 1 part = 15 ÷ 3 = 5 litres",
+          "",
+          "Step 2: Find blue paint",
+          "• Blue paint = 5 parts",
+          "• Blue paint = 5 × 5 = 25 litres",
+          "",
+          "Answer: 25 litres"
+        ],
+        correctAnswers: ["25 litres", "25 liters", "25L", "25 L", "25"],
+        commonMistakes: [
+          { answer: "9", feedback: "You've added 3 + 5 + 1. Use the ratio to find how much blue paint is needed." },
+          { answer: "15", feedback: "That's the amount of red paint. Blue paint is 5 parts, not 3 parts." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 42,
+    title: "Pocket Money Sharing",
+    topic: 'ratios',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "Three siblings share £120 pocket money in the ratio 2:3:5. How much does each sibling receive?",
+        hint: "Add the ratio parts to find the total, then find the value of one part.",
+        solution: [
+          "Step 1: Find total parts",
+          "• Total parts = 2 + 3 + 5 = 10 parts",
+          "",
+          "Step 2: Find value of one part",
+          "• 10 parts = £120",
+          "• 1 part = £120 ÷ 10 = £12",
+          "",
+          "Step 3: Calculate each share",
+          "• First sibling: 2 × £12 = £24",
+          "• Second sibling: 3 × £12 = £36",
+          "• Third sibling: 5 × £12 = £60",
+          "",
+          "Answer: £24, £36, and £60"
+        ],
+        correctAnswers: [
+          "£24, £36, £60",
+          "24, 36, 60",
+          "£24, £36 and £60",
+          "24 pounds, 36 pounds, 60 pounds",
+          "£24 £36 £60"
+        ],
+        commonMistakes: [
+          { answer: "£40, £40, £40", feedback: "They don't share equally. Use the ratio 2:3:5 to divide the money." },
+          { answer: "£20, £30, £50", feedback: "Check your calculation. Total parts = 10, so 1 part = £12." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 43,
+    title: "Concrete Mix Ratio",
+    topic: 'ratios',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "A concrete mix uses cement, sand, and gravel in the ratio 1:2:4. If you need 35 kg of concrete mix in total, how much cement do you need?",
+        hint: "Find the total number of parts first, then work out what one part equals.",
+        solution: [
+          "Step 1: Find total parts",
+          "• Total parts = 1 + 2 + 4 = 7 parts",
+          "",
+          "Step 2: Find value of one part",
+          "• 7 parts = 35 kg",
+          "• 1 part = 35 ÷ 7 = 5 kg",
+          "",
+          "Step 3: Find cement amount",
+          "• Cement = 1 part = 5 kg",
+          "",
+          "Answer: 5 kg"
+        ],
+        correctAnswers: ["5 kg", "5kg", "5 kilograms", "5 kilogrammes", "5"],
+        commonMistakes: [
+          { answer: "7 kg", feedback: "That's the number of parts, not the amount of cement. 1 part = 5 kg." },
+          { answer: "10 kg", feedback: "That's 2 parts (sand). Cement is only 1 part = 5 kg." }
+        ]
+      }
+    ]
+  },
+
+  // LCM & HCF - 5 more needed (44-48)
+  {
+    id: 44,
+    title: "Bus Timetable LCM",
+    topic: 'lcm-hcf',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "Bus A leaves the station every 12 minutes and Bus B leaves every 18 minutes. If both buses leave together at 09:00, when will they next leave together?",
+        hint: "Find the LCM of 12 and 18 to determine when they'll leave together again.",
+        solution: [
+          "Step 1: Find LCM of 12 and 18",
+          "• Multiples of 12: 12, 24, 36, 48...",
+          "• Multiples of 18: 18, 36, 54...",
+          "• LCM = 36 minutes",
+          "",
+          "Step 2: Add to start time",
+          "• 09:00 + 36 minutes = 09:36",
+          "",
+          "Answer: 09:36"
+        ],
+        correctAnswers: ["09:36", "9:36", "9:36 am", "09:36 am", "0936"],
+        commonMistakes: [
+          { answer: "09:30", feedback: "That's 30 minutes. The LCM of 12 and 18 is 36 minutes." },
+          { answer: "09:18", feedback: "That's when Bus B leaves next, but Bus A won't leave then. Find the LCM." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 45,
+    title: "HCF of 48 and 72",
+    topic: 'lcm-hcf',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "Find the highest common factor (HCF) of 48 and 72.",
+        hint: "List the factors of both numbers and find the largest one they have in common.",
+        solution: [
+          "Step 1: List factors of 48",
+          "• Factors of 48: 1, 2, 3, 4, 6, 8, 12, 16, 24, 48",
+          "",
+          "Step 2: List factors of 72",
+          "• Factors of 72: 1, 2, 3, 4, 6, 8, 9, 12, 18, 24, 36, 72",
+          "",
+          "Step 3: Find common factors",
+          "• Common factors: 1, 2, 3, 4, 6, 8, 12, 24",
+          "• Highest common factor = 24",
+          "",
+          "Answer: 24"
+        ],
+        correctAnswers: ["24", "twenty-four", "twenty four"],
+        commonMistakes: [
+          { answer: "12", feedback: "12 is a common factor, but it's not the highest. The HCF is 24." },
+          { answer: "8", feedback: "8 is a common factor, but there's a larger one. The HCF is 24." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 46,
+    title: "LCM of 15 and 20",
+    topic: 'lcm-hcf',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "Find the lowest common multiple (LCM) of 15 and 20.",
+        hint: "List the multiples of both numbers until you find the smallest one they share.",
+        solution: [
+          "Step 1: List multiples of 15",
+          "• Multiples of 15: 15, 30, 45, 60, 75...",
+          "",
+          "Step 2: List multiples of 20",
+          "• Multiples of 20: 20, 40, 60, 80...",
+          "",
+          "Step 3: Find lowest common multiple",
+          "• First common multiple = 60",
+          "• LCM = 60",
+          "",
+          "Answer: 60"
+        ],
+        correctAnswers: ["60", "sixty"],
+        commonMistakes: [
+          { answer: "300", feedback: "That's 15 × 20, but the LCM is smaller. The LCM is 60." },
+          { answer: "5", feedback: "That's the HCF, not the LCM. The LCM is 60." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 47,
+    title: "Tile Pattern Problem",
+    topic: 'lcm-hcf',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "A floor is 144 cm long and 96 cm wide. What is the largest size of square tile that can be used to cover the floor exactly without cutting any tiles?",
+        hint: "Find the HCF of 144 and 96. This will be the largest square tile size that fits exactly.",
+        solution: [
+          "Step 1: Find HCF of 144 and 96",
+          "• Factors of 144: 1, 2, 3, 4, 6, 8, 9, 12, 16, 18, 24, 36, 48, 72, 144",
+          "• Factors of 96: 1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96",
+          "• Common factors: 1, 2, 3, 4, 6, 8, 12, 16, 24, 48",
+          "• HCF = 48",
+          "",
+          "Step 2: Interpret the answer",
+          "• Largest square tile = 48 cm × 48 cm",
+          "",
+          "Answer: 48 cm"
+        ],
+        correctAnswers: ["48 cm", "48cm", "48 centimetres", "48 centimeters", "48"],
+        commonMistakes: [
+          { answer: "24 cm", feedback: "24 is a common factor, but not the highest. The HCF is 48 cm." },
+          { answer: "12 cm", feedback: "12 is a common factor, but there's a larger one. The HCF is 48 cm." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 48,
+    title: "Swimming Training Schedule",
+    topic: 'lcm-hcf',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "Sarah swims every 4 days and Tom swims every 6 days. If they both swim today, in how many days will they swim together again?",
+        hint: "Find the LCM of 4 and 6.",
+        solution: [
+          "Step 1: Find LCM of 4 and 6",
+          "• Multiples of 4: 4, 8, 12, 16...",
+          "• Multiples of 6: 6, 12, 18...",
+          "• LCM = 12",
+          "",
+          "Step 2: Interpret the answer",
+          "• They will swim together again in 12 days",
+          "",
+          "Answer: 12 days"
+        ],
+        correctAnswers: ["12 days", "12", "twelve days", "twelve"],
+        commonMistakes: [
+          { answer: "10 days", feedback: "That's 4 + 6, but you need the LCM. The answer is 12 days." },
+          { answer: "24 days", feedback: "That's 4 × 6, but the LCM is smaller. The answer is 12 days." }
+        ]
+      }
+    ]
+  },
+
+  // PRIME FACTORISATION - 8 more needed (49-56)
+  {
+    id: 49,
+    title: "Prime Factors of 60",
+    topic: 'prime',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "Write 60 as a product of its prime factors.",
+        hint: "Use a factor tree. Start by dividing by 2, then continue with prime numbers.",
+        solution: [
+          "Step 1: Create factor tree",
+          "• 60 = 2 × 30",
+          "• 30 = 2 × 15",
+          "• 15 = 3 × 5",
+          "",
+          "Step 2: Write as product of primes",
+          "• 60 = 2 × 2 × 3 × 5",
+          "• 60 = 2² × 3 × 5",
+          "",
+          "Answer: 2² × 3 × 5"
+        ],
+        correctAnswers: [
+          "2² × 3 × 5",
+          "2^2 × 3 × 5",
+          "2 × 2 × 3 × 5",
+          "2²×3×5",
+          "2^2×3×5",
+          "4 × 3 × 5"
+        ],
+        commonMistakes: [
+          { answer: "6 × 10", feedback: "6 and 10 aren't prime. Break them down further into prime factors." },
+          { answer: "2 × 30", feedback: "30 isn't prime. Continue factorising until all factors are prime." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 50,
+    title: "Prime Factors of 84",
+    topic: 'prime',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "Express 84 as a product of prime factors in index form.",
+        hint: "Start with 2, the smallest prime. Keep dividing until you can't divide by 2 anymore, then try 3.",
+        solution: [
+          "Step 1: Divide by 2 repeatedly",
+          "• 84 ÷ 2 = 42",
+          "• 42 ÷ 2 = 21",
+          "• 21 is odd, so stop dividing by 2",
+          "",
+          "Step 2: Divide by 3",
+          "• 21 ÷ 3 = 7",
+          "• 7 is prime",
+          "",
+          "Step 3: Write in index form",
+          "• 84 = 2 × 2 × 3 × 7",
+          "• 84 = 2² × 3 × 7",
+          "",
+          "Answer: 2² × 3 × 7"
+        ],
+        correctAnswers: [
+          "2² × 3 × 7",
+          "2^2 × 3 × 7",
+          "2 × 2 × 3 × 7",
+          "2²×3×7",
+          "2^2×3×7"
+        ],
+        commonMistakes: [
+          { answer: "4 × 21", feedback: "4 and 21 aren't prime. Break them down into prime factors." },
+          { answer: "2 × 3 × 7", feedback: "You're missing one factor of 2. The answer is 2² × 3 × 7." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 51,
+    title: "Prime Factors of 100",
+    topic: 'prime',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "Find the prime factorisation of 100 and write it in index form.",
+        hint: "100 = 10 × 10. Now factorise 10.",
+        solution: [
+          "Step 1: Break down 100",
+          "• 100 = 10 × 10",
+          "• 10 = 2 × 5",
+          "",
+          "Step 2: Write all prime factors",
+          "• 100 = 2 × 5 × 2 × 5",
+          "• 100 = 2 × 2 × 5 × 5",
+          "",
+          "Step 3: Write in index form",
+          "• 100 = 2² × 5²",
+          "",
+          "Answer: 2² × 5²"
+        ],
+        correctAnswers: [
+          "2² × 5²",
+          "2^2 × 5^2",
+          "2 × 2 × 5 × 5",
+          "2²×5²",
+          "2^2×5^2"
+        ],
+        commonMistakes: [
+          { answer: "10 × 10", feedback: "10 isn't prime. Break it down into 2 × 5." },
+          { answer: "2 × 5²", feedback: "You need two factors of 2. The answer is 2² × 5²." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 52,
+    title: "Prime Factors of 180",
+    topic: 'prime',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "Write 180 as a product of prime factors in index form.",
+        hint: "Start by dividing by 2 as many times as possible, then try 3, then 5.",
+        solution: [
+          "Step 1: Divide by 2",
+          "• 180 ÷ 2 = 90",
+          "• 90 ÷ 2 = 45",
+          "",
+          "Step 2: Divide by 3",
+          "• 45 ÷ 3 = 15",
+          "• 15 ÷ 3 = 5",
+          "",
+          "Step 3: 5 is prime",
+          "• 180 = 2 × 2 × 3 × 3 × 5",
+          "",
+          "Step 4: Write in index form",
+          "• 180 = 2² × 3² × 5",
+          "",
+          "Answer: 2² × 3² × 5"
+        ],
+        correctAnswers: [
+          "2² × 3² × 5",
+          "2^2 × 3^2 × 5",
+          "2 × 2 × 3 × 3 × 5",
+          "2²×3²×5",
+          "2^2×3^2×5"
+        ],
+        commonMistakes: [
+          { answer: "2 × 3² × 5", feedback: "You need two factors of 2. The answer is 2² × 3² × 5." },
+          { answer: "36 × 5", feedback: "36 isn't prime. Break it down into prime factors." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 53,
+    title: "Prime Factors of 72",
+    topic: 'prime',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "Express 72 as a product of its prime factors in index form.",
+        hint: "72 is even, so start by dividing by 2 repeatedly.",
+        solution: [
+          "Step 1: Divide by 2 repeatedly",
+          "• 72 ÷ 2 = 36",
+          "• 36 ÷ 2 = 18",
+          "• 18 ÷ 2 = 9",
+          "",
+          "Step 2: Divide by 3",
+          "• 9 ÷ 3 = 3",
+          "• 3 ÷ 3 = 1",
+          "",
+          "Step 3: Write in index form",
+          "• 72 = 2 × 2 × 2 × 3 × 3",
+          "• 72 = 2³ × 3²",
+          "",
+          "Answer: 2³ × 3²"
+        ],
+        correctAnswers: [
+          "2³ × 3²",
+          "2^3 × 3^2",
+          "2 × 2 × 2 × 3 × 3",
+          "2³×3²",
+          "2^3×3^2",
+          "8 × 9"
+        ],
+        commonMistakes: [
+          { answer: "2² × 3²", feedback: "You need three factors of 2, not two. The answer is 2³ × 3²." },
+          { answer: "8 × 3²", feedback: "8 isn't prime. Write it as 2³. The answer is 2³ × 3²." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 54,
+    title: "Prime Factors of 150",
+    topic: 'prime',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "Find the prime factorisation of 150 in index form.",
+        hint: "150 = 15 × 10. Now factorise both 15 and 10.",
+        solution: [
+          "Step 1: Break down 150",
+          "• 150 = 15 × 10",
+          "• 15 = 3 × 5",
+          "• 10 = 2 × 5",
+          "",
+          "Step 2: Collect all prime factors",
+          "• 150 = 2 × 3 × 5 × 5",
+          "",
+          "Step 3: Write in index form",
+          "• 150 = 2 × 3 × 5²",
+          "",
+          "Answer: 2 × 3 × 5²"
+        ],
+        correctAnswers: [
+          "2 × 3 × 5²",
+          "2 × 3 × 5^2",
+          "2 × 3 × 5 × 5",
+          "2×3×5²",
+          "2×3×5^2"
+        ],
+        commonMistakes: [
+          { answer: "15 × 10", feedback: "15 and 10 aren't prime. Break them down into prime factors." },
+          { answer: "2 × 3 × 5", feedback: "You're missing one factor of 5. The answer is 2 × 3 × 5²." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 55,
+    title: "Prime Factors and HCF",
+    topic: 'prime',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "Using prime factorisation, find the HCF of 36 and 48.",
+        hint: "First write both numbers as products of prime factors, then find the common factors.",
+        solution: [
+          "Step 1: Prime factorise 36",
+          "• 36 = 2² × 3²",
+          "",
+          "Step 2: Prime factorise 48",
+          "• 48 = 2⁴ × 3",
+          "",
+          "Step 3: Find common prime factors",
+          "• Common factors: 2² and 3",
+          "• HCF = 2² × 3 = 4 × 3 = 12",
+          "",
+          "Answer: 12"
+        ],
+        correctAnswers: ["12", "twelve"],
+        commonMistakes: [
+          { answer: "6", feedback: "That's 2 × 3, but you need 2² × 3. The HCF is 12." },
+          { answer: "24", feedback: "That's too large. Use only the lowest powers of common prime factors. HCF = 12." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 56,
+    title: "Prime Factors of 200",
+    topic: 'prime',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "Express 200 as a product of prime factors in index form.",
+        hint: "200 = 2 × 100. Keep dividing by 2, then factorise what's left.",
+        solution: [
+          "Step 1: Divide by 2 repeatedly",
+          "• 200 ÷ 2 = 100",
+          "• 100 ÷ 2 = 50",
+          "• 50 ÷ 2 = 25",
+          "",
+          "Step 2: Factorise 25",
+          "• 25 = 5 × 5 = 5²",
+          "",
+          "Step 3: Write in index form",
+          "• 200 = 2 × 2 × 2 × 5 × 5",
+          "• 200 = 2³ × 5²",
+          "",
+          "Answer: 2³ × 5²"
+        ],
+        correctAnswers: [
+          "2³ × 5²",
+          "2^3 × 5^2",
+          "2 × 2 × 2 × 5 × 5",
+          "2³×5²",
+          "2^3×5^2",
+          "8 × 25"
+        ],
+        commonMistakes: [
+          { answer: "2² × 5²", feedback: "You need three factors of 2, not two. The answer is 2³ × 5²." },
+          { answer: "8 × 5²", feedback: "8 isn't prime. Write it as 2³. The answer is 2³ × 5²." }
+        ]
+      }
+    ]
+  },
+
+  // MASS CONVERSIONS - 6 more needed (57-62)
+  {
+    id: 57,
+    title: "Fruit Market Weights",
+    topic: 'mass',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "A bag of apples weighs 2.5 kg. How many grams is this?",
+        hint: "Remember: 1 kg = 1000 g. To convert kg to g, multiply by 1000.",
+        solution: [
+          "Step 1: Identify conversion factor",
+          "• 1 kg = 1000 g",
+          "",
+          "Step 2: Multiply to convert",
+          "• 2.5 kg = 2.5 × 1000",
+          "• 2.5 kg = 2500 g",
+          "",
+          "Answer: 2500 g"
+        ],
+        correctAnswers: ["2500 g", "2500g", "2500 grams", "2500 grammes", "2500", "2,500 g", "2,500"],
+        commonMistakes: [
+          { answer: "250", feedback: "You've multiplied by 100 instead of 1000. The answer is 2500 g." },
+          { answer: "25", feedback: "You've multiplied by 10. Remember: 1 kg = 1000 g." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 58,
+    title: "Medicine Dosage Conversion",
+    topic: 'mass',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "A medicine tablet weighs 500 mg. How many grams is this?",
+        hint: "Remember: 1000 mg = 1 g. To convert mg to g, divide by 1000.",
+        solution: [
+          "Step 1: Identify conversion factor",
+          "• 1000 mg = 1 g",
+          "",
+          "Step 2: Divide to convert",
+          "• 500 mg = 500 ÷ 1000",
+          "• 500 mg = 0.5 g",
+          "",
+          "Answer: 0.5 g"
+        ],
+        correctAnswers: ["0.5 g", "0.5g", "0.5 grams", "0.5 grammes", "0.5", "1/2 g", "½ g"],
+        commonMistakes: [
+          { answer: "5", feedback: "You've divided by 100 instead of 1000. The answer is 0.5 g." },
+          { answer: "500", feedback: "You forgot to convert. Divide by 1000 to get grams." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 59,
+    title: "Lorry Load Calculation",
+    topic: 'mass',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A lorry is carrying 3 tonnes of sand and 1500 kg of cement. What is the total mass in kilograms?",
+        hint: "Convert tonnes to kg first (1 tonne = 1000 kg), then add.",
+        solution: [
+          "Step 1: Convert tonnes to kg",
+          "• 3 tonnes = 3 × 1000 = 3000 kg",
+          "",
+          "Step 2: Add the masses",
+          "• Total = 3000 kg + 1500 kg",
+          "• Total = 4500 kg",
+          "",
+          "Answer: 4500 kg"
+        ],
+        correctAnswers: ["4500 kg", "4500kg", "4500 kilograms", "4500 kilogrammes", "4500", "4,500 kg", "4,500"],
+        commonMistakes: [
+          { answer: "1503", feedback: "You can't add 3 tonnes and 1500 kg directly. Convert tonnes to kg first." },
+          { answer: "4.5", feedback: "That's in tonnes. The question asks for kilograms: 4500 kg." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 60,
+    title: "Baking Ingredients",
+    topic: 'mass',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A recipe needs 750 g of flour and 0.5 kg of sugar. What is the total mass in grams?",
+        hint: "Convert kg to g first (1 kg = 1000 g), then add.",
+        solution: [
+          "Step 1: Convert kg to g",
+          "• 0.5 kg = 0.5 × 1000 = 500 g",
+          "",
+          "Step 2: Add the masses",
+          "• Total = 750 g + 500 g",
+          "• Total = 1250 g",
+          "",
+          "Answer: 1250 g"
+        ],
+        correctAnswers: ["1250 g", "1250g", "1250 grams", "1250 grammes", "1250", "1,250 g", "1,250"],
+        commonMistakes: [
+          { answer: "800", feedback: "You can't add 750 g and 0.5 kg directly. Convert to the same unit first." },
+          { answer: "1.25", feedback: "That's in kg. The question asks for grams: 1250 g." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 61,
+    title: "Parcel Weight Comparison",
+    topic: 'mass',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "Parcel A weighs 3.2 kg and Parcel B weighs 2850 g. Which parcel is heavier and by how much (in grams)?",
+        hint: "Convert both to grams, compare, then find the difference.",
+        solution: [
+          "Step 1: Convert Parcel A to grams",
+          "• 3.2 kg = 3.2 × 1000 = 3200 g",
+          "",
+          "Step 2: Compare",
+          "• Parcel A: 3200 g",
+          "• Parcel B: 2850 g",
+          "• 3200 g > 2850 g",
+          "",
+          "Step 3: Find difference",
+          "• 3200 - 2850 = 350 g",
+          "",
+          "Answer: Parcel A is heavier by 350 g"
+        ],
+        correctAnswers: [
+          "Parcel A by 350 g",
+          "A by 350 g",
+          "Parcel A, 350 g",
+          "350 g heavier",
+          "350 g",
+          "350"
+        ],
+        commonMistakes: [
+          { answer: "Parcel B", feedback: "Convert both to grams: 3.2 kg = 3200 g, which is more than 2850 g." },
+          { answer: "3200", feedback: "That's Parcel A's weight. The question asks by how much more: 350 g." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 62,
+    title: "Shipping Container Mass",
+    topic: 'mass',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "A shipping container can hold a maximum of 5 tonnes. It currently contains boxes weighing 1.8 tonnes, 950 kg, and 1200 kg. How much more weight (in kg) can be added?",
+        hint: "Convert everything to kg, add up the current weight, then subtract from the maximum.",
+        solution: [
+          "Step 1: Convert to kg",
+          "• Maximum: 5 tonnes = 5000 kg",
+          "• Box 1: 1.8 tonnes = 1800 kg",
+          "• Box 2: 950 kg",
+          "• Box 3: 1200 kg",
+          "",
+          "Step 2: Calculate current weight",
+          "• Current = 1800 + 950 + 1200 = 3950 kg",
+          "",
+          "Step 3: Find remaining capacity",
+          "• Remaining = 5000 - 3950 = 1050 kg",
+          "",
+          "Answer: 1050 kg"
+        ],
+        correctAnswers: ["1050 kg", "1050kg", "1050 kilograms", "1050 kilogrammes", "1050", "1,050 kg", "1,050"],
+        commonMistakes: [
+          { answer: "3950", feedback: "That's the current weight. Subtract from 5000 kg to find remaining capacity." },
+          { answer: "1.05", feedback: "That's in tonnes. The question asks for kilograms: 1050 kg." }
+        ]
+      }
+    ]
+  },
+
+  // GEOMETRY & AREAS - 9 more needed (63-71)
+  {
+    id: 63,
+    title: "Rectangle Area",
+    topic: 'geometry',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "A rectangle has a length of 12 cm and a width of 7 cm. What is its area?",
+        hint: "Area of rectangle = length × width",
+        solution: [
+          "Step 1: Use the formula",
+          "• Area = length × width",
+          "• Area = 12 × 7",
+          "• Area = 84 cm²",
+          "",
+          "Answer: 84 cm²"
+        ],
+        correctAnswers: ["84 cm²", "84cm²", "84 cm2", "84cm2", "84 square centimetres", "84 square centimeters", "84"],
+        commonMistakes: [
+          { answer: "19", feedback: "That's the perimeter (12 + 7 + 12 + 7). For area, multiply: 12 × 7 = 84 cm²." },
+          { answer: "38", feedback: "That's the perimeter. For area, multiply length by width: 84 cm²." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 64,
+    title: "Triangle Area",
+    topic: 'geometry',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A triangle has a base of 10 cm and a height of 8 cm. Calculate its area.",
+        hint: "Area of triangle = ½ × base × height",
+        solution: [
+          "Step 1: Use the formula",
+          "• Area = ½ × base × height",
+          "• Area = ½ × 10 × 8",
+          "• Area = ½ × 80",
+          "• Area = 40 cm²",
+          "",
+          "Answer: 40 cm²"
+        ],
+        correctAnswers: ["40 cm²", "40cm²", "40 cm2", "40cm2", "40 square centimetres", "40 square centimeters", "40"],
+        commonMistakes: [
+          { answer: "80", feedback: "You forgot to multiply by ½. Area of triangle = ½ × base × height = 40 cm²." },
+          { answer: "18", feedback: "That's not the correct calculation. Use: ½ × 10 × 8 = 40 cm²." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 65,
+    title: "Square Perimeter",
+    topic: 'geometry',
+    difficulty: 'easy',
+    parts: [
+      {
+        question: "A square has sides of length 9 cm. What is its perimeter?",
+        hint: "Perimeter of square = 4 × side length",
+        solution: [
+          "Step 1: Use the formula",
+          "• Perimeter = 4 × side",
+          "• Perimeter = 4 × 9",
+          "• Perimeter = 36 cm",
+          "",
+          "Answer: 36 cm"
+        ],
+        correctAnswers: ["36 cm", "36cm", "36 centimetres", "36 centimeters", "36"],
+        commonMistakes: [
+          { answer: "81", feedback: "That's the area (9 × 9). For perimeter, multiply side by 4: 36 cm." },
+          { answer: "18", feedback: "That's only two sides. A square has 4 sides: 4 × 9 = 36 cm." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 66,
+    title: "Parallelogram Area",
+    topic: 'geometry',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A parallelogram has a base of 15 cm and a perpendicular height of 6 cm. Find its area.",
+        hint: "Area of parallelogram = base × height",
+        solution: [
+          "Step 1: Use the formula",
+          "• Area = base × height",
+          "• Area = 15 × 6",
+          "• Area = 90 cm²",
+          "",
+          "Answer: 90 cm²"
+        ],
+        correctAnswers: ["90 cm²", "90cm²", "90 cm2", "90cm2", "90 square centimetres", "90 square centimeters", "90"],
+        commonMistakes: [
+          { answer: "45", feedback: "You've divided instead of multiplied. Area = base × height = 90 cm²." },
+          { answer: "21", feedback: "That's not the correct calculation. Multiply base by height: 15 × 6 = 90 cm²." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 67,
+    title: "Compound Shape Area",
+    topic: 'geometry',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "A shape is made from a rectangle (8 cm × 5 cm) with a triangle (base 8 cm, height 3 cm) on top. What is the total area?",
+        hint: "Find the area of the rectangle and triangle separately, then add them together.",
+        solution: [
+          "Step 1: Find rectangle area",
+          "• Rectangle area = 8 × 5 = 40 cm²",
+          "",
+          "Step 2: Find triangle area",
+          "• Triangle area = ½ × 8 × 3 = 12 cm²",
+          "",
+          "Step 3: Add areas",
+          "• Total area = 40 + 12 = 52 cm²",
+          "",
+          "Answer: 52 cm²"
+        ],
+        correctAnswers: ["52 cm²", "52cm²", "52 cm2", "52cm2", "52 square centimetres", "52 square centimeters", "52"],
+        commonMistakes: [
+          { answer: "40", feedback: "That's only the rectangle. Don't forget to add the triangle area: 52 cm²." },
+          { answer: "64", feedback: "Check your triangle calculation. Triangle area = ½ × 8 × 3 = 12 cm², not 24 cm²." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 68,
+    title: "Garden Path Area",
+    topic: 'geometry',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "A rectangular garden is 20 m long and 15 m wide. A path 2 m wide runs around the inside edge. What is the area of the path?",
+        hint: "Find the area of the whole garden, then subtract the area of the inner rectangle (without the path).",
+        solution: [
+          "Step 1: Find total garden area",
+          "• Total area = 20 × 15 = 300 m²",
+          "",
+          "Step 2: Find inner rectangle dimensions",
+          "• Inner length = 20 - 2 - 2 = 16 m",
+          "• Inner width = 15 - 2 - 2 = 11 m",
+          "• Inner area = 16 × 11 = 176 m²",
+          "",
+          "Step 3: Find path area",
+          "• Path area = 300 - 176 = 124 m²",
+          "",
+          "Answer: 124 m²"
+        ],
+        correctAnswers: ["124 m²", "124m²", "124 m2", "124m2", "124 square metres", "124 square meters", "124"],
+        commonMistakes: [
+          { answer: "300", feedback: "That's the total garden area. Subtract the inner rectangle to find the path area." },
+          { answer: "140", feedback: "Check your inner dimensions. Subtract 2 m from each side: 16 m × 11 m." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 69,
+    title: "Trapezium Area",
+    topic: 'geometry',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "A trapezium has parallel sides of 12 cm and 8 cm, and a height of 5 cm. Calculate its area.",
+        hint: "Area of trapezium = ½ × (sum of parallel sides) × height",
+        solution: [
+          "Step 1: Add parallel sides",
+          "• Sum of parallel sides = 12 + 8 = 20 cm",
+          "",
+          "Step 2: Use the formula",
+          "• Area = ½ × (a + b) × h",
+          "• Area = ½ × 20 × 5",
+          "• Area = ½ × 100",
+          "• Area = 50 cm²",
+          "",
+          "Answer: 50 cm²"
+        ],
+        correctAnswers: ["50 cm²", "50cm²", "50 cm2", "50cm2", "50 square centimetres", "50 square centimeters", "50"],
+        commonMistakes: [
+          { answer: "100", feedback: "You forgot to multiply by ½. Area = ½ × 20 × 5 = 50 cm²." },
+          { answer: "60", feedback: "Check your calculation. Area = ½ × (12 + 8) × 5 = 50 cm²." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 70,
+    title: "Classroom Floor Area",
+    topic: 'geometry',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A classroom floor is 9 m long and 6.5 m wide. What is the area of the floor in square metres?",
+        hint: "Area = length × width. Be careful with the decimal.",
+        solution: [
+          "Step 1: Use the formula",
+          "• Area = length × width",
+          "• Area = 9 × 6.5",
+          "• Area = 58.5 m²",
+          "",
+          "Answer: 58.5 m²"
+        ],
+        correctAnswers: ["58.5 m²", "58.5m²", "58.5 m2", "58.5m2", "58.5 square metres", "58.5 square meters", "58.5"],
+        commonMistakes: [
+          { answer: "54", feedback: "Check your multiplication. 9 × 6.5 = 58.5 m²." },
+          { answer: "31", feedback: "That's the perimeter. For area, multiply: 9 × 6.5 = 58.5 m²." }
+        ]
+      }
+    ]
+  },
+  {
+    id: 71,
+    title: "Picture Frame Border",
+    topic: 'geometry',
+    difficulty: 'hard',
+    parts: [
+      {
+        question: "A picture is 30 cm by 20 cm. It has a frame 3 cm wide all around. What is the area of the frame only?",
+        hint: "Find the total area (picture + frame), then subtract the picture area.",
+        solution: [
+          "Step 1: Find total dimensions",
+          "• Total length = 30 + 3 + 3 = 36 cm",
+          "• Total width = 20 + 3 + 3 = 26 cm",
+          "• Total area = 36 × 26 = 936 cm²",
+          "",
+          "Step 2: Find picture area",
+          "• Picture area = 30 × 20 = 600 cm²",
+          "",
+          "Step 3: Find frame area",
+          "• Frame area = 936 - 600 = 336 cm²",
+          "",
+          "Answer: 336 cm²"
+        ],
+        correctAnswers: ["336 cm²", "336cm²", "336 cm2", "336cm2", "336 square centimetres", "336 square centimeters", "336"],
+        commonMistakes: [
+          { answer: "936", feedback: "That's the total area. Subtract the picture area to find just the frame." },
+          { answer: "600", feedback: "That's the picture area. The frame area is 936 - 600 = 336 cm²." }
+        ]
+      }
+    ]
   }
 ];

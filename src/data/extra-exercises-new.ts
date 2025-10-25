@@ -2053,5 +2053,49 @@ export const extraExercises: ExtraExercise[] = [
         ]
       }
     ]
+  },
+
+  // ADDITIONAL RATIOS & PROPORTIONS (4 more needed)
+  {
+    id: 40,
+    title: "Recipe Ratio Scaling",
+    topic: 'ratios',
+    difficulty: 'medium',
+    parts: [
+      {
+        question: "A recipe for 4 people uses flour and sugar in the ratio 5:2. If you need to make the recipe for 10 people, and the original recipe uses 200g of flour, how much sugar do you need?",
+        hint: "First find how much sugar is needed for 4 people using the ratio, then scale up to 10 people.",
+        solution: [
+          "Step 1: Find sugar for 4 people",
+          "• Ratio flour:sugar = 5:2",
+          "• If flour = 200g, then 5 parts = 200g",
+          "• 1 part = 200 ÷ 5 = 40g",
+          "• Sugar = 2 parts = 2 × 40 = 80g",
+          "",
+          "Step 2: Scale up to 10 people",
+          "• 10 people = 2.5 × 4 people",
+          "• Sugar needed = 80 × 2.5 = 200g",
+          "",
+          "Answer: 200g"
+        ],
+        correctAnswers: [
+          "200g",
+          "200 g",
+          "200 grams",
+          "200 grammes",
+          "200"
+        ],
+        commonMistakes: [
+          {
+            answer: "80g",
+            feedback: "That's the sugar for 4 people. You need to scale up to 10 people."
+          },
+          {
+            answer: "100g",
+            feedback: "Check your scaling factor. 10 people = 2.5 × 4 people, not 2 times."
+          }
+        ]
+      }
+    ]
   }
 ];

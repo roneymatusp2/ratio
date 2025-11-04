@@ -141,7 +141,7 @@ export class GeminiProvider implements AIProvider {
 
     const data = await response.json();
     const text = data.candidates[0].content.parts[0].text;
-    
+
     // Remove markdown code blocks if present
     const cleanText = text.replace(/```json\n?|\n?```/g, '').trim();
     return JSON.parse(cleanText);

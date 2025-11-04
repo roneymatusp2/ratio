@@ -69,6 +69,12 @@ function App() {
     suggestions?: string[];
   } | null>(null);
   const [isEvaluating, setIsEvaluating] = useState(false);
+  const [quizEvaluationResult, setQuizEvaluationResult] = useState<{
+    isCorrect: boolean;
+    confidence: number;
+    feedback: string;
+    suggestions?: string[];
+  } | null>(null);
 
   const topics = [
     { id: 'all', name: 'All Topics', icon: BookOpen, color: 'from-indigo-500 via-violet-500 to-sky-500', accent: 'bg-indigo-100 text-indigo-700' },
@@ -1018,6 +1024,7 @@ function App() {
                   onClick={async () => {
                     if (!selectedAnswer.trim()) return;
                     
+                    setIsEvaluating(true);
                     setShowResult(true);
                     setQuestionsAnswered(previous => previous + 1);
                     
@@ -1030,6 +1037,9 @@ function App() {
                       currentQuestion.explanation || '',
                       true // Usando Gemini AI
                     );
+                    
+                    setQuizEvaluationResult(result);
+                    setIsEvaluating(false);
                     
                     const isCorrect = result.isCorrect;
 
@@ -1060,16 +1070,17 @@ function App() {
                         setQuestionIndex(previous => previous + 1);
                         setSelectedAnswer('');
                         setShowResult(false);
+                        setQuizEvaluationResult(null);
                       } else {
                         setGameState('results');
                       }
                     }, 3500);
                   }}
-                  disabled={!selectedAnswer.trim()}
+                  disabled={!selectedAnswer.trim() || isEvaluating}
                   className="mt-3 inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Send className="h-4 w-4" />
-                  Submit Answer
+                  {isEvaluating ? 'Evaluating...' : 'Submit Answer'}
                 </button>
               )}
             </div>
@@ -1147,27 +1158,50 @@ function App() {
                 );
               })}
             </div>
-
-            {showResult && (
+            {showResult && isEvaluating && (
               <div className="mt-10 rounded-3xl border border-slate-200 bg-slate-50/80 p-6 shadow-sm">
+                <div className="flex items-center gap-4">
+                  <div className="h-6 w-6 rounded-full border-4 border-indigo-500 border-t-transparent animate-spin" />
+                  <p className="text-sm text-slate-600">Evaluating your answer with AI...</p>
+                </div>
+              </div>
+            )}
+            
+            {showResult && !isEvaluating && quizEvaluationResult && (
+              <div className={`mt-10 rounded-3xl border-2 p-6 shadow-lg ${
+                quizEvaluationResult.isCorrect
+                  ? 'border-emerald-200 bg-emerald-50'
+                  : 'border-amber-200 bg-amber-50'
+              }`}>
                 <div className="flex items-start gap-4">
-                  {selectedAnswer === currentQuestion.correct ? (
-                    <div className="rounded-2xl bg-emerald-100 p-3 text-emerald-600">
-                      <CheckCircle className="h-5 w-5" />
-                    </div>
+                  {quizEvaluationResult.isCorrect ? (
+                    <CheckCircle className="h-6 w-6 text-emerald-600 flex-shrink-0 mt-0.5" />
                   ) : (
-                    <div className="rounded-2xl bg-rose-100 p-3 text-rose-600">
-                      <XCircle className="h-5 w-5" />
-                    </div>
+                    <AlertCircle className="h-6 w-6 text-amber-600 flex-shrink-0 mt-0.5" />
                   )}
-                  <div>
-                    <p className="text-base font-semibold text-slate-800">
-                      {selectedAnswer === currentQuestion.correct ? 'Brilliant work!' : 'Good effort — here’s the method.'}
+                  <div className="flex-1">
+                    <p className={`font-semibold ${
+                      quizEvaluationResult.isCorrect ? 'text-emerald-900' : 'text-amber-900'
+                    }`}>
+                      {quizEvaluationResult.feedback}
                     </p>
-                    {currentQuestion.explanation && (
-                      <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                        {currentQuestion.explanation}
-                      </p>
+                    {quizEvaluationResult.suggestions && quizEvaluationResult.suggestions.length > 0 && (
+                      <ul className="mt-2 space-y-1">
+                        {quizEvaluationResult.suggestions.map((suggestion, idx) => (
+                          <li key={idx} className="text-sm text-amber-800 flex gap-2">
+                            <span>•</span>
+                            <span>{suggestion}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {currentQuestion.explanation && !quizEvaluationResult.isCorrect && (
+                      <div className="mt-4 pt-4 border-t border-amber-200">
+                        <p className="text-sm font-medium text-amber-900 mb-2">Explanation:</p>
+                        <p className="text-sm leading-relaxed text-amber-800">
+                          {currentQuestion.explanation}
+                        </p>
+                      </div>
                     )}
                   </div>
                 </div>

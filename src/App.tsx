@@ -709,19 +709,78 @@ function App() {
                           ))}
                         </ul>
                       )}
-                      {!evaluationResult.isCorrect && (
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setSubmittedAnswer(false);
-                            setEvaluationResult(null);
-                            setUserAnswer('');
-                          }}
-                          className="mt-3 text-sm font-medium text-amber-700 hover:text-amber-900 underline"
-                        >
-                          Try again
-                        </button>
-                      )}
+                      <div className="mt-3 flex gap-3">
+                        {!evaluationResult.isCorrect && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSubmittedAnswer(false);
+                              setEvaluationResult(null);
+                              setUserAnswer('');
+                            }}
+                            className="text-sm font-medium text-amber-700 hover:text-amber-900 underline"
+                          >
+                            Try again
+                          </button>
+                        )}
+                        {evaluationResult.isCorrect && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              // Verificar se há mais partes no exercício atual
+                              if (currentPartIndex < currentExercise!.parts.length - 1) {
+                                // Próxima parte
+                                setCurrentPartIndex(prev => prev + 1);
+                                setUserAnswer('');
+                                setSubmittedAnswer(false);
+                                setEvaluationResult(null);
+                                setShowExerciseHint(false);
+                                setShowExerciseSolution(false);
+                              } else if (currentExerciseIndex < topicExercises.length - 1) {
+                                // Próximo exercício
+                                setCurrentExerciseIndex(prev => prev + 1);
+                                setCurrentExercise(topicExercises[currentExerciseIndex + 1]);
+                                setCurrentPartIndex(0);
+                                setUserAnswer('');
+                                setSubmittedAnswer(false);
+                                setEvaluationResult(null);
+                                setShowExerciseHint(false);
+                                setShowExerciseSolution(false);
+                              } else {
+                                // Voltar para lista de tópicos
+                                setSelectedExerciseTopic(null);
+                                setCurrentExercise(null);
+                                setTopicExercises([]);
+                                setCurrentExerciseIndex(0);
+                                setCurrentPartIndex(0);
+                                setUserAnswer('');
+                                setSubmittedAnswer(false);
+                                setEvaluationResult(null);
+                                setShowExerciseHint(false);
+                                setShowExerciseSolution(false);
+                              }
+                            }}
+                            className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-emerald-700"
+                          >
+                            {currentPartIndex < currentExercise!.parts.length - 1 ? (
+                              <>
+                                Next Part
+                                <ArrowRight className="h-4 w-4" />
+                              </>
+                            ) : currentExerciseIndex < topicExercises.length - 1 ? (
+                              <>
+                                Next Exercise
+                                <ArrowRight className="h-4 w-4" />
+                              </>
+                            ) : (
+                              <>
+                                Complete Topic
+                                <Trophy className="h-4 w-4" />
+                              </>
+                            )}
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1074,7 +1133,7 @@ function App() {
                       } else {
                         setGameState('results');
                       }
-                    }, 3500);
+                    }, 15000);
                   }}
                   disabled={!selectedAnswer.trim() || isEvaluating}
                   className="mt-3 inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -1203,6 +1262,34 @@ function App() {
                         </p>
                       </div>
                     )}
+                    <div className="mt-4 flex justify-end">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          if (questionIndex < gameQuestions.length - 1) {
+                            setQuestionIndex(previous => previous + 1);
+                            setSelectedAnswer('');
+                            setShowResult(false);
+                            setQuizEvaluationResult(null);
+                          } else {
+                            setGameState('results');
+                          }
+                        }}
+                        className="inline-flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-2 text-sm font-medium text-white shadow-lg transition hover:bg-indigo-700"
+                      >
+                        {questionIndex < gameQuestions.length - 1 ? (
+                          <>
+                            Next Question
+                            <ArrowRight className="h-4 w-4" />
+                          </>
+                        ) : (
+                          <>
+                            View Results
+                            <Trophy className="h-4 w-4" />
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

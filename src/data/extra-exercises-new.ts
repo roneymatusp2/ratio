@@ -1,3 +1,5 @@
+import { percentagesExercises } from './percentages-exercises';
+
 export interface ExercisePart {
   question: string;
   hint: string;
@@ -18,6 +20,7 @@ export interface ExtraExercise {
 }
 
 export const exerciseTopics = [
+  { id: 'percentages', name: 'Percentages', icon: '💯', color: 'from-green-500 to-emerald-500' },
   { id: 'ratios', name: 'Ratios & Proportions', icon: '🔢', color: 'from-blue-500 to-cyan-500' },
   { id: 'lcm-hcf', name: 'LCM & HCF', icon: '🔄', color: 'from-purple-500 to-pink-500' },
   { id: 'prime', name: 'Prime Factorisation', icon: '🌟', color: 'from-amber-500 to-orange-500' },
@@ -28,6 +31,10 @@ export const exerciseTopics = [
 ];
 
 export const extraExercises: ExtraExercise[] = [
+  // PERCENTAGES UNIT - 100 exercises (IDs 1001-1100)
+  ...percentagesExercises,
+  
+  // OTHER UNITS START HERE
   // VOLUME CONVERSIONS
   {
     id: 1,

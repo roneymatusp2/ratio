@@ -45,6 +45,24 @@ if (Test-Path "$ratiosPath\quadratics-app-updates.tsx") {
     Write-Host "✅ quadratics-app-updates.tsx copiado" -ForegroundColor Green
 }
 
+if (Test-Path "$ratiosPath\QUADRATICS_DEPLOY_GUIDE.md") {
+    Copy-Item "$ratiosPath\QUADRATICS_DEPLOY_GUIDE.md" "$quadraticsPath\" -Force
+    Write-Host "✅ QUADRATICS_DEPLOY_GUIDE.md copiado" -ForegroundColor Green
+}
+
+# Copiar arquivos de deploy
+Write-Host ""
+Write-Host "📝 Copiando arquivos de deploy..." -ForegroundColor Yellow
+if (Test-Path "$ratiosPath\quadratics-netlify.toml") {
+    Copy-Item "$ratiosPath\quadratics-netlify.toml" "$quadraticsPath\netlify.toml" -Force
+    Write-Host "✅ netlify.toml copiado" -ForegroundColor Green
+}
+
+if (Test-Path "$ratiosPath\quadratics-build.sh") {
+    Copy-Item "$ratiosPath\quadratics-build.sh" "$quadraticsPath\build.sh" -Force
+    Write-Host "✅ build.sh copiado" -ForegroundColor Green
+}
+
 Write-Host ""
 
 # 2. Atualizar package.json

@@ -1,0 +1,55 @@
+# Netlify configuration for Quadratics Practice
+# Build settings for a Vite-based React TypeScript application
+
+[build]
+  # Directory to deploy (Vite output directory)
+  publish = "dist"
+  
+  # Build command - use custom build script with verbose logging
+  command = "bash build.sh"
+  
+  # Functions directory (if needed in future)
+  # functions = "netlify/functions"
+
+[build.environment]
+  # Node.js version for build
+  NODE_VERSION = "20.11.0"
+  # Prevent treating warnings as errors
+  CI = "false"
+  # Gemini API key will be set in Netlify dashboard
+  # VITE_GEMINI_API_KEY = "set_in_netlify_dashboard"
+
+# Removed context-specific NODE_ENV to ensure devDependencies are always installed
+
+# Redirects and headers
+[[redirects]]
+  # SPA redirect - all routes to index.html
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  # Security headers for all routes
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  # Cache control for static assets
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  # Cache control for images
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Plugins (optional, uncomment if needed)
+# [[plugins]]
+#   package = "@netlify/plugin-lighthouse"

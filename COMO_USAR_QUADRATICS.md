@@ -13,9 +13,12 @@ Todos os arquivos foram commitados no repositório ratios:
 3. **QUADRATICS_COMPLETE_GUIDE.md** - Guia completo
 4. **QUADRATICS_MIGRATION_GUIDE.md** - Guia de migração
 5. **QUADRATICS_SUMMARY.md** - Resumo executivo
-6. **quadratics-app-updates.tsx** - Código para copiar
-7. **migrate-to-quadratics.ps1** - Script de migração
-8. **setup-quadratics-repo.ps1** - Script de setup completo
+6. **QUADRATICS_DEPLOY_GUIDE.md** - Guia de deploy no Netlify
+7. **quadratics-app-updates.tsx** - Código para copiar
+8. **migrate-to-quadratics.ps1** - Script de migração
+9. **setup-quadratics-repo.ps1** - Script de setup completo
+10. **quadratics-netlify.toml** - Configuração do Netlify
+11. **quadratics-build.sh** - Script de build
 
 ## 🎯 Opção 1: Setup Automático (RECOMENDADO)
 
@@ -36,6 +39,7 @@ Copy-Item C:\Users\roney\WebstormProjects\ratios\setup-quadratics-repo.ps1 .
 
 O script vai:
 - ✅ Copiar todos os arquivos necessários
+- ✅ Copiar arquivos de deploy (netlify.toml, build.sh)
 - ✅ Atualizar package.json e index.html
 - ✅ Inicializar Git
 - ✅ Fazer commit inicial
@@ -65,6 +69,16 @@ git add .
 git commit -m "feat: Update UI and Gemini prompts for quadratics"
 git push
 ```
+
+### Passo 7: Deploy no Netlify
+
+Siga o guia completo em **QUADRATICS_DEPLOY_GUIDE.md**
+
+Resumo rápido:
+1. Acesse https://app.netlify.com/
+2. Conecte o repositório GitHub
+3. Configure variável `VITE_GEMINI_API_KEY`
+4. Deploy automático!
 
 ## 🎯 Opção 2: Manual
 

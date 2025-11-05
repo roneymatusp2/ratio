@@ -211,13 +211,15 @@ export async function evaluateAnswerWithAI(
   question: string,
   hint: string
 ): Promise<EvaluationResult> {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  
+  if (!apiKey) {
+    console.warn('⚠️ Gemini API key not found');
+    throw new Error('API key not configured');
+  }
+
   try {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    
-    if (!apiKey) {
-      console.warn('Gemini API key not found, using local evaluation');
-      return evaluateAnswerLocally(userAnswer, [correctAnswer]);
-    }
+    console.log('🔄 Calling Gemini API...');
 
     const prompt = `You are a patient and encouraging mathematics teacher evaluating a Form 2 student's answer.
 
@@ -289,16 +291,26 @@ If correct, keep feedback positive and brief. If incorrect, provide helpful sugg
 
     if (!response.ok) {
       const error = await response.json();
-      console.error('Gemini API error:', error);
-      return evaluateAnswerLocally(userAnswer, [correctAnswer]);
+      console.error('❌ Gemini API error:', error);
+      throw new Error(`API error: ${error.error?.message || response.statusText}`);
     }
 
     const data = await response.json();
+    console.log('📦 Gemini API response received');
+    
+    if (!data.candidates || !data.candidates[0]) {
+      console.error('❌ Invalid API response structure:', data);
+      throw new Error('Invalid API response');
+    }
+
     const text = data.candidates[0].content.parts[0].text;
+    console.log('📝 Raw AI response:', text);
     
     // Remove markdown code blocks if present
     const cleanText = text.replace(/```json\n?|\n?```/g, '').trim();
     const result = JSON.parse(cleanText);
+
+    console.log('✅ Parsed AI result:', result);
 
     return {
       isCorrect: result.isCorrect,
@@ -308,15 +320,14 @@ If correct, keep feedback positive and brief. If incorrect, provide helpful sugg
     };
 
   } catch (error) {
-    console.error('AI evaluation failed:', error);
-    // Fallback para avaliação local
-    return evaluateAnswerLocally(userAnswer, [correctAnswer]);
+    console.error('❌ AI evaluation exception:', error);
+    throw error; // Re-throw para ser capturado pela função principal
   }
 }
 
 /**
  * Função principal de avaliação
- * Usa avaliação local com múltiplas respostas corretas
+ * Usa avaliação AI quando disponível, senão usa avaliação local
  */
 export async function evaluateAnswer(
   userAnswer: string,
@@ -324,15 +335,29 @@ export async function evaluateAnswer(
   commonMistakes?: { answer: string; feedback: string }[],
   question?: string,
   hint?: string,
-  useAI: boolean = false
+  useAI: boolean = true // Mudado para true por padrão
 ): Promise<EvaluationResult> {
-  if (useAI && question && hint) {
+  // Sempre tenta usar AI se tiver API key e informações necessárias
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  
+  if (useAI && apiKey && question && hint) {
     try {
-      return await evaluateAnswerWithAI(userAnswer, correctAnswers[0], question, hint);
+      console.log('🤖 Using Gemini AI evaluation...');
+      const result = await evaluateAnswerWithAI(userAnswer, correctAnswers[0], question, hint);
+      console.log('✅ AI evaluation successful:', result);
+      return result;
     } catch (error) {
-      console.error('AI evaluation failed, using local evaluation:', error);
+      console.error('❌ AI evaluation failed, using local evaluation:', error);
+    }
+  } else {
+    if (!apiKey) {
+      console.warn('⚠️ Gemini API key not found, using local evaluation');
+    }
+    if (!question || !hint) {
+      console.warn('⚠️ Question or hint missing, using local evaluation');
     }
   }
   
+  console.log('📝 Using local evaluation...');
   return evaluateAnswerLocally(userAnswer, correctAnswers, commonMistakes);
 }

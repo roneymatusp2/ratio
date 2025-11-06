@@ -220,109 +220,21 @@ export async function evaluateAnswerWithAI(
 
   try {
     console.log('🔄 Calling Gemini API...');
+    console.log('📝 User Answer:', userAnswer);
+    console.log('✅ Correct Answer:', correctAnswer);
 
-    const prompt = `You are a patient and encouraging mathematics teacher evaluating a Form 2 student's answer.
+    const prompt = `You are evaluating a student's mathematics answer.
 
 Question: ${question}
-Hint: ${hint}
 Correct Answer: ${correctAnswer}
 Student's Answer: ${userAnswer}
 
-CRITICAL INSTRUCTION: Be EXTREMELY FLEXIBLE and GENEROUS in accepting answers. Your goal is to recognize correct mathematical understanding regardless of format.
+CRITICAL: Accept answers written in WORDS or NUMBERS as equally correct!
 
-✅ ACCEPT ALL THESE VARIATIONS AS CORRECT:
-
-1. NUMBERS - Accept ANY form:
-   - Numeric: "3", "15", "100", "1.5", "0.5"
-   - Written: "three", "fifteen", "one hundred", "one point five", "half"
-   - Mixed: "1 and a half", "2 and three quarters"
-   - Capitalized: "Three", "FIFTEEN", "One Hundred"
-   - With articles: "a half", "a quarter", "an eighth"
-
-2. FRACTIONS - Accept ALL representations:
-   - Standard: "1/2", "3/4", "2/5"
-   - Unicode: "½", "¾", "⅓", "⅔", "⅛"
-   - Written: "one half", "three quarters", "two fifths"
-   - Decimal: "0.5", "0.75", "0.4"
-   - Unsimplified: "2/4" = "1/2", "6/8" = "3/4"
-   - With spaces: "1 / 2", "3 / 4"
-
-3. PERCENTAGES - Accept ALL forms:
-   - With symbol: "50%", "25%", "12.5%"
-   - Without symbol: "50", "25", "12.5"
-   - Written: "fifty percent", "twenty-five percent"
-   - As fraction: "1/2" for 50%, "1/4" for 25%
-   - As decimal: "0.5" for 50%, "0.25" for 25%
-
-4. RATIOS - Accept ALL equivalent forms:
-   - Colon: "4:7", "3:2"
-   - With spaces: "4 : 7", "3 : 2"
-   - Written: "four to seven", "three to two"
-   - Mixed: "4 to 7", "four:seven"
-   - Simplified: "6:8" = "3:4", "10:15" = "2:3"
-
-5. MONEY - Accept ALL currency formats:
-   - With symbol: "£20", "£8.50", "£1.30"
-   - Without symbol: "20", "8.50", "1.30"
-   - Written: "twenty pounds", "eight pounds fifty"
-   - With pence: "£8.50", "8 pounds 50 pence", "850 pence"
-   - Variations: "20 pounds", "twenty pounds", "£20.00"
-
-6. MEASUREMENTS - Accept ALL unit variations:
-   - Length: "5 m" = "5 metres" = "5 meters" = "five metres" = "500 cm"
-   - Mass: "2 kg" = "2 kilograms" = "2000 g" = "two kilograms"
-   - Volume: "1800 cm³" = "1800 cc" = "1.8 L" = "1800 cubic centimetres"
-   - Time: "2 hours 30 minutes" = "2.5 hours" = "150 minutes"
-
-7. MULTIPLE VALUES - Accept ANY format:
-   - Comma separated: "40, 56"
-   - With 'and': "40 and 56"
-   - With currency: "£40 and £56", "£40, £56"
-   - Written: "forty and fifty-six"
-   - List format: "40; 56" or "40 / 56"
-
-8. SPELLING & GRAMMAR - Accept variations:
-   - British/American: "metres"/"meters", "litres"/"liters"
-   - Singular/Plural: "pound"/"pounds", "metre"/"metres"
-   - Capitalization: "Metres", "METRES", "metres"
-   - Typos: Be forgiving of minor spelling errors
-
-9. MATHEMATICAL EQUIVALENCE:
-   - Rounding: Accept if within 0.01 (e.g., 33.3% = 33.33%)
-   - Simplified vs unsimplified: "6:8" = "3:4", "50/100" = "1/2"
-   - Different forms: "0.5" = "1/2" = "50%" = "half"
-   - Equivalent expressions: "2 × 3" = "6", "10 ÷ 2" = "5"
-
-10. PARTIAL CREDIT:
-    - If method is correct but calculation has minor error, give partial credit
-    - If answer is very close (within 5%), acknowledge the approach
-    - If units are missing but number is correct, accept it
-
-🎯 EXAMPLES OF WHAT TO ACCEPT:
-
-For "Convert 50% to a fraction":
-✅ "1/2", "½", "one half", "a half", "0.5", "one over two", "1 / 2"
-
-For "4:7 ratio":
-✅ "4:7", "4 to 7", "four to seven", "4 : 7", "four:seven", "4/7"
-
-For "£20":
-✅ "£20", "20", "20 pounds", "twenty pounds", "£20.00", "20.00"
-
-For "1800 cm³":
-✅ "1800", "1800 cm³", "1800 cc", "1.8 L", "eighteen hundred", "1800 cubic centimetres"
-
-🚫 ONLY MARK INCORRECT IF:
-- The mathematical value is clearly wrong (e.g., "1/3" when answer is "1/2")
-- The answer shows fundamental misunderstanding
-- The calculation is significantly off (more than 10% error)
-
-⚠️ REMEMBER:
-- Students may write answers in ANY format they're comfortable with
-- Written numbers are JUST AS VALID as numeric ones
-- Focus on mathematical correctness, not format
-- Be encouraging and positive in feedback
-- If in doubt, ACCEPT the answer
+Examples of CORRECT variations:
+- "1/2" = "one over two" = "half" = "0.5" = "one half"
+- "50%" = "fifty percent" = "50 percent"
+- "3/4" = "three quarters" = "three over four" = "0.75"
 
 Respond ONLY with valid JSON in this exact format:
 {
@@ -335,7 +247,7 @@ Respond ONLY with valid JSON in this exact format:
 If correct, keep feedback positive and brief. If incorrect, provide helpful suggestions.`;
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite-preview-09-2025:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: {
@@ -348,9 +260,9 @@ If correct, keep feedback positive and brief. If incorrect, provide helpful sugg
             }]
           }],
           generationConfig: {
-            temperature: 0.3,
+            temperature: 0.2,
             topK: 1,
-            topP: 1,
+            topP: 0.95,
             maxOutputTokens: 512,
           }
         }),
@@ -365,6 +277,7 @@ If correct, keep feedback positive and brief. If incorrect, provide helpful sugg
 
     const data = await response.json();
     console.log('📦 Gemini API response received');
+    console.log('📦 Full response:', JSON.stringify(data, null, 2));
     
     if (!data.candidates || !data.candidates[0]) {
       console.error('❌ Invalid API response structure:', data);
@@ -376,9 +289,11 @@ If correct, keep feedback positive and brief. If incorrect, provide helpful sugg
     
     // Remove markdown code blocks if present
     const cleanText = text.replace(/```json\n?|\n?```/g, '').trim();
+    console.log('🧹 Cleaned text:', cleanText);
+    
     const result = JSON.parse(cleanText);
-
     console.log('✅ Parsed AI result:', result);
+    console.log('✅ Is Correct?', result.isCorrect);
 
     return {
       isCorrect: result.isCorrect,
@@ -405,6 +320,16 @@ export async function evaluateAnswer(
   hint?: string,
   useAI: boolean = true // Mudado para true por padrão
 ): Promise<EvaluationResult> {
+  // Verifica se a resposta está vazia
+  if (!userAnswer.trim()) {
+    return {
+      isCorrect: false,
+      confidence: 1,
+      feedback: 'Please provide an answer.',
+      suggestions: ['Write your answer in the text box above.']
+    };
+  }
+
   // Sempre tenta usar AI se tiver API key e informações necessárias
   const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
   
